@@ -1,4 +1,8 @@
 ---
+import '../styles/index.css';
+import Header from './Header.astro';
+import LeftSideBar from './LeftSideBar.astro';
+
 interface Props {
 	title: string;
 }
@@ -17,7 +21,31 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<body class="bg-slate-100">
+			<div class="sticky top-0 z-10 w-full">
+				<Header />
+			</div>
+			<div class="grid grid-cols-12">
+				<div class="col-span-3 sticky top-0 pt-12 h-screen flex">
+					<div class="ml-auto">
+						<LeftSideBar />
+					</div>
+				</div>
+				<main class="py-4 px-8 pb-32 col-span-6  overflow-auto">
+					<div>
+						<article id="article" class="content">
+							<section class="main-section">
+								<nav class="block sm:hidden"></nav>
+								<slot />
+							</section>
+						</article>
+					</div>
+				</main>
+				<div class="col-span-3 sticky top-0 h-screen flex">
+					<!-- <RightSidebar content={content} /> -->
+				</div>
+			</div>
+		</body>
 	</body>
 </html>
 

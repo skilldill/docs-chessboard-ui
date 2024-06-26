@@ -1,19 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import '../styles/index.css';
-import 'react-chessboard-ui/dist/index.css';
-import { ChessBoard } from 'react-chessboard-ui';
+import { ChessBoardDefault } from '../components/ChessBoards';
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<ChessBoard 
-			client:load
-			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-			onChange={(data) => {}}
-			onEndGame={() => {}}
-		/>
+		<ChessBoardDefault client:load />
 	</main>
 </Layout>
 
