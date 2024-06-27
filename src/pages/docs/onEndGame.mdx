@@ -3,3 +3,30 @@ layout: ../../layouts/Layout.astro
 ---
 
 ## onEndGame
+
+```ts
+type GameResult = {
+    resultType: 'mat' | 'pat' | 'draw' | 'timeout' | 'surrender' | undefined;
+    winColor?: 'white' | 'black';
+};
+
+type onChange = (gameResult: GameResult) => void;
+```
+
+
+### Code
+```tsx
+export const ChessBoard = () => {
+    const handleEndGame = (gameResult) => {
+        saveGameResult(gameResult);
+    }
+
+    return (
+        <ChessBoard 
+			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+			onChange={() => {}}
+			onEndGame={handleEndGame}
+		/>
+    );
+}
+```

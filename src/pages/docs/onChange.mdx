@@ -5,4 +5,33 @@ layout: ../../layouts/Layout.astro
 ## onChange
 
 ```ts
+type MoveData = {
+    FEN: string;
+    from: [number, number];
+    to: [number, number];
+    figure: { 
+        color: 'white' | 'black';
+        type: 'pawn' | 'bishop' | 'knigts' | 'rook' | 'queen' | 'king';
+    };
+}
+
+type onChange = (moveData: MoveData) => void;
+```
+
+
+### Code
+```tsx
+export const ChessBoard = () => {
+    const handleChange = (moveData) => {
+        sendMove(moveData);
+    }
+
+    return (
+        <ChessBoard 
+			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+			onChange={handleChange}
+			onEndGame={() => {}}
+		/>
+    );
+}
 ```

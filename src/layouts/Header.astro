@@ -1,15 +1,19 @@
 ---
-
+const response = await fetch('https://registry.npmjs.org/react-chessboard-ui/latest');
+const { version } = await response.json();
 ---
 
 <header class="p-3 bg-slate-100 bg-opacity-50 backdrop-blur-md border-b text-slate-900">
 	<!-- <SkipToContent /> -->
 	<nav title="Top Navigation" class="max-w-7xl mx-auto flex justify-between items-center px-4">
 		<div>
-			<a class="text-lg font-medium" href="/">
+			<a class="text-lg font-medium flex items-end gap-2" href="/">
 				<h1>
 					Docs Chessboard UI
 				</h1>
+				<span class="inline-block text-blue-800 text-custom" style="font-size: 14px;">
+					v{ version }
+				</span>
 			</a>
 		</div>
 		<div class="flex gap-2">

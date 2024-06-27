@@ -2,7 +2,7 @@
 layout: ../../layouts/Layout.astro
 ---
 
-import { ChessBoardKingPawnFEN } from '../../components/ChessBoards.tsx';
+import { ChessBoardClonsFEN } from '../../components/ChessBoards.tsx';
 
 ## FEN
 
@@ -10,7 +10,6 @@ import { ChessBoardKingPawnFEN } from '../../components/ChessBoards.tsx';
 type FEN = string;
 ```
 
-You can reverse chessboard for 
 
 ## What is it FEN?
 FEN notation is a compact way to represent the state of a chessboard. <br/>
@@ -19,13 +18,13 @@ You can read about FEN notation [on this page](https://en.wikipedia.org/wiki/For
 ### Code
 ```tsx
 <ChessBoard 
-    FEN="8/8/8/8/8/8/1K6/P7 w - - 0 1" // <~~~ King and Pawn FEN
+    FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 b - - 0 1" // <~~~ King and Pawn FEN
     onChange={handleChange}
     onEndGame={handleEndGame}
 />
 ```
 ### Example
 <div class="component-preview">
-    <ChessBoardKingPawnFEN client:load />
+    <ChessBoardClonsFEN client:load />
 </div>
 

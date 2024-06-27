@@ -28,7 +28,7 @@ export const ChessBoardKingPawnFEN: FC = () => {
     return (
         <ChessBoard 
 			FEN="8/8/8/8/8/8/1K6/P7 w - - 0 1"
-			onChange={(data) => {}}
+			onChange={(data) => { console.log(data) }}
 			onEndGame={() => {}}
 			config={{ cellSize: 70 }}
 		/>
