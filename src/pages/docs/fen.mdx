@@ -1,0 +1,31 @@
+---
+layout: ../../layouts/Layout.astro
+---
+
+import { ChessBoardKingPawnFEN } from '../../components/ChessBoards.tsx';
+
+## FEN
+
+```ts
+type FEN = string;
+```
+
+You can reverse chessboard for 
+
+## What is it FEN?
+FEN notation is a compact way to represent the state of a chessboard. <br/>
+You can read about FEN notation [on this page](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation) 👈
+
+### Code
+```tsx
+<ChessBoard 
+    FEN="8/8/8/8/8/8/1K6/P7 w - - 0 1" // <~~~ King and Pawn FEN
+    onChange={handleChange}
+    onEndGame={handleEndGame}
+/>
+```
+### Example
+<div class="component-preview">
+    <ChessBoardKingPawnFEN client:load />
+</div>
+
