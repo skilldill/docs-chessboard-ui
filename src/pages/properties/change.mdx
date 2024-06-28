@@ -1,0 +1,52 @@
+---
+layout: ../../layouts/Layout.astro
+---
+
+# change
+
+```ts
+type MoveData = {
+    FEN: string;
+    from: [number, number];
+    to: [number, number];
+    figure: { 
+        color: "white" | "black";
+        type: "pawn" | "bishop" | "knight" | "rook" | "queen" | "king";
+    };
+}
+
+type ChangeMove = {
+    move: MoveData;
+    withTransition?: boolean;
+};
+```
+
+### Code
+```jsx
+const ChessBoard = () => {
+    const [change, setChange] = useState();
+
+    const doMove = () => {
+        setChange(
+            {
+                move: { // <~~~ MoveData
+                    figure: { type: "knigts", color: "white" },
+                    from: [3, 7],
+                    to: [4, 5],
+                    FEN: "q6k/8/8/8/8/4N3/8/4KR2 b - - 0 1",
+                },
+                withTransition: true // <~~~ For transition move
+            }
+        );
+    }
+
+    return (
+        <ChessBoard 
+			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+			onChange={handleChange}
+			onEndGame={handleEndGame}
+            change={change}
+		/>
+    );
+}
+```

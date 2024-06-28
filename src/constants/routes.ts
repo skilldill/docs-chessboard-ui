@@ -4,14 +4,14 @@ export const MENU_ROUTES = [
     { text: "Quick start", link: "/docs/quickStart" },
 
     { text: "Properties", header: true },
-    { text: "FEN", link: "/docs/fen" },
-    { text: "reversed (optional)", link: "/docs/reversed" },
-    { text: "onChange", link: "/docs/onChange" },
-    { text: "onEndGame", link: "/docs/onEndGame" },
-    { text: "change (optional)", link: "/docs/change" },
-    { text: "config (optional)", link: "/docs/config" },
+    { text: "FEN", link: "/properties/FEN" },
+    { text: "reversed (optional)", link: "/properties/reversed" },
+    { text: "onChange", link: "/properties/onChange" },
+    { text: "onEndGame", link: "/properties/onEndGame" },
+    { text: "change (optional)", link: "/properties/change" },
+    { text: "config (optional)", link: "/properties/config" },
 
     { text: "Configurations", header: true },
-    { text: "Reversing board", link: "/docs/reversingBoard" },
-    { text: "Custom FEN", link: "/docs/customFen" },
+    { text: "Reversing board", link: "/examples/reversingBoard" },
+    { text: "Custom FEN", link: "/examples/customFen" },
 ];

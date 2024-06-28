@@ -2,7 +2,13 @@
 layout: ../../layouts/Layout.astro
 ---
 
-## onChange
+# onChange
+
+Called during the update of the state of the chessboard.
+
+Returns the updated state of the chessboard in FEN notation, 
+indicating the move that was made and the piece that was moved.
+<br/>
 
 ```ts
 type MoveData = {
@@ -10,8 +16,8 @@ type MoveData = {
     from: [number, number];
     to: [number, number];
     figure: { 
-        color: 'white' | 'black';
-        type: 'pawn' | 'bishop' | 'knigts' | 'rook' | 'queen' | 'king';
+        color: "white" | "black";
+        type: "pawn" | "bishop" | "knigts" | "rook" | "queen" | "king";
     };
 }
 
