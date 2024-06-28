@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import { ChessBoard } from "react-chessboard-ui";
+
 import 'react-chessboard-ui/dist/index.css';
 
 export const ChessBoardDefault: FC = () => {

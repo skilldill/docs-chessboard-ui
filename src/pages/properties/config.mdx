@@ -3,3 +3,86 @@ layout: ../../layouts/Layout.astro
 ---
 
 # config
+
+For customizing chessboard 💅
+
+```ts
+type ChessBoardConfig = {
+    cellSize: number; // px
+    whiteCellColor: string; // CSS color
+    blackCellColor: string; // CSS color
+    selectedCellColor: string; // CSS color
+    selectedCellBorder: string; // CSS border prop
+    markedCellColor: string; // px
+    circleMarkColor: string; // px
+    arrowColor: string; // CSS color (but with additional opacity)
+    checkedCellColor: string; // CSS color
+    piecesMap: ChessPiecesMap;
+}
+
+type config = Partial<ChessBoardConfig>;
+```
+
+<br/>
+*ChessPiecesMap* is needed for setting custom pieces.
+
+```ts
+type FigureType = 
+      "pawn-white"
+    | "bishop-white" 
+    | "knight-white" 
+    | "rook-white" 
+    | "queen-white" 
+    | "king-white"
+    | "pawn-black" 
+    | "bishop-black" 
+    | "knight-black" 
+    | "rook-black" 
+    | "queen-black" 
+    | "king-black";
+
+type ChessPiecesMap = {
+    [key: FigureType]: (size /* from cellSize */) => JSX.Element;
+}
+```
+
+### Example ChessPiecesMap
+
+```jsx
+const CUSTOM_PIECES_MAP = {
+    "pawn-white": (size) => <img width={size} height={size} src="white-pawn.png" />,
+    "bishop-white": (size) => <img width={size} height={size} src="bishop-pawn.png" />,
+    "knight-white": (size) => <img width={size} height={size} src="knight-pawn.png" />, 
+    "rook-white": (size) => <img width={size} height={size} src="rook-pawn.png" />, 
+    "queen-white": (size) => <img width={size} height={size} src="queen-pawn.png" />, 
+    "king-white": (size) => <img width={size} height={size} src="king-pawn.png" />,
+    "pawn-black": (size) => <img width={size} height={size} src="pawn-pawn.png" />, 
+    "bishop-black": (size) => <img width={size} height={size} src="bishop-pawn.png" />, 
+    "knight-black": (size) => <img width={size} height={size} src="knight-pawn.png" />, 
+    "rook-black": (size) => <img width={size} height={size} src="rook-pawn.png" />, 
+    "queen-black": (size) => <img width={size} height={size} src="queen-pawn.png" />, 
+    "king-black": (size) => <img width={size} height={size} src="king-pawn.png" />,
+}
+```
+
+### Example of full custom config
+
+```tsx
+import { CHESS_PIECES_MAP /* default pieces */ } from "react-chessboard-ui";
+
+const CUSTOM_CONFIG = { 
+  cellSize: 60,
+  selectedCellColor: "gray",
+  selectedCellBorder: "4px dashed black",
+  circleMarkColor: "red",
+  whiteCellColor: "#166",
+  blackCellColor: "#e0e0e0",
+  arrowColor: "red",
+  markedCellColor: "red",
+  checkedCellColor: "green",
+  piecesMap: {
+    ...CHESS_PIECES_MAP,
+    "pawn-white": (size) => <img width={size} height={size} src="white-pawn.png" />,
+  }
+}
+```

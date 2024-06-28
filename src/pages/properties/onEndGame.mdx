@@ -4,14 +4,14 @@ layout: ../../layouts/Layout.astro
 
 # onEndGame
 
-Called during the game's end with the result.
+Called during the game"s end with the result.
 
 Returns the games result and winning color.
 <br/>
 ```ts
 type GameResult = {
-    resultType: 'mat' | 'pat' | 'draw';
-    winColor?: 'white' | 'black';
+    resultType: "mat" | "pat" | "draw";
+    winColor?: "white" | "black";
 };
 
 type onChange = (gameResult: GameResult) => void;
