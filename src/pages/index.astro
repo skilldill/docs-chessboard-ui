@@ -1,14 +1,34 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { ChessBoardDefault } from '../components/ChessBoards';
+import '../styles/index.css';
+import LayoutApp from '../layouts/LayoutApp.astro';
+import Header from '../layouts/Header.astro';
+import { ChessBoardKings } from '../components/ChessBoards';
+import 'react-chessboard-ui/dist/index.css';
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<ChessBoardDefault client:load />
-	</main>
-</Layout>
+<LayoutApp title="chessboard-ui">
+    <Header />
+    <div class="flex justify-center gap-4">
+        
+        <!-- Primary Button -->
+        <a href="/docs/quickStart">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full">
+                Quick start
+            </button>
+        </a>
 
-<style is:global>
-	
+        <!-- Secondary Button -->
+        <a href="/examples/customFen">
+            <button class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full">
+                Show Examples
+            </button>
+        </a>
+    </div>
+</LayoutApp>
+
+
+<style scoped>
+.codeBlock {
+  
+}
 </style>
