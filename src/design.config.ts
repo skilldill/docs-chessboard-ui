@@ -1,4 +1,3 @@
-
 export const COLORS = {
     gray: [
       { name: "50", value: "#f9fafb" },

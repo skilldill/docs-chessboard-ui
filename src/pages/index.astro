@@ -2,25 +2,28 @@
 import '../styles/index.css';
 import LayoutApp from '../layouts/LayoutApp.astro';
 import Header from '../layouts/Header.astro';
-import { ChessBoardKings } from '../components/ChessBoards';
 import 'react-chessboard-ui/dist/index.css';
 ---
 
 <LayoutApp title="chessboard-ui">
     <Header />
-    <div class="flex justify-center gap-4">
-        
-        <!-- Primary Button -->
+    <div class="topBlock bg-gradient-to-br from-slate-700 to-black">
+        <h1 class="title mb-20">Chessboard UI</h1>
+        <div class="codeBlock">
+            <span>npm install react-chessboard-ui</span>
+        </div>
+    </div>
+
+    <div class="flex justify-center gap-4 pt-20">
         <a href="/docs/quickStart">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full">
-                Quick start
+                Get started
             </button>
         </a>
 
-        <!-- Secondary Button -->
         <a href="/examples/customFen">
             <button class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full">
-                Show Examples
+                Examples
             </button>
         </a>
     </div>
@@ -28,7 +31,28 @@ import 'react-chessboard-ui/dist/index.css';
 
 
 <style scoped>
+.topBlock {
+    height: 40vh;
+    min-height: 400px;
+}
+
+.title {
+    color: #fff;
+    text-align: center;
+    font-size: 40px;
+    padding-top: 80px;
+}
+
 .codeBlock {
-  
+    background-color: black;
+    border-radius: 14px;
+    padding: 20px 40px;
+    width: fit-content;
+    margin: auto;
+}
+.codeBlock > span {
+    font-family: monospace;
+    color: #e0e0e0;
+    font-size: 20px;
 }
 </style>

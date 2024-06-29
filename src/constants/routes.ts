@@ -1,7 +1,7 @@
 export const MENU_ROUTES = [
-    { text: "Getting started", header: true },
+    { text: "Documentation", header: true },
     { text: 'Introduction', link: '/docs/introduction' },
-    { text: "Quick start", link: "/docs/quickStart" },
+    { text: "Get started", link: "/docs/quickStart" },
 
     { text: "Properties", header: true },
     { text: "FEN", link: "/properties/FEN" },
@@ -11,7 +11,8 @@ export const MENU_ROUTES = [
     { text: "change (optional)", link: "/properties/change" },
     { text: "config (optional)", link: "/properties/config" },
 
-    { text: "Configurations", header: true },
+    { text: "Examples", header: true },
     { text: "Reversing board", link: "/examples/reversingBoard" },
     { text: "Custom FEN", link: "/examples/customFen" },
+    { text: "Customization", link: "/examples/customization" },
 ];
