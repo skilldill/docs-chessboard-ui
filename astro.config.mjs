@@ -9,5 +9,6 @@ export default defineConfig({
   integrations: [react(), tailwind(), mdx()],
   devToolbar: {
     enabled: false
-  }
+  },
+  outDir: './build',
 });
