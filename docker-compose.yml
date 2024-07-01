@@ -3,3 +3,6 @@ services:
   docs:
     build: ./
     container_name: docs-chessboard-ui
+    ports:
+      - 80:80
+    
