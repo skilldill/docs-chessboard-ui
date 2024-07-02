@@ -4,12 +4,11 @@ import LayoutApp from '../layouts/LayoutApp.astro';
 import Header from '../layouts/Header.astro';
 import 'react-chessboard-ui/dist/index.css';
 ---
-
-<LayoutApp title="chessboard-ui">
+<LayoutApp>
     <Header />
     <div class="topBlock bg-gradient-to-br from-slate-700 to-black">
         <h1 class="title mb-20">Chessboard UI</h1>
-        <div class="codeBlock">
+        <div class="codeBlock" id="codeBlock">
             <span>npm install react-chessboard-ui</span>
         </div>
     </div>
@@ -29,6 +28,25 @@ import 'react-chessboard-ui/dist/index.css';
     </div>
 </LayoutApp>
 
+<script>
+    const code = 'npm install react-chessboard-ui';
+    const codeBlock = document.querySelector('#codeBlock');
+
+    async function copyInstallCode() {
+        try {
+            await navigator.clipboard.writeText(code);
+            codeBlock.classList.add('codeBlockCopied');
+            const timeout = setTimeout(() => {
+                codeBlock.classList.remove('codeBlockCopied');
+                clearTimeout(timeout)
+            }, 4000);
+        } catch(error) {
+            console.error(error);
+        }
+    }
+
+    codeBlock.addEventListener('click', () => copyInstallCode())
+</script>
 
 <style scoped>
 .topBlock {
@@ -44,12 +62,24 @@ import 'react-chessboard-ui/dist/index.css';
 }
 
 .codeBlock {
-    background-color: black;
+    background-color: #000000;
     border-radius: 14px;
     padding: 20px 40px;
     width: fit-content;
     margin: auto;
+    cursor: pointer;
+    transition: all .3s;
 }
+
+.codeBlock:hover {
+    background-color: #111111;
+}
+
+.codeBlockCopied {
+    /* background-color: #212236; */
+    background-color: #213624 !important;
+}
+
 .codeBlock > span {
     font-family: monospace;
     color: #e0e0e0;
