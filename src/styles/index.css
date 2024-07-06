@@ -6,7 +6,6 @@ body {
     background: var(--color-gray-100);
     margin: 0;
     padding: 0;
-    padding-top: 64px;
 }
   
 .component-preview {
@@ -18,8 +17,35 @@ body {
     background-image: url("/grid-dot.svg");
     background-repeat: repeat;
     background-size: 1.5rem;
-    border-radius: 0.33rem;
+    border-radius: 14px;
     border: 1px solid var(--color-gray-200);
-    margin: 0.5rem;
     resize: both;
+}
+
+.copyBlock {
+    position: relative;        
+}
+
+.copyButton {
+    position: absolute;
+    right: 60px;
+    top: 12px;
+    width: 24px;
+    height: 24px;
+    z-index: 1;
+    mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'%3E%3Crect width='13' height='13' x='9' y='9' rx='2' ry='2' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+    mask-size: cover;
+    background-color: var(--color-gray-400);
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.showCopyButton {
+    opacity: 1;
+}
+
+.copyButtonCopied {
+    mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'%3E%3Cpath d='M20 6 9 17l-5-5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E")
 }

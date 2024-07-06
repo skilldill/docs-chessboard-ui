@@ -3,26 +3,34 @@ layout: ../../layouts/LayoutDocs.astro
 ---
 
 import { ChessBoardClonsFEN } from '../../components/ChessBoards.tsx';
+import CopyBlock from '../../components/CopyBlock.tsx';
 
 # FEN
 
-```ts
-type FEN = string;
-```
+<CopyBlock client:load>
+    ```ts
+    type FEN = string;
+    ```
+</CopyBlock>
 
+<br />
 ## What is it FEN?
 FEN notation is a compact way to represent the state of a chessboard. <br/>
 You can read about FEN notation [on this page](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation) 👈
 
-### Code
-```tsx
-<ChessBoard 
-    FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 b - - 0 1" // <~~~ King and Pawn FEN
-    onChange={handleChange}
-    onEndGame={handleEndGame}
-/>
-```
-### Example
+## Code
+<CopyBlock client:load>
+    ```tsx
+    <ChessBoard 
+        FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 b - - 0 1" // <~~~ King and Pawn FEN
+        onChange={handleChange}
+        onEndGame={handleEndGame}
+    />
+    ```
+</CopyBlock>
+
+<br />
+## Example
 <div class="component-preview">
     <ChessBoardClonsFEN client:load />
 </div>

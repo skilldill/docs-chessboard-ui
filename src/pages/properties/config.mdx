@@ -3,104 +3,135 @@ layout: ../../layouts/LayoutDocs.astro
 ---
 
 import { ChessBoardCustomConfig } from "../../components/ChessBoards";
+import CopyBlock from '../../components/CopyBlock.tsx';
 
 # config
 
 For customizing chessboard 💅
 
-```ts
-type ChessBoardConfig = {
-    cellSize: number; // px
-    whiteCellColor: string; // CSS color
-    blackCellColor: string; // CSS color
-    selectedCellColor: string; // CSS color
-    selectedCellBorder: string; // CSS border prop
-    markedCellColor: string; // CSS color
-    circleMarkColor: string; // CSS color
-    arrowColor: string; // CSS color (but with additional opacity)
-    checkedCellColor: string; // CSS color
-    piecesMap: ChessPiecesMap;
-}
+<CopyBlock client:load>
+    ```ts
+    type ChessBoardConfig = {
+        cellSize: number; // px
+        whiteCellColor: string; // CSS color
+        blackCellColor: string; // CSS color
+        selectedCellColor: string; // CSS color
+        selectedCellBorder: string; // CSS border prop
+        markedCellColor: string; // CSS color
+        circleMarkColor: string; // CSS color
+        arrowColor: string; // CSS color (but with additional opacity)
+        checkedCellColor: string; // CSS color
+        piecesMap: ChessPiecesMap;
+    }
 
-type config = Partial<ChessBoardConfig>;
-```
+    type config = Partial<ChessBoardConfig>;
+    ```
+</CopyBlock>
 
-<br/>
 *ChessPiecesMap* is needed for setting custom pieces.
 
-```ts
-type FigureType = 
-      "pawn-white"
-    | "bishop-white" 
-    | "knight-white" 
-    | "rook-white" 
-    | "queen-white" 
-    | "king-white"
-    | "pawn-black" 
-    | "bishop-black" 
-    | "knight-black" 
-    | "rook-black" 
-    | "queen-black" 
-    | "king-black";
+<CopyBlock client:load>
+    ```ts
+    type FigureType = 
+        "pawn-white"
+        | "bishop-white" 
+        | "knight-white" 
+        | "rook-white" 
+        | "queen-white" 
+        | "king-white"
+        | "pawn-black" 
+        | "bishop-black" 
+        | "knight-black" 
+        | "rook-black" 
+        | "queen-black" 
+        | "king-black";
 
-type ChessPiecesMap = {
-    [key: FigureType]: (size /* from cellSize */) => JSX.Element;
-}
-```
+    type ChessPiecesMap = {
+        [key: FigureType]: (size /* from cellSize */) => JSX.Element;
+    }
+    ```
+</CopyBlock>
 
-### Example ChessPiecesMap
+## Example ChessPiecesMap
 
-```jsx
-const CUSTOM_PIECES_MAP = {
-    "pawn-white": (size) => <img width={size} height={size} src="white-pawn.png" />,
-    "bishop-white": (size) => <img width={size} height={size} src="bishop-pawn.png" />,
-    "knight-white": (size) => <img width={size} height={size} src="knight-pawn.png" />, 
-    "rook-white": (size) => <img width={size} height={size} src="rook-pawn.png" />, 
-    "queen-white": (size) => <img width={size} height={size} src="queen-pawn.png" />, 
-    "king-white": (size) => <img width={size} height={size} src="king-pawn.png" />,
-    "pawn-black": (size) => <img width={size} height={size} src="pawn-pawn.png" />, 
-    "bishop-black": (size) => <img width={size} height={size} src="bishop-pawn.png" />, 
-    "knight-black": (size) => <img width={size} height={size} src="knight-pawn.png" />, 
-    "rook-black": (size) => <img width={size} height={size} src="rook-pawn.png" />, 
-    "queen-black": (size) => <img width={size} height={size} src="queen-pawn.png" />, 
-    "king-black": (size) => <img width={size} height={size} src="king-pawn.png" />,
-}
-```
+<CopyBlock client:load>
+    ```jsx
+    const CUSTOM_PIECES_MAP = {
+        "pawn-white": (size) => 
+            <img width={size} height={size} src="white-pawn.png" />,
 
-### Example of full custom config
+        "bishop-white": (size) => 
+            <img width={size} height={size} src="bishop-pawn.png" />,
 
-```tsx
-import { DEFAULT_PIECES_MAP /* default pieces */ } from "react-chessboard-ui";
+        "knight-white": (size) => 
+            <img width={size} height={size} src="knight-pawn.png" />, 
 
-const CUSTOM_CONFIG = { 
-	cellSize: 70,
-	selectedCellColor: "gray",
-	selectedCellBorder: "4px dashed black",
-	circleMarkColor: "red",
-	whiteCellColor: "#166",
-	blackCellColor: "#e0e0e0",
-	arrowColor: "red",
-	markedCellColor: "red",
-	checkedCellColor: "green",
-	piecesMap: {
-		...DEFAULT_PIECES_MAP,
-		"pawn-white": () => <img width={40} src="https://pics.clipartpng.com/midle/Pawn_White_Chess_Piece_PNG_Clip_Art-2751.png" />,
-		"pawn-black": () => <img width={40} src="https://pics.clipartpng.com/midle/Pawn_Black_Chess_Piece_PNG_Clip_Art-2764.png" />,
-		"knight-white": () => <img height={100} src="https://purepng.com/public/uploads/thumbnail//purepng.com-white-horse-jumpinghorsejumpingwhite-horsemountknighthackneyprad-481520976081ixkeq.png" />
-	}
-}
+        "rook-white": (size) => 
+            <img width={size} height={size} src="rook-pawn.png" />, 
 
-export const App = () => {
-	return (
-      <ChessBoard 
-        FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-        onChange={handleChange}
-        onEndGame={handleEndGame}
-        config={CUSTOM_CONFIG}
-      />
-    );
-}
-```
+        "queen-white": (size) => 
+            <img width={size} height={size} src="queen-pawn.png" />, 
+        
+        "king-white": (size) => 
+            <img width={size} height={size} src="king-pawn.png" />,
+        
+        "pawn-black": (size) => 
+            <img width={size} height={size} src="pawn-pawn.png" />, 
+        
+        "bishop-black": (size) => 
+            <img width={size} height={size} src="bishop-pawn.png" />, 
+        
+        "knight-black": (size) => 
+            <img width={size} height={size} src="knight-pawn.png" />, 
+        
+        "rook-black": (size) => 
+            <img width={size} height={size} src="rook-pawn.png" />, 
+        
+        "queen-black": (size) => 
+            <img width={size} height={size} src="queen-pawn.png" />, 
+        
+        "king-black": (size) => 
+            <img width={size} height={size} src="king-pawn.png" />,
+    }
+    ```
+</CopyBlock>
+
+## Example of full custom config
+
+<CopyBlock client:load>
+    ```tsx
+    import { DEFAULT_PIECES_MAP /* default pieces */ } from "react-chessboard-ui";
+
+    const CUSTOM_CONFIG = { 
+        cellSize: 70,
+        selectedCellColor: "gray",
+        selectedCellBorder: "4px dashed black",
+        circleMarkColor: "red",
+        whiteCellColor: "#166",
+        blackCellColor: "#e0e0e0",
+        arrowColor: "red",
+        markedCellColor: "red",
+        checkedCellColor: "green",
+        piecesMap: {
+            ...DEFAULT_PIECES_MAP,
+            "pawn-white": () => <img width={40} src="https://pics.clipartpng.com/midle/Pawn_White_Chess_Piece_PNG_Clip_Art-2751.png" />,
+            "pawn-black": () => <img width={40} src="https://pics.clipartpng.com/midle/Pawn_Black_Chess_Piece_PNG_Clip_Art-2764.png" />,
+            "knight-white": () => <img height={100} src="https://purepng.com/public/uploads/thumbnail//purepng.com-white-horse-jumpinghorsejumpingwhite-horsemountknighthackneyprad-481520976081ixkeq.png" />
+        }
+    }
+
+    export const App = () => {
+        return (
+        <ChessBoard 
+            FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+            onChange={handleChange}
+            onEndGame={handleEndGame}
+            config={CUSTOM_CONFIG}
+        />
+        );
+    }
+    ```
+</CopyBlock>
 
 ### Example
 <div class="component-preview">

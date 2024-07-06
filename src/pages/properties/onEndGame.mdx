@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/LayoutDocs.astro
 ---
+import CopyBlock from '../../components/CopyBlock.tsx';
 
 # onEndGame
 
@@ -8,29 +9,33 @@ Called during the game"s end with the result.
 
 Returns the games result and winning color.
 <br/>
-```ts
-type GameResult = {
-    resultType: "mat" | "pat" | "draw";
-    winColor?: "white" | "black";
-};
+<CopyBlock client:load>
+    ```ts
+    type GameResult = {
+        resultType: "mat" | "pat" | "draw";
+        winColor?: "white" | "black";
+    };
 
-type onChange = (gameResult: GameResult) => void;
-```
+    type onChange = (gameResult: GameResult) => void;
+    ```
+</CopyBlock>
 
 
 ### Code
-```tsx
-export const App = () => {
-    const handleEndGame = (gameResult) => {
-        saveGameResult(gameResult);
-    }
+<CopyBlock client:load>
+    ```tsx
+    export const App = () => {
+        const handleEndGame = (gameResult) => {
+            saveGameResult(gameResult);
+        }
 
-    return (
-        <ChessBoard 
-			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-			onChange={() => {}}
-			onEndGame={handleEndGame}
-		/>
-    );
-}
-```
+        return (
+            <ChessBoard 
+                FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                onChange={() => {}}
+                onEndGame={handleEndGame}
+            />
+        );
+    }
+    ```
+</CopyBlock>

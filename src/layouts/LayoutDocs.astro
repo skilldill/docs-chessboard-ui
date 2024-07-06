@@ -5,28 +5,40 @@ import LeftSideBar from './LeftSideBar.astro';
 ---
 
 <LayoutApp>
-	<div class="sticky top-0 z-10 w-full">
-		<Header />
-	</div>
-	<div class="grid grid-cols-12">
-		<div class="col-span-3 sticky top-0 pt-12 h-screen flex">
-			<div class="ml-auto">
-				<LeftSideBar />
-			</div>
+	<Header />
+	<div class="layout container">
+		<div class="leftBlock">
+			<LeftSideBar />
 		</div>
-		<main class="py-4 px-8 pb-32 col-span-6  overflow-auto">
-			<div>
-				<article id="article" class="content">
-					<section class="main-section">
-						<nav class="block sm:hidden"></nav>
-						<slot />
-					</section>
-				</article>
-			</div>
-		</main>
-		<div class="col-span-3 sticky top-0 h-screen flex">
-			<!-- <RightSidebar content={content} /> -->
+		
+		<div class="centerBlock">
+			<slot />
+		</div>
+
+		<div class="rightBlock">
+
 		</div>
 	</div>
 </LayoutApp>
+
+<script>
+	import { upradeCodeBlock } from "../utils/upgradeCodeBlock";
+	const codeBlocks = document.querySelectorAll('pre');
+	
+	codeBlocks.forEach((codeBlock) => {
+		upradeCodeBlock(codeBlock);
+	})
+
+</script>
+
+<style scoped>
+	.layout {
+		display: grid;
+		grid-template-columns: 300px 1fr 300px;
+	}
+
+	.centerBlock {
+
+	}
+</style>
 

@@ -3,26 +3,30 @@ layout: ../../layouts/LayoutDocs.astro
 ---
 
 import { ChessBoardReversed } from '../../components/ChessBoards.tsx';
+import CopyBlock from '../../components/CopyBlock.tsx';
 
 # reversed (optional)
-
-```js
-type reversed = boolean;
-```
-<br />
+<CopyBlock client:load>
+    ```js
+    type reversed = boolean;
+    ```
+</CopyBlock>
 You can reverse the chessboard to make it more comfortable for playing as black pieces.
 
-### Code
-```tsx
-<ChessBoard 
-    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-    onChange={handleChange}
-    onEndGame={handleEndGame}
-    reversed // <~~~ flag for reversing board
-/>
-```
+## Code
+<CopyBlock client:load>
+    ```tsx
+    <ChessBoard 
+        FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        onChange={handleChange}
+        onEndGame={handleEndGame}
+        reversed // <~~~ flag for reversing board
+    />
+    ```
+</CopyBlock>
 
-### Example
+<br />
+## Example
 <div class="component-preview">
     <ChessBoardReversed client:load />
 </div>

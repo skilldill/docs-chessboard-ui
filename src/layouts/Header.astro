@@ -7,7 +7,7 @@
 	<nav title="Top Navigation" class="container headerContent">
 		<div>
 			<a class="title" href="/">
-				<h1>
+				<h1 class="docsName">
 					Docs Chessboard UI
 				</h1>
 				<span class="packageVersion">
@@ -16,11 +16,11 @@
 			</a>
 		</div>
 		<div class="socials">
-			<a class="" href="https://github.com/skilldill/react-chessboard-ui">
-				<img class="" height="28px" src="/github.svg" alt="github logo">
+			<a class="socialIcon socialIconGithub" href="https://github.com/skilldill/react-chessboard-ui">
+				<img height="22px" width="22px" src="/github.svg" alt="github logo">
 			</a>
-			<a class="" class="" href="https://www.npmjs.com/package/react-chessboard-ui">
-				<img class="" height="28px" src="/npm.svg" alt="npm logo">
+			<a class="socialIcon socialIconNpm" class="" href="https://www.npmjs.com/package/react-chessboard-ui">
+				<img height="22px" width="22px" src="/npm.svg" alt="npm logo">
 			</a>
 		<!-- <button onclick="toggleDarkMode()">theme</button> -->
 		<!-- {
@@ -56,10 +56,9 @@
 </script>
 <style scoped>
 	header {
-		position: fixed;
+		position: sticky;
 		top: 0;
-		right: 0;
-		left: 0;
+		z-index: 100;
 		backdrop-filter: blur(10px);
 		background-color: rgb(241 245 249 / .5);
 		border-bottom: 1px solid var(--color-gray-200) !important;
@@ -82,7 +81,8 @@
 	.title h1 {
 		margin: 0;
 		color: var(--color-gray-700);
-		margin-right: 8px;
+		margin-right: 12px;
+		font-size: 22px;
 	}
 
 	.socials {
@@ -96,5 +96,24 @@
 		padding: 4px 8px;
 		border-radius: 8px;
 		font-weight: 700;
+	}
+
+	.socialIcon {
+		padding: 4px;
+		border-radius: 100%;
+		transition: background-color .3s;
+		display: flex;
+		width: 28px;
+		height: 28px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.socialIconGithub:hover {
+		background-color: var(--color-gray-200);
+	}
+
+	.socialIconNpm:hover {
+		background-color: var(--color-red-200);
 	}
 </style>
