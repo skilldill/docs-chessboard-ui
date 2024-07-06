@@ -39,10 +39,7 @@
     margin: 0.5rem;
 }
 
-.content code {
-    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
-        Consolas, "Liberation Mono", "Courier New", monospace;
-}
+.content 
 
 .content .component-preview {
     padding: 4rem;

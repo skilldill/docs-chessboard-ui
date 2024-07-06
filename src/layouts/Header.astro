@@ -2,25 +2,25 @@
 
 ---
 
-<header class="p-3 bg-slate-100 bg-opacity-50 backdrop-blur-md border-b text-slate-900">
+<header>
 	<!-- <SkipToContent /> -->
-	<nav title="Top Navigation" class="max-w-7xl mx-auto flex justify-between items-center px-4">
+	<nav title="Top Navigation" class="container headerContent">
 		<div>
-			<a class="text-lg font-medium flex items-end gap-2" href="/">
+			<a class="title" href="/">
 				<h1>
 					Docs Chessboard UI
 				</h1>
-				<span class="inline-block text-blue-800 text-custom" style="font-size: 14px;">
+				<span class="packageVersion">
 					v<span id="versionView"></span>
 				</span>
 			</a>
 		</div>
-		<div class="flex gap-2">
-			<a class="opacity-80 hover:opacity-100 hover:bg-slate-200 p-2 rounded-full transition-colors" href="https://github.com/skilldill/react-chessboard-ui">
-				<img class="h-7" src="/github.svg" alt="github logo">
+		<div class="socials">
+			<a class="" href="https://github.com/skilldill/react-chessboard-ui">
+				<img class="" height="28px" src="/github.svg" alt="github logo">
 			</a>
-			<a class="opacity-80 hover:opacity-100 hover:bg-slate-200 p-2 rounded-full transition-colors" class="link" href="https://www.npmjs.com/package/react-chessboard-ui">
-				<img class="h-7" src="/npm.svg" alt="npm logo">
+			<a class="" class="" href="https://www.npmjs.com/package/react-chessboard-ui">
+				<img class="" height="28px" src="/npm.svg" alt="npm logo">
 			</a>
 		<!-- <button onclick="toggleDarkMode()">theme</button> -->
 		<!-- {
@@ -55,9 +55,46 @@
 	fetchPackageAction(versionView);
 </script>
 <style scoped>
-	.link {
-		width: fit-content !important;
-		height: 28px !important;
-		width: 28px !important;
+	header {
+		position: fixed;
+		top: 0;
+		right: 0;
+		left: 0;
+		backdrop-filter: blur(10px);
+		background-color: rgb(241 245 249 / .5);
+		border-bottom: 1px solid var(--color-gray-200) !important;
+		height: 64px;
+	}
+	.headerContent {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		
+		padding: 16px 0;
+	}
+
+	.title {
+		text-decoration: none;
+		display: flex;
+		align-items: end;
+	}
+
+	.title h1 {
+		margin: 0;
+		color: var(--color-gray-700);
+		margin-right: 8px;
+	}
+
+	.socials {
+		display: flex;
+		gap: 14px;
+	}
+
+	.packageVersion {
+		background-color: var(--color-blue-600);
+		color: #fff;
+		padding: 4px 8px;
+		border-radius: 8px;
+		font-weight: 700;
 	}
 </style>

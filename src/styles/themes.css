@@ -1,0 +1,101 @@
+:root {
+    --color-gray-50: #f9fafb;
+    --color-gray-100: #f3f4f6;
+    --color-gray-200: #e5e7eb;
+    --color-gray-300: #d1d5db;
+    --color-gray-400: #9ca3af;
+    --color-gray-500: #6b7280;
+    --color-gray-600: #4b5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #1f2937;
+    --color-gray-900: #111827;
+
+    --color-blue-50: #eff6ff;
+    --color-blue-100: #dbeafe;
+    --color-blue-200: #bfdbfe;
+    --color-blue-300: #93c5fd;
+    --color-blue-400: #60a5fa;
+    --color-blue-500: #3b82f6;
+    --color-blue-600: #2563eb;
+    --color-blue-700: #1d4ed8;
+    --color-blue-800: #1e40af;
+    --color-blue-900: #1e3a8a;
+
+    --color-green-50: #f0fdfc;
+    --color-green-100: #e1f9f7;
+    --color-green-200: #c3f3eb;
+    --color-green-300: #a0ece5;
+    --color-green-400: #7ddcd3;
+    --color-green-500: #5bc9c0;
+    --color-green-600: #4db7b2;
+    --color-green-700: #3da69e;
+    --color-green-800: #2d8c82;
+    --color-green-900: #1e7a6e;
+
+    --color-red-50: #fdf2f2;
+    --color-red-100: #fde8e8;
+    --color-red-200: #fcd9d9;
+    --color-red-300: #fbcbcb;
+    --color-red-400: #f8b5b5;
+    --color-red-500: #f49f9f;
+    --color-red-600: #e57373;
+    --color-red-700: #d73a3a;
+    --color-red-800: #c62e2e;
+    --color-red-900: #ad1c1c;
+}
+
+/* Define the default font family */
+body {
+    font-family: "Inter", system;
+}
+
+/* Apply typography settings */
+h1 {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+body,
+button,
+caption {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+code {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+        Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+pre.astro-code {
+    margin: 0.5rem;
+}
+
+a {
+    color: var(--color-blue-600);
+}
+
+p {
+    margin-top: 0.77rem;
+    color: var(--color-gray-600);
+}
+
+.container {
+    max-width: 1280px;
+    margin: auto;
+}
