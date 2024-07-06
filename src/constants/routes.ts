@@ -10,6 +10,7 @@ export const MENU_ROUTES = [
     { text: "onEndGame", link: "/properties/onEndGame" },
     { text: "change (optional)", link: "/properties/change" },
     { text: "config (optional)", link: "/properties/config" },
+    { text: "playerColor (optional)", link: "/properties/playerColor" },
 
     { text: "Examples", header: true },
     { text: "Reversing board", link: "/examples/reversingBoard" },

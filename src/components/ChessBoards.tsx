@@ -98,3 +98,15 @@ export const ChessBoardCustomConfig: FC = () => {
 		/>
     );
 }
+
+export const ChessBoardPlayerColor: FC = () => {
+	return (
+		<ChessBoard 
+			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+			onChange={(data) => {}}
+			onEndGame={() => {}}
+			config={{ cellSize: 70 }}
+			playerColor="white"
+		/>
+	);
+}
