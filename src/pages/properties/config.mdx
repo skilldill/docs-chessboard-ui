@@ -9,7 +9,7 @@ import CopyBlock from '../../components/CopyBlock.tsx';
     # config
 
     For customizing chessboard 💅
-
+    <h2 id="Typing" data-anchor>Typing</h2>
     <CopyBlock client:load>
         ```ts
         type ChessBoardConfig = {
@@ -31,6 +31,7 @@ import CopyBlock from '../../components/CopyBlock.tsx';
 
     *ChessPiecesMap* is needed for setting custom pieces.
 
+    <h2 id="ChessPiecesMap" data-anchor>ChessPiecesMap</h2>
     <CopyBlock client:load>
         ```ts
         type FigureType = 
@@ -52,9 +53,8 @@ import CopyBlock from '../../components/CopyBlock.tsx';
         }
         ```
     </CopyBlock>
-
-    ## Example ChessPiecesMap
-
+    
+    <h2 id="Example ChessPiecesMap" data-anchor>Example ChessPiecesMap</h2>
     <CopyBlock client:load>
         ```jsx
         const CUSTOM_PIECES_MAP = {
@@ -97,8 +97,7 @@ import CopyBlock from '../../components/CopyBlock.tsx';
         ```
     </CopyBlock>
 
-    ## Example of full custom config
-
+    <h2 id="Example of full custom config" data-anchor>Example of full custom config</h2>
     <CopyBlock client:load>
         ```tsx
         import { DEFAULT_PIECES_MAP /* default pieces */ } from "react-chessboard-ui";
@@ -134,7 +133,7 @@ import CopyBlock from '../../components/CopyBlock.tsx';
         ```
     </CopyBlock>
 
-    ### Example
+    <h2 id="Example" data-anchor>Example</h2>
     <div class="component-preview">
         <ChessBoardCustomConfig client:load />
     </div>

@@ -12,30 +12,31 @@ import CopyBlock from '../../components/CopyBlock.tsx';
     of the other color can only be changed by [change](/properties/change) properties.
     <br/>
 
+    <h2 id="Typing" data-anchor>Typing</h2>
     <CopyBlock client:load>
+        ```ts
+        type playerColor = "white" | "black";
+        ```
     </CopyBlock>
-    ```ts
-    type playerColor = "white" | "black";
-    ```
 
-    ### Code
+    <h2 id="Code" data-anchor>Code</h2>
     <CopyBlock client:load>
+        ```jsx
+        const App = () => {
+            return (
+                <ChessBoard 
+                    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                    onChange={handleChange}
+                    onEndGame={handleEndGame}
+                    change={change}
+                    playerColor="white"
+                />
+            );
+        }
+        ```
     </CopyBlock>
-    ```jsx
-    const App = () => {
-        return (
-            <ChessBoard 
-                FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-                onChange={handleChange}
-                onEndGame={handleEndGame}
-                change={change}
-                playerColor="white"
-            />
-        );
-    }
-    ```
 
-    ### Example
+    <h2 id="Example" data-anchor>Example</h2>
     <div class="component-preview">
         <ChessBoardPlayerColor client:load />
     </div>

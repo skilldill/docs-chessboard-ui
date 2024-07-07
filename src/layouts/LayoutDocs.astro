@@ -2,6 +2,7 @@
 import LayoutApp from "./LayoutApp.astro";
 import Header from "./Header.astro";
 import LeftSideBar from "./LeftSideBar.astro";
+import RightSideBar from "./RightSideBar.astro";
 
 interface Props {
   active?: string;
@@ -19,7 +20,9 @@ const { active } = Astro.props;
 		<main class="centerBlock">
 			<slot />
 		</main>
-		<aside class="rightBlock">Sidebar Right</aside>
+		<aside class="rightBlock">
+			<RightSideBar />
+		</aside>
 	</div>
 </LayoutApp>
 

@@ -104,11 +104,11 @@ code {
 
 pre {
     padding: 14px;
-    border-radius: 8px;
+    border-radius: 14px;
     background-color: var(--color-gray-800) !important;
     position: relative;
     margin: 0;
-    max-width: 700px;
+    max-width: 100%;
 }
 
 a {

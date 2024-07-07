@@ -1,0 +1,35 @@
+---
+---
+
+<div class="rightSideBar">
+    <ul class="anchors" id="anchorsRoot"></ul>
+</div>
+<script>
+    import { fillAnchorsDocs } from "../utils/fillAnchorsDocs";
+    const anchorsRoot = document.querySelector<HTMLUListElement>("#anchorsRoot");
+    fillAnchorsDocs(anchorsRoot);
+</script>
+<style global>
+    .rightSideBar {
+
+    }
+
+    .anchors {
+    }
+    
+    .anchorItem {
+        list-style-type: none;
+        margin-bottom: 14px;
+    }
+
+    .anchorItem a {
+        font-size: 16px;
+        text-decoration: none;
+        color: var(--color-gray-400);
+    }
+
+    .anchorItem a:hover {
+        text-decoration: underline;
+        color: var(--color-gray-500);
+    }
+</style>
