@@ -1,44 +1,43 @@
 ---
-import LayoutApp from './LayoutApp.astro';
-import Header from './Header.astro';
-import LeftSideBar from './LeftSideBar.astro';
+import LayoutApp from "./LayoutApp.astro";
+import Header from "./Header.astro";
+import LeftSideBar from "./LeftSideBar.astro";
 ---
 
 <LayoutApp>
 	<Header />
 	<div class="layout container">
-		<div class="leftBlock">
+		<aside class="leftBlock">
 			<LeftSideBar />
-		</div>
-		
-		<div class="centerBlock">
+		</aside>
+		<main class="centerBlock">
 			<slot />
-		</div>
-
-		<div class="rightBlock">
-
-		</div>
+		</main>
+		<aside class="rightBlock">Sidebar Right</aside>
 	</div>
 </LayoutApp>
 
-<script>
-	import { upradeCodeBlock } from "../utils/upgradeCodeBlock";
-	const codeBlocks = document.querySelectorAll('pre');
-	
-	codeBlocks.forEach((codeBlock) => {
-		upradeCodeBlock(codeBlock);
-	})
-
-</script>
-
 <style scoped>
+	.leftBlock {
+		position: sticky;
+		top: 64px;
+		grid-area: lb;
+	}
+	.centerBlock {
+		overflow-y: scroll;
+		grid-area: cb;
+	}
+	.rightBlock {
+		position: sticky;
+		top: 64px;
+		grid-area: rb;
+	}
+
 	.layout {
+		height: calc(100vh - 64px);
 		display: grid;
 		grid-template-columns: 300px 1fr 300px;
-	}
-
-	.centerBlock {
-
+		grid-template-areas:
+			"lb cb rb";
 	}
 </style>
-
