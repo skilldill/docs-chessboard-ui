@@ -3,6 +3,7 @@ layout: ../../layouts/LayoutDocs.astro
 ---
 
 import { ChessBoardReversed } from '../../components/ChessBoards.tsx';
+import CopyBlock from '../../components/CopyBlock.tsx';
 
 # Reversing board
 
@@ -13,11 +14,13 @@ import { ChessBoardReversed } from '../../components/ChessBoards.tsx';
 
 
 ### Code
-```tsx
-<ChessBoard 
-    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-    onChange={handleChange}
-    onEndGame={handleEndGame}
-    reversed // <~~~ flag for reversing board
-/>
-```
+<CopyBlock client:load>
+    ```tsx
+    <ChessBoard 
+        FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        onChange={handleChange}
+        onEndGame={handleEndGame}
+        reversed // <~~~ flag for reversing board
+    />
+    ```
+</CopyBlock>

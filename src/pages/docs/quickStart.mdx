@@ -3,34 +3,41 @@ layout: ../../layouts/LayoutDocs.astro
 ---
 
 import { ChessBoardDefault } from '../../components/ChessBoards.tsx';
+import CopyBlock from '../../components/CopyBlock.tsx';
 
 # Get started
 
 ## Install
-```bash
-npm install react-chessboard-ui
-```
+<CopyBlock client:load>
+    ```bash
+    npm install react-chessboard-ui
+    ```
+</CopyBlock>
+
 <br />
 ## Add in project
-```tsx
-import type { FC } from "react";
-import { ChessBoard } from "react-chessboard-ui";
+<CopyBlock client:load>
+    ```tsx
+    import type { FC } from "react";
+    import { ChessBoard } from "react-chessboard-ui";
 
-// Import chessboard styles global or local
-import 'react-chessboard-ui/dist/index.css';
+    // Import chessboard styles global or local
+    import 'react-chessboard-ui/dist/index.css';
 
-export const App: FC = () => {
-    return (
-        <div className="app">
-            <ChessBoard 
-                FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-                onChange={(data) => {}}
-                onEndGame={(result) => {}}
-            />
-        </div>
-    );
-}
-```
+    export const App: FC = () => {
+        return (
+            <div className="app">
+                <ChessBoard 
+                    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                    onChange={(data) => {}}
+                    onEndGame={(result) => {}}
+                />
+            </div>
+        );
+    }
+    ```
+</CopyBlock>
+
 <br />
 ## Example
 <div class="component-preview">
