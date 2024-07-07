@@ -21,15 +21,19 @@ import LeftSideBar from "./LeftSideBar.astro";
 	.leftBlock {
 		position: sticky;
 		top: 64px;
+		overflow-y: auto;
 		grid-area: lb;
 	}
 	.centerBlock {
-		overflow-y: scroll;
+		overflow-y: auto;
+		padding: 0 20px;
+		padding-bottom: 64px;
 		grid-area: cb;
 	}
 	.rightBlock {
 		position: sticky;
 		top: 64px;
+		overflow-y: auto;
 		grid-area: rb;
 	}
 
