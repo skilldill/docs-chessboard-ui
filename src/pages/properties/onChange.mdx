@@ -1,48 +1,50 @@
 ---
-layout: ../../layouts/LayoutDocs.astro
 ---
+import LayoutDocs from "../../layouts/LayoutDocs.astro";
 import CopyBlock from '../../components/CopyBlock.tsx';
 
-# onChange
+<LayoutDocs active="/properties/onChange">
+    # onChange
 
-Called during the update of the state of the chessboard.
+    Called during the update of the state of the chessboard.
 
-Returns the updated state of the chessboard in FEN notation, 
-indicating the move that was made and the piece that was moved.
-<br/>
+    Returns the updated state of the chessboard in FEN notation, 
+    indicating the move that was made and the piece that was moved.
+    <br/>
 
-<CopyBlock client:load>
-    ```ts
-    type MoveData = {
-        FEN: string;
-        from: [number, number];
-        to: [number, number];
-        figure: { 
-            color: "white" | "black";
-            type: "pawn" | "bishop" | "knigts" | "rook" | "queen" | "king";
-        };
-    }
-
-    type onChange = (moveData: MoveData) => void;
-    ```
-</CopyBlock>
-
-<br />
-## Code
-<CopyBlock client:load>
-    ```tsx
-    export const App = () => {
-        const handleChange = (moveData) => {
-            sendMove(moveData);
+    <CopyBlock client:load>
+        ```ts
+        type MoveData = {
+            FEN: string;
+            from: [number, number];
+            to: [number, number];
+            figure: { 
+                color: "white" | "black";
+                type: "pawn" | "bishop" | "knigts" | "rook" | "queen" | "king";
+            };
         }
 
-        return (
-            <ChessBoard 
-                FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-                onChange={handleChange}
-                onEndGame={() => {}}
-            />
-        );
-    }
-    ```
-</CopyBlock>
+        type onChange = (moveData: MoveData) => void;
+        ```
+    </CopyBlock>
+
+    <br />
+    ## Code
+    <CopyBlock client:load>
+        ```tsx
+        export const App = () => {
+            const handleChange = (moveData) => {
+                sendMove(moveData);
+            }
+
+            return (
+                <ChessBoard 
+                    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                    onChange={handleChange}
+                    onEndGame={() => {}}
+                />
+            );
+        }
+        ```
+    </CopyBlock>
+</LayoutDocs>

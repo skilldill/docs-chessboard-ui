@@ -2,13 +2,19 @@
 import LayoutApp from "./LayoutApp.astro";
 import Header from "./Header.astro";
 import LeftSideBar from "./LeftSideBar.astro";
+
+interface Props {
+  active?: string;
+}
+
+const { active } = Astro.props;
 ---
 
 <LayoutApp>
 	<Header />
 	<div class="layout container">
 		<aside class="leftBlock">
-			<LeftSideBar />
+			<LeftSideBar active={active} />
 		</aside>
 		<main class="centerBlock">
 			<slot />

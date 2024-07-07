@@ -1,45 +1,47 @@
 ---
-layout: ../../layouts/LayoutDocs.astro
 ---
-
+import LaoutDocs from '../../layouts/LayoutDocs.astro';
 import { ChessBoardDefault } from '../../components/ChessBoards.tsx';
 import CopyBlock from '../../components/CopyBlock.tsx';
 
-# Get started
 
-## Install
-<CopyBlock client:load>
-    ```bash
-    npm install react-chessboard-ui
-    ```
-</CopyBlock>
+<LaoutDocs active="/docs/quickStart">
+    # Get started
 
-<br />
-## Add in project
-<CopyBlock client:load>
-    ```tsx
-    import type { FC } from "react";
-    import { ChessBoard } from "react-chessboard-ui";
+    ## Install
+    <CopyBlock client:load>
+        ```bash
+        npm install react-chessboard-ui
+        ```
+    </CopyBlock>
 
-    // Import chessboard styles global or local
-    import 'react-chessboard-ui/dist/index.css';
+    <br />
+    ## Add in project
+    <CopyBlock client:load>
+        ```tsx
+        import type { FC } from "react";
+        import { ChessBoard } from "react-chessboard-ui";
 
-    export const App: FC = () => {
-        return (
-            <div className="app">
-                <ChessBoard 
-                    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-                    onChange={(data) => {}}
-                    onEndGame={(result) => {}}
-                />
-            </div>
-        );
-    }
-    ```
-</CopyBlock>
+        // Import chessboard styles global or local
+        import 'react-chessboard-ui/dist/index.css';
 
-<br />
-## Example
-<div class="component-preview">
-    <ChessBoardDefault client:load />
-</div>
+        export const App: FC = () => {
+            return (
+                <div className="app">
+                    <ChessBoard 
+                        FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                        onChange={(data) => {}}
+                        onEndGame={(result) => {}}
+                    />
+                </div>
+            );
+        }
+        ```
+    </CopyBlock>
+
+    <br />
+    ## Example
+    <div class="component-preview">
+        <ChessBoardDefault client:load />
+    </div>
+</LaoutDocs>

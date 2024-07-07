@@ -1,39 +1,42 @@
 ---
-layout: ../../layouts/LayoutDocs.astro
 ---
+import LayoutDocs from "../../layouts/LayoutDocs.astro";
 import { ChessBoardPlayerColor } from '../../components/ChessBoards';
 import CopyBlock from '../../components/CopyBlock.tsx';
 
-# playerColor
-To set the color of the piece that can only be played, the player's color must be selected. 
-If the *playerColor* has been selected, then the positions of the pieces 
-of the other color can only be changed by [change](/properties/change) properties.
-<br/>
+<LayoutDocs active="/properties/playerColor">
+    # playerColor
 
-<CopyBlock client:load>
-</CopyBlock>
-```ts
-type playerColor = "white" | "black";
-```
+    To set the color of the piece that can only be played, the player's color must be selected. 
+    If the *playerColor* has been selected, then the positions of the pieces 
+    of the other color can only be changed by [change](/properties/change) properties.
+    <br/>
 
-### Code
-<CopyBlock client:load>
-</CopyBlock>
-```jsx
-const App = () => {
-    return (
-        <ChessBoard 
-			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-			onChange={handleChange}
-			onEndGame={handleEndGame}
-            change={change}
-            playerColor="white"
-		/>
-    );
-}
-```
+    <CopyBlock client:load>
+    </CopyBlock>
+    ```ts
+    type playerColor = "white" | "black";
+    ```
 
-### Example
-<div class="component-preview">
-    <ChessBoardPlayerColor client:load />
-</div>
+    ### Code
+    <CopyBlock client:load>
+    </CopyBlock>
+    ```jsx
+    const App = () => {
+        return (
+            <ChessBoard 
+                FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                onChange={handleChange}
+                onEndGame={handleEndGame}
+                change={change}
+                playerColor="white"
+            />
+        );
+    }
+    ```
+
+    ### Example
+    <div class="component-preview">
+        <ChessBoardPlayerColor client:load />
+    </div>
+</LayoutDocs>

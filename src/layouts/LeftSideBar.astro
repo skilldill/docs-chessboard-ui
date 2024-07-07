@@ -1,12 +1,19 @@
 ---
 import { MENU_ROUTES } from '../constants/routes';
 
-const currentPage = new URL(Astro.request.url).pathname;
+interface Props {
+	active?: string;
+}
+
+const { active } = Astro.props;
 ---
 <nav class="navbar">
 	<ul class="menuItems">
 		{MENU_ROUTES.map((item) => 
-			<li class:list={item.link ? ['menuItem'] : ['menuTitle']}>
+			<li class:list={item.link 
+				? ['menuItem', { active: active === item.link }] 
+				: ['menuTitle']
+			}>
 				{item.link ? (
 					<a href={item.link ? item.link : ''}>
 						{item.text}
@@ -53,6 +60,11 @@ const currentPage = new URL(Astro.request.url).pathname;
 
 	.menuItem a:hover {
 		background-color: var(--color-gray-200);
+	}
+
+	.active a {
+		background-color: var(--color-gray-400) !important;
+		color: #fff !important;
 	}
 
 	.menuTitle {
