@@ -1,50 +1,58 @@
 ---
-layout: ../../layouts/LayoutDocs.astro
 ---
-
+import LaoutDocs from '../../layouts/LayoutDocs.astro';
 import { 
     ChessBoardDefaultFEN, 
     ChessBoardKingPawnFEN, 
     ChessBoardClonsFEN 
 } from '../../components/ChessBoards.tsx';
+import CopyBlock from '../../components/CopyBlock.tsx';
 
-# Reversing board
+<LaoutDocs active="/examples/customFen">
+    # Reversing board
 
-### Default
-<div class="component-preview">
-    <ChessBoardDefaultFEN client:load />
-</div>
+    <h2 id="Default" data-anchor>Default</h2>
+    <div class="component-preview">
+        <ChessBoardDefaultFEN client:load />
+    </div>
+    <br />
+    <CopyBlock client:load>
+        ```tsx
+        <ChessBoard 
+            FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" // <~~~ Default FEN
+            onChange={handleChange}
+            onEndGame={handleEndGame}
+        />
+        ```
+    </CopyBlock>
 
-```tsx
-<ChessBoard 
-    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" // <~~~ Default FEN
-    onChange={handleChange}
-    onEndGame={handleEndGame}
-/>
-```
+    <h2 id="King and Pawn" data-anchor>King and Pawn</h2>
+    <div class="component-preview">
+        <ChessBoardKingPawnFEN client:load />
+    </div>
+    <br />
+    <CopyBlock client:load>
+        ```tsx
+        <ChessBoard 
+            FEN="8/8/8/8/8/8/1K6/P7 w - - 0 1" // <~~~ King and Pawn FEN
+            onChange={handleChange}
+            onEndGame={handleEndGame}
+        />
+        ```
+    </CopyBlock>
 
-### King and Pawn
-<div class="component-preview">
-    <ChessBoardKingPawnFEN client:load />
-</div>
-
-```tsx
-<ChessBoard 
-    FEN="8/8/8/8/8/8/1K6/P7 w - - 0 1" // <~~~ King and Pawn FEN
-    onChange={handleChange}
-    onEndGame={handleEndGame}
-/>
-```
-
-### Quins clones (blacks start)
-<div class="component-preview">
-    <ChessBoardClonsFEN client:load />
-</div>
-
-```tsx
-<ChessBoard 
-    FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 b - - 0 1" // <~~~ Quins clones FEN
-    onChange={handleChange}
-    onEndGame={handleEndGame}
-/>
-```
+    <h2 id="Quins clones (blacks start)" data-anchor>Quins clones (blacks start)</h2>
+    <div class="component-preview">
+        <ChessBoardClonsFEN client:load />
+    </div>
+    <br />
+    <CopyBlock client:load>
+        ```tsx
+        <ChessBoard 
+            FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 b - - 0 1" // <~~~ Quins clones FEN
+            onChange={handleChange}
+            onEndGame={handleEndGame}
+        />
+        ```
+    </CopyBlock>
+</LaoutDocs>

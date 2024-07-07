@@ -1,38 +1,47 @@
 ---
-layout: ../../layouts/LayoutDocs.astro
 ---
-
+import LaoutDocs from '../../layouts/LayoutDocs.astro';
 import { ChessBoardDefault } from '../../components/ChessBoards.tsx';
+import CopyBlock from '../../components/CopyBlock.tsx';
 
-# Get started
 
-### Install
-```bash
-npm install react-chessboard-ui
-```
+<LaoutDocs active="/docs/quickStart">
+    # Get started
 
-### Add in project
-```tsx
-import type { FC } from "react";
-import { ChessBoard } from "react-chessboard-ui";
+    <h2 id="Install" data-anchor>Install</h2>
+    <CopyBlock client:load>
+        ```bash
+        npm install react-chessboard-ui
+        ```
+    </CopyBlock>
 
-// Import chessboard styles global or local
-import 'react-chessboard-ui/dist/index.css';
+    <br />
+    <h2 id="Add in project" data-anchor>Add in project</h2>
+    <CopyBlock client:load>
+        ```tsx
+        import type { FC } from "react";
+        import { ChessBoard } from "react-chessboard-ui";
 
-export const App: FC = () => {
-    return (
-        <div className="app">
-            <ChessBoard 
-                FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-                onChange={(data) => {}}
-                onEndGame={(result) => {}}
-            />
-        </div>
-    );
-}
-```
+        // Import chessboard styles global or local
+        import 'react-chessboard-ui/dist/index.css';
 
-### Example
-<div class="component-preview">
-    <ChessBoardDefault client:load />
-</div>
+        export const App: FC = () => {
+            return (
+                <div className="app">
+                    <ChessBoard 
+                        FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                        onChange={(data) => {}}
+                        onEndGame={(result) => {}}
+                    />
+                </div>
+            );
+        }
+        ```
+    </CopyBlock>
+
+    <br />
+    <h2 id="Example" data-anchor>Example</h2>
+    <div class="component-preview">
+        <ChessBoardDefault client:load />
+    </div>
+</LaoutDocs>

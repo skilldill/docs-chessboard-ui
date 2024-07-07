@@ -1,34 +1,43 @@
 ---
-layout: ../../layouts/LayoutDocs.astro
 ---
+import LayoutDocs from "../../layouts/LayoutDocs.astro";
 import { ChessBoardPlayerColor } from '../../components/ChessBoards';
+import CopyBlock from '../../components/CopyBlock.tsx';
 
-# playerColor
-To set the color of the piece that can only be played, the player's color must be selected. 
-If the *playerColor* has been selected, then the positions of the pieces 
-of the other color can only be changed by [change](/properties/change) properties.
-<br/>
+<LayoutDocs active="/properties/playerColor">
+    # playerColor
 
-```ts
-type playerColor = "white" | "black";
-```
+    To set the color of the piece that can only be played, the player's color must be selected. 
+    If the *playerColor* has been selected, then the positions of the pieces 
+    of the other color can only be changed by [change](/properties/change) properties.
+    <br/>
 
-### Code
-```jsx
-const App = () => {
-    return (
-        <ChessBoard 
-			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-			onChange={handleChange}
-			onEndGame={handleEndGame}
-            change={change}
-            playerColor="white"
-		/>
-    );
-}
-```
+    <h2 id="Typing" data-anchor>Typing</h2>
+    <CopyBlock client:load>
+        ```ts
+        type playerColor = "white" | "black";
+        ```
+    </CopyBlock>
 
-### Example
-<div class="component-preview">
-    <ChessBoardPlayerColor client:load />
-</div>
+    <h2 id="Code" data-anchor>Code</h2>
+    <CopyBlock client:load>
+        ```jsx
+        const App = () => {
+            return (
+                <ChessBoard 
+                    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                    onChange={handleChange}
+                    onEndGame={handleEndGame}
+                    change={change}
+                    playerColor="white"
+                />
+            );
+        }
+        ```
+    </CopyBlock>
+
+    <h2 id="Example" data-anchor>Example</h2>
+    <div class="component-preview">
+        <ChessBoardPlayerColor client:load />
+    </div>
+</LayoutDocs>

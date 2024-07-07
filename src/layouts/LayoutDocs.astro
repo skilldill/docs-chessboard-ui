@@ -1,32 +1,59 @@
 ---
-import LayoutApp from './LayoutApp.astro';
-import Header from './Header.astro';
-import LeftSideBar from './LeftSideBar.astro';
+import LayoutApp from "./LayoutApp.astro";
+import Header from "./Header.astro";
+import LeftSideBar from "./LeftSideBar.astro";
+import RightSideBar from "./RightSideBar.astro";
+
+interface Props {
+  active?: string;
+}
+
+const { active } = Astro.props;
 ---
 
 <LayoutApp>
-	<div class="sticky top-0 z-10 w-full">
-		<Header />
-	</div>
-	<div class="grid grid-cols-12">
-		<div class="col-span-3 sticky top-0 pt-12 h-screen flex">
-			<div class="ml-auto">
-				<LeftSideBar />
-			</div>
-		</div>
-		<main class="py-4 px-8 pb-32 col-span-6  overflow-auto">
-			<div>
-				<article id="article" class="content">
-					<section class="main-section">
-						<nav class="block sm:hidden"></nav>
-						<slot />
-					</section>
-				</article>
-			</div>
+	<Header />
+	<div class="layout container">
+		<aside class="leftBlock">
+			<LeftSideBar active={active} />
+		</aside>
+		<main class="centerBlock">
+			<slot />
 		</main>
-		<div class="col-span-3 sticky top-0 h-screen flex">
-			<!-- <RightSidebar content={content} /> -->
-		</div>
+		<aside class="rightBlock">
+			<RightSideBar />
+		</aside>
 	</div>
 </LayoutApp>
 
+<style scoped>
+	.leftBlock,
+	.rightBlock {
+		position: sticky;
+		top: 64px;
+		overflow-y: auto;
+		padding-top: 24px;
+	}
+
+	.leftBlock {
+		grid-area: lb;
+	}
+
+	.rightBlock {
+		grid-area: rb;
+	}
+
+	.centerBlock {
+		overflow-y: auto;
+		padding: 40px 20px;
+		grid-area: cb;
+	}
+
+	.layout {
+		height: calc(100vh - 64px);
+		display: grid;
+		grid-template-columns: 300px 1fr 300px;
+		grid-template-areas:
+			"lb cb rb";
+	}
+</style>

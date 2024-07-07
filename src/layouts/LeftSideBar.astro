@@ -1,44 +1,74 @@
 ---
 import { MENU_ROUTES } from '../constants/routes';
 
-const currentPage = new URL(Astro.request.url).pathname;
-const currentPageMatch = currentPage.slice(1);
-
-const isCurrentPage = (link: string) => {
-	if (link) {
-		return link.includes(currentPageMatch);
-	}
-	return false;
-};
-
-const getLinkClasses = (link: string) => {
-	const baseClasses = "block py-2 px-6  my-1 transition-colors border-l hover:border-slate-400 text-slate-500 hover:text-slate-900"
-
-	if (isCurrentPage(link)) {
-		return baseClasses + " border-slate-500 text-slate-900";
-	} else {
-		return baseClasses;
-	}
+interface Props {
+	active?: string;
 }
+
+const { active } = Astro.props;
 ---
-<aside title="Site Navigation">
-	<!-- <Debug content={navigation} /> -->
-	<nav aria-labelledby="grid-left" class="w-64 p-4 border-r">
-		<ul>
-			{MENU_ROUTES.map(item => (item.header ? 
-				<h2 class="mt-4 font-semibold text-slate-700">{item.text}</h2> : 
-				<li class={getLinkClasses(item.link)}>
-					<a href={item.link}>{item.text}</a>
-				</li>))}
-		</ul>
-	</nav>
-</aside>
+<nav class="navbar">
+	<ul class="menuItems">
+		{MENU_ROUTES.map((item) => 
+			<li class:list={item.link 
+				? ['menuItem', { active: active === item.link }] 
+				: ['menuTitle']
+			}>
+				{item.link ? (
+					<a href={item.link ? item.link : ''}>
+						{item.text}
+					</a>
+				) : <span>{item.text}</span>}
+			</li>
+		)}
+	</ul>
+</nav>
 
 <script is:inline>
-	window.addEventListener('DOMContentLoaded', (event) => {
-		var target = document.querySelector('[aria-current="page"]');
-		if (target && target.offsetTop > window.innerHeight - 100) {
-			document.querySelector('.nav-groups').scrollTop = target.offsetTop;
-		}
-	});
+	
 </script>
+
+<style scoped>
+	.navbar {
+
+	}
+		
+	.menuItems {
+		padding: 0;
+		margin: 0;
+	}
+
+	.menuItems li {
+		list-style-type: none;
+		padding: 4px 0;
+	}
+
+	.menuItem {
+		font-size: 16px;
+		padding-left: 10px !important;
+	}
+
+	.menuItem a {
+		text-decoration: none;
+		display: block;
+		width: fit-content;
+		color: var(--color-gray-500);
+		padding: 6px 8px;
+		border-radius: 6px;
+		transition: background-color .3s;
+	}
+
+	.menuItem a:hover {
+		background-color: var(--color-gray-200);
+	}
+
+	.active a {
+		background-color: var(--color-gray-400) !important;
+		color: #fff !important;
+	}
+
+	.menuTitle {
+		font-size: 18px;
+		margin-top: 8px;
+	}
+</style>

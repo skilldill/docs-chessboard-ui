@@ -1,56 +1,63 @@
 ---
-layout: ../../layouts/LayoutDocs.astro
 ---
+import LayoutDocs from "../../layouts/LayoutDocs.astro"
+import CopyBlock from '../../components/CopyBlock.tsx';
 
-# change
+<LayoutDocs active="/properties/change">
+    # change
 
-You can use the change function to update the state from outside. 
-This can be used to create games using a websocket or to generate chess problems.
-<br/>
+    You can use the change function to update the state from outside. 
+    This can be used to create games using a websocket or to generate chess problems.
 
-```ts
-type MoveData = {
-    FEN: string;
-    from: [number, number];
-    to: [number, number];
-    figure: { 
-        color: "white" | "black";
-        type: "pawn" | "bishop" | "knight" | "rook" | "queen" | "king";
-    };
-}
+    <h2 id="Typing" data-anchor>Typing</h2>
+    <CopyBlock client:load>
+        ```ts
+        type MoveData = {
+            FEN: string;
+            from: [number, number];
+            to: [number, number];
+            figure: { 
+                color: "white" | "black";
+                type: "pawn" | "bishop" | "knight" | "rook" | "queen" | "king";
+            };
+        }
 
-type ChangeMove = {
-    move: MoveData;
-    withTransition?: boolean;
-};
-```
+        type ChangeMove = {
+            move: MoveData;
+            withTransition?: boolean;
+        };
+        ```
+    </CopyBlock>
 
-### Code
-```jsx
-const App = () => {
-    const [change, setChange] = useState();
+    <h2 id="Code" data-anchor>Code</h2>
+    <CopyBlock client:load>
+        ```jsx
+        const App = () => {
+            const [change, setChange] = useState();
 
-    const doMove = () => {
-        setChange(
-            {
-                move: { // <~~~ MoveData
-                    figure: { type: "knigts", color: "white" },
-                    from: [3, 7],
-                    to: [4, 5],
-                    FEN: "q6k/8/8/8/8/4N3/8/4KR2 b - - 0 1",
-                },
-                withTransition: true // <~~~ For transition move
+            const doMove = () => {
+                setChange(
+                    {
+                        move: { // <~~~ MoveData
+                            figure: { type: "knigts", color: "white" },
+                            from: [3, 7],
+                            to: [4, 5],
+                            FEN: "q6k/8/8/8/8/4N3/8/4KR2 b - - 0 1",
+                        },
+                        withTransition: true // <~~~ For transition move
+                    }
+                );
             }
-        );
-    }
 
-    return (
-        <ChessBoard 
-			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-			onChange={handleChange}
-			onEndGame={handleEndGame}
-            change={change}
-		/>
-    );
-}
-```
+            return (
+                <ChessBoard 
+                    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                    onChange={handleChange}
+                    onEndGame={handleEndGame}
+                    change={change}
+                />
+            );
+        }
+        ```
+    </CopyBlock>
+</LayoutDocs>
