@@ -27,23 +27,26 @@ const { active } = Astro.props;
 </LayoutApp>
 
 <style scoped>
-	.leftBlock {
-		position: sticky;
-		top: 64px;
-		overflow-y: auto;
-		grid-area: lb;
-	}
-	.centerBlock {
-		overflow-y: auto;
-		padding: 0 20px;
-		padding-bottom: 64px;
-		grid-area: cb;
-	}
+	.leftBlock,
 	.rightBlock {
 		position: sticky;
 		top: 64px;
 		overflow-y: auto;
+		padding-top: 24px;
+	}
+
+	.leftBlock {
+		grid-area: lb;
+	}
+
+	.rightBlock {
 		grid-area: rb;
+	}
+
+	.centerBlock {
+		overflow-y: auto;
+		padding: 40px 20px;
+		grid-area: cb;
 	}
 
 	.layout {

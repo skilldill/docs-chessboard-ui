@@ -7,22 +7,25 @@ import Header from '../layouts/Header.astro';
 ---
 <LayoutApp>
     <Header />
-    <div class="topBlock bg-gradient-to-br from-slate-700 to-black">
-        <h1 class="title mb-20">Chessboard UI</h1>
+    <div class="topBlock">
+        <h1 class="title">Chessboard UI</h1>
         <div class="codeBlock" id="codeBlock">
             <span>npm install react-chessboard-ui</span>
         </div>
+        <div class="copyResultView">
+            <span id="copyResultView"></span>
+        </div>
     </div>
 
-    <div class="flex justify-center gap-4 pt-20">
+    <div class="buttonsBlock">
         <a href="/docs/quickStart">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full">
+            <button class="buttonBlue">
                 Get started
             </button>
         </a>
 
         <a href="/examples/customFen">
-            <button class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full">
+            <button class="buttonBlack">
                 Examples
             </button>
         </a>
@@ -32,13 +35,16 @@ import Header from '../layouts/Header.astro';
 <script>
     const code = 'npm install react-chessboard-ui';
     const codeBlock = document.querySelector('#codeBlock');
+    const copyResultView = document.querySelector<HTMLSpanElement>('#copyResultView');
 
     async function copyInstallCode() {
         try {
             await navigator.clipboard.writeText(code);
             codeBlock.classList.add('codeBlockCopied');
+            copyResultView.innerText = "Copied! ✅";
             const timeout = setTimeout(() => {
                 codeBlock.classList.remove('codeBlockCopied');
+                copyResultView.innerText = "";
                 clearTimeout(timeout)
             }, 4000);
         } catch(error) {
@@ -50,40 +56,87 @@ import Header from '../layouts/Header.astro';
 </script>
 
 <style scoped>
-.topBlock {
-    height: 40vh;
-    min-height: 400px;
-}
+    .topBlock {
+        padding-top: 82px;
+        min-height: 360px;
+        background: rgb(55,65,81);
+        background: -moz-linear-gradient(90deg, rgba(55,65,81,1) 6%, rgba(0,0,0,1) 100%);
+        background: -webkit-linear-gradient(90deg, rgba(55,65,81,1) 6%, rgba(0,0,0,1) 100%);
+        background: linear-gradient(90deg, rgba(55,65,81,1) 6%, rgba(0,0,0,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#374151",endColorstr="#000000",GradientType=1);
+    }
 
-.title {
-    color: #fff;
-    text-align: center;
-    font-size: 40px;
-    padding-top: 80px;
-}
+    .title {
+        color: #fff;
+        text-align: center;
+        font-size: 40px;
+        margin: 0;
+        margin-bottom: 80px;
+    }
 
-.codeBlock {
-    background-color: #000000;
-    border-radius: 14px;
-    padding: 20px 40px;
-    width: fit-content;
-    margin: auto;
-    cursor: pointer;
-    transition: all .3s;
-}
+    .codeBlock {
+        background-color: #000000;
+        border-radius: 14px;
+        padding: 20px 40px;
+        width: fit-content;
+        margin: auto;
+        cursor: pointer;
+        transition: all .3s;
+    }
 
-.codeBlock:hover {
-    background-color: #111111;
-}
+    .codeBlock:hover {
+        background-color: #111111;
+    }
 
-.codeBlockCopied {
-    /* background-color: #212236; */
-    background-color: #213624 !important;
-}
+    .codeBlockCopied {
+        /* background-color: #212236; */
+        background-color: #213624 !important;
+    }
 
-.codeBlock > span {
-    font-family: monospace;
-    color: #e0e0e0;
-    font-size: 20px;
-}
+    .codeBlock > span {
+        font-family: monospace;
+        color: #e0e0e0;
+        font-size: 20px;
+        user-select: none;
+    }
+
+    .buttonsBlock {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        padding: 40px 0px;
+    }
+
+    button {
+        font-size: 24px;
+        border: none;
+        padding: 10px 40px;
+        cursor: pointer;
+        color: #fff;
+        border-radius: 8px;
+        transition: background-color .3s;
+    }
+
+    .buttonBlue {
+        background-color: var(--color-blue-500);
+    }
+
+    .buttonBlue:hover {
+        background-color: var(--color-blue-700);
+    }
+
+    .buttonBlack {
+        background-color: var(--color-gray-700);
+    }
+
+    .buttonBlack:hover {
+        background-color: var(--color-gray-900);
+    }
+
+    .copyResultView {
+        display: flex;
+        justify-content: center;
+        padding-top: 4px;
+        color: var(--color-gray-100);
+    }
 </style>

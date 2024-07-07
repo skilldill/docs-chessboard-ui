@@ -35,14 +35,14 @@ import CopyBlock from '../../components/CopyBlock';
 			}
 		}
 
-		export const ChessBoard = () => {
+		export const App = () => {
 			return (
-			<ChessBoard 
-				FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-				onChange={handleChange}
-				onEndGame={handleEndGame}
-				config={CUSTOM_CONFIG}
-			/>
+				<ChessBoard 
+					FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+					onChange={handleChange}
+					onEndGame={handleEndGame}
+					config={CUSTOM_CONFIG}
+				/>
 			);
 		}
 		```
