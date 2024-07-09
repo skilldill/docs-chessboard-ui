@@ -13,6 +13,16 @@ const { active } = Astro.props;
 
 <LayoutApp>
 	<Header />
+	<div class="openArea" id="openArea">
+		<span>menu</span>
+	</div>
+	<div class="mobileMenu" id="mobileMenu">
+		<div class="hideArea" id="hideArea">
+			<span>hide</span>
+		</div>
+		<LeftSideBar active={active} />
+	</div>
+
 	<div class="layout container">
 		<aside class="leftBlock">
 			<LeftSideBar active={active} />
@@ -25,7 +35,20 @@ const { active } = Astro.props;
 		</aside>
 	</div>
 </LayoutApp>
+<script>
+	const mobileMenu = document.querySelector('#mobileMenu');
+	const hideArea = document.querySelector('#hideArea');
+	const openArea = document.querySelector('#openArea');
 
+	hideArea.addEventListener('click', () => {
+		mobileMenu.classList.remove('mobileMenuOpened');
+	});
+
+	openArea.addEventListener('click', () => {
+		mobileMenu.classList.add('mobileMenuOpened');
+	});
+
+</script>
 <style scoped>
 	.leftBlock,
 	.rightBlock {
@@ -56,4 +79,56 @@ const { active } = Astro.props;
 		grid-template-areas:
 			"lb cb rb";
 	}
+
+	.mobileMenu {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 60%;
+		padding: 40px;
+		z-index: 100;
+		background-color: var(--color-gray-100);
+		transform: translateX(-100%);
+		transition: all .3s;
+		box-shadow: 0 0 15px #00000033;
+	}
+
+	.mobileMenuOpened {
+		transform: translateX(0%);
+	}
+
+	.hideArea {
+		display: flex;
+		justify-content: flex-end;
+		font-size: 16px;
+		color: var(--color-gray-500);
+	}
+
+	.openArea {
+		display: none;
+		padding: 30px 0;
+		text-align: center;
+		font-size: 16px;
+		color: var(--color-gray-500);
+	}
+
+	@media screen and (max-width: 1280px) {
+    	.layout {
+			height: calc(100vh - 64px);
+			display: grid;
+			grid-template-columns: 0px 1fr 0px;
+			grid-template-areas:
+				"lb cb rb";
+		}
+
+		.centerBlock {
+			padding: 0px 0px;
+		}
+
+		.openArea {
+			display: block;
+		}
+	}
+
 </style>

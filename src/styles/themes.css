@@ -125,3 +125,10 @@ p {
     max-width: 1376px;
     margin: auto;
 }
+
+@media screen and (max-width: 1280px) {
+    .container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
