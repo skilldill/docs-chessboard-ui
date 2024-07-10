@@ -9,6 +9,20 @@ const useCellSize = (defaultValue: number) => {
 	return defaultValue;
 }
 
+const getCustomPawnSize = () => {
+	if (typeof window === undefined) return 40;
+	if (window.innerWidth <= 460) return 20;
+	if (window.innerWidth < 768) return 30;
+	return 40;
+}
+
+const getCustomKnightSize = () => {
+	if (typeof window === undefined) return 100;
+	if (window.innerWidth <= 460) return 48;
+	if (window.innerWidth < 768) return 64;
+	return 100;
+}
+
 export const ChessBoardKings: FC = () => {
     const cellSize = useCellSize(100);
 	return (
@@ -94,9 +108,9 @@ const CUSTOM_CONFIG = {
 	checkedCellColor: "green",
 	piecesMap: {
 		...DEFAULT_PIECES_MAP,
-		"pawn-white": () => <img width={40} src="https://pics.clipartpng.com/midle/Pawn_White_Chess_Piece_PNG_Clip_Art-2751.png" />,
-		"pawn-black": () => <img width={40} src="https://pics.clipartpng.com/midle/Pawn_Black_Chess_Piece_PNG_Clip_Art-2764.png" />,
-		"knight-white": () => <img height={100} src="https://purepng.com/public/uploads/thumbnail//purepng.com-white-horse-jumpinghorsejumpingwhite-horsemountknighthackneyprad-481520976081ixkeq.png" />
+		"pawn-white": () => <img width={getCustomPawnSize()} src="https://pics.clipartpng.com/midle/Pawn_White_Chess_Piece_PNG_Clip_Art-2751.png" />,
+		"pawn-black": () => <img width={getCustomPawnSize()} src="https://pics.clipartpng.com/midle/Pawn_Black_Chess_Piece_PNG_Clip_Art-2764.png" />,
+		"knight-white": () => <img height={getCustomKnightSize()} src="https://purepng.com/public/uploads/thumbnail//purepng.com-white-horse-jumpinghorsejumpingwhite-horsemountknighthackneyprad-481520976081ixkeq.png" />
 	}
 }
 
