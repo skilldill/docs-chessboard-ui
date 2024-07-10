@@ -4,10 +4,9 @@ import { ChessBoard, DEFAULT_PIECES_MAP } from "react-chessboard-ui";
 
 const useCellSize = (defaultValue: number) => {
 	if (typeof window === undefined) return defaultValue;
-	console.log(window);
-	return window.innerWidth < 768
-		? 44
-		: defaultValue;
+	if (window.innerWidth <= 460) return 36;
+	if (window.innerWidth < 768) return 44;
+	return defaultValue;
 }
 
 export const ChessBoardKings: FC = () => {

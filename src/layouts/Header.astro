@@ -7,7 +7,7 @@
 	<nav title="Top Navigation" class="container headerContent">
 		<div>
 			<a class="title" href="/">
-				<h1 class="docsName">
+				<h1>
 					Docs Chessboard UI
 				</h1>
 				<span class="packageVersion">
@@ -115,5 +115,20 @@
 
 	.socialIconNpm:hover {
 		background-color: var(--color-red-200);
+	}
+
+	@media screen and (max-width: 460px) {
+		.title h1 {
+			font-size: 16px;
+			margin-right: 4px;
+		}
+
+		.packageVersion {
+			background-color: var(--color-blue-600);
+			color: #fff;
+			padding: 2px 6px;
+			border-radius: 4px;
+			font-size: 10px;
+		}
 	}
 </style>

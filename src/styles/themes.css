@@ -126,7 +126,11 @@ p {
     margin: auto;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1376px) {
+    body {
+        overflow: auto;
+    }
+
     .container {
         padding-left: 20px !important;
         padding-right: 20px !important;

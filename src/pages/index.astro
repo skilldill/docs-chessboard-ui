@@ -141,8 +141,28 @@ import Header from '../layouts/Header.astro';
     }
 
     @media screen and (max-width: 460px) {
+        .topBlock {
+            min-height: 160px;
+        }
+
         .codeBlock {
             display: none;
+        }
+
+        .buttonsBlock {
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .buttonsBlock a {
+            display: block;
+            width: 100%;
+        }
+
+        .buttonBlue,
+        .buttonBlack {
+            width: 100%;
         }
     }
 </style>

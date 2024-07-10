@@ -51,3 +51,9 @@ body {
 .copyButtonCopied {
     -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'%3E%3Cpath d='M20 6 9 17l-5-5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E")
 }
+
+@media screen and (max-width: 1376px) {
+    body {
+        overflow: auto;
+    }
+}
