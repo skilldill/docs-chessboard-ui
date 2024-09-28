@@ -147,7 +147,6 @@ export const ChessBoardPawnPromotion: FC = () => {
 			onChange={(data) => {}}
 			onEndGame={() => {}}
 			config={{ cellSize }}
-			playerColor="white"
 		/>
 	);
 }
