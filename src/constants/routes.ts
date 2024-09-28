@@ -13,6 +13,7 @@ export const MENU_ROUTES = [
     { text: "playerColor (optional)", link: "/properties/playerColor" },
 
     { text: "Examples", header: true },
+    { text: "Pawn promotion", link: "/examples/pawnPromotion" },
     { text: "Reversing board", link: "/examples/reversingBoard" },
     { text: "Custom FEN", link: "/examples/customFen" },
     { text: "Customization", link: "/examples/customization" },

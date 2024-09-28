@@ -2,15 +2,16 @@
 ---
 
 import LayoutDocs from "../../layouts/LayoutDocs.astro"
-import { ChessBoardReversed } from '../../components/ChessBoards.tsx';
+import { ChessBoardPawnPromotion } from '../../components/ChessBoards.tsx';
 import CopyBlock from '../../components/CopyBlock.tsx';
 
-<LayoutDocs active="/examples/reversingBoard">
-    # Reversing board
+<LayoutDocs active="/examples/pawnPromotion">
+    # Pawn promotion
+    Move the pawn up
 
     <h2 id="Example" data-anchor>Example</h2>
     <div class="component-preview">
-        <ChessBoardReversed client:only />
+        <ChessBoardPawnPromotion client:only />
     </div>
     <br />
 
@@ -18,10 +19,9 @@ import CopyBlock from '../../components/CopyBlock.tsx';
     <CopyBlock client:load>
         ```tsx
         <ChessBoard 
-            FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+            FEN="8/k5PK/8/8/8/8/8/8 w - - 0 1"
             onChange={handleChange}
             onEndGame={handleEndGame}
-            reversed // <~~~ flag for reversing board
         />
         ```
     </CopyBlock>

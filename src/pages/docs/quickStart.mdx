@@ -1,11 +1,11 @@
 ---
 ---
-import LaoutDocs from '../../layouts/LayoutDocs.astro';
+import LayoutDocs from '../../layouts/LayoutDocs.astro';
 import { ChessBoardDefault } from '../../components/ChessBoards.tsx';
 import CopyBlock from '../../components/CopyBlock.tsx';
 
 
-<LaoutDocs active="/docs/quickStart">
+<LayoutDocs active="/docs/quickStart">
     # Get started
 
     <h2 id="Install" data-anchor>Install</h2>
@@ -44,4 +44,4 @@ import CopyBlock from '../../components/CopyBlock.tsx';
     <div class="component-preview">
         <ChessBoardDefault client:only />
     </div>
-</LaoutDocs>
+</LayoutDocs>

@@ -138,3 +138,16 @@ export const ChessBoardPlayerColor: FC = () => {
 		/>
 	);
 }
+
+export const ChessBoardPawnPromotion: FC = () => {
+	const cellSize = useCellSize(70);
+	return (
+		<ChessBoard 
+			FEN="8/k5PK/8/8/8/8/8/8 w - - 0 1"
+			onChange={(data) => {}}
+			onEndGame={() => {}}
+			config={{ cellSize }}
+			playerColor="white"
+		/>
+	);
+}
