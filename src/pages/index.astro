@@ -7,114 +7,86 @@ import Header from '../layouts/Header.astro';
 ---
 <LayoutApp>
     <Header />
-    <div class="topBlock">
-        <h1 class="title">Chessboard UI</h1>
-        <div class="codeBlock" id="codeBlock">
-            <span>npm install react-chessboard-ui</span>
+    <div class="container mainLayout">
+        <div class="leftBlock">
+            <div class="mainContent">
+                <h1 class="title"><span class="titleAccentColor">React</span> Chessboard&nbsp;UI</h1>
+                <p class="description">
+                    This library is designed for the fast and simple creation of chess applications.
+                </p>
+                <div class="buttonsBlock">
+                    <a class="button buttonBlue" href="/docs/quickStart">
+                        Get started
+                    </a>
+            
+                    <a class="button" href="/examples/customFen">
+                        Examples
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="copyResultView">
-            <span id="copyResultView"></span>
+        <div class="mainPoster">
+            <img src="./react-chessboard.svg" alt="react and chessboard">
         </div>
-    </div>
-
-    <div class="buttonsBlock">
-        <a href="/docs/quickStart">
-            <button class="buttonBlue">
-                Get started
-            </button>
-        </a>
-
-        <a href="/examples/customFen">
-            <button class="buttonBlack">
-                Examples
-            </button>
-        </a>
     </div>
 </LayoutApp>
 
 <script>
-    const code = 'npm install react-chessboard-ui';
-    const codeBlock = document.querySelector('#codeBlock');
-    const copyResultView = document.querySelector<HTMLSpanElement>('#copyResultView');
 
-    async function copyInstallCode() {
-        try {
-            await navigator.clipboard.writeText(code);
-            codeBlock.classList.add('codeBlockCopied');
-            copyResultView.innerText = "Copied! ✅";
-            const timeout = setTimeout(() => {
-                codeBlock.classList.remove('codeBlockCopied');
-                copyResultView.innerText = "";
-                clearTimeout(timeout)
-            }, 4000);
-        } catch(error) {
-            console.error(error);
-        }
-    }
-
-    codeBlock.addEventListener('click', () => copyInstallCode())
 </script>
 
 <style scoped>
-    .topBlock {
-        padding-top: 82px;
-        min-height: 360px;
-        background: rgb(55,65,81);
-        background: -moz-linear-gradient(90deg, rgba(55,65,81,1) 6%, rgba(0,0,0,1) 100%);
-        background: -webkit-linear-gradient(90deg, rgba(55,65,81,1) 6%, rgba(0,0,0,1) 100%);
-        background: linear-gradient(90deg, rgba(55,65,81,1) 6%, rgba(0,0,0,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#374151",endColorstr="#000000",GradientType=1);
+    .mainLayout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding-top: 120px;
+    }
+
+    .mainContent {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        max-width: 80%;
+        padding-top: 80px;
     }
 
     .title {
-        color: #fff;
-        text-align: center;
-        font-size: 40px;
+        color: var(--color-gray-900);
+        font-weight: 900;
+        font-size: 50px;
         margin: 0;
-        margin-bottom: 80px;
+        margin-bottom: 10px;
     }
 
-    .codeBlock {
-        background-color: #000000;
-        border-radius: 14px;
-        padding: 20px 40px;
-        width: fit-content;
-        margin: auto;
-        cursor: pointer;
-        transition: all .3s;
+    .description {
+        font-size: 24px;
+        line-height: 30px;
+        font-weight: 500;
+        margin-bottom: 60px;
     }
 
-    .codeBlock:hover {
-        background-color: #111111;
+    .titleAccentColor {
+        color: var(--color-blue-500);
     }
 
-    .codeBlockCopied {
-        /* background-color: #212236; */
-        background-color: #213624 !important;
-    }
-
-    .codeBlock > span {
-        font-family: monospace;
-        color: #e0e0e0;
-        font-size: 20px;
-        user-select: none;
-    }
-
-    .buttonsBlock {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-        padding: 40px 0px;
-    }
-
-    button {
+    .button {
+        box-sizing: border-box;
+        text-decoration: none;
         font-size: 24px;
         border: none;
-        padding: 10px 40px;
+        padding: 20px 40px;
         cursor: pointer;
         color: #fff;
-        border-radius: 8px;
+        background-color: var(--color-gray-700);
+        text-align: center;
+        border-radius: 10px;
         transition: background-color .3s;
+        flex: 1;
+    }
+
+    .button:hover {
+        background-color: var(--color-gray-900);
     }
 
     .buttonBlue {
@@ -125,19 +97,69 @@ import Header from '../layouts/Header.astro';
         background-color: var(--color-blue-700);
     }
 
-    .buttonBlack {
-        background-color: var(--color-gray-700);
-    }
-
-    .buttonBlack:hover {
-        background-color: var(--color-gray-900);
-    }
-
-    .copyResultView {
+    .buttonsBlock {
         display: flex;
+        width: 100%;
         justify-content: center;
-        padding-top: 4px;
-        color: var(--color-gray-100);
+        gap: 16px;
+    }
+   
+    @media screen and (max-width: 1243px) {
+        .mainContent {
+            padding-top: 0px;
+        }
+
+        .button {
+            width: 100%;
+        }
+
+        .buttonsBlock {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    @media screen and (max-width: 1180px) {
+        .mainPoster {
+            padding-top: 40px;
+        }
+
+        .mainPoster img {
+            max-width: 90%;
+            margin: auto;
+        }
+    }   
+
+    @media screen and (max-width: 980px) {
+        .mainPoster {
+            display: none;
+        }
+
+        .mainLayout {
+            grid-template-columns: 1fr;
+        }
+
+        .mainContent {
+            max-width: 100%;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .buttonsBlock {
+            width: 100%;
+        } 
+
+        .button {
+            width: 100%;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .description {
+            text-align: center;
+        }
     }
 
     @media screen and (max-width: 460px) {
