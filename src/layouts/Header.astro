@@ -2,9 +2,8 @@
 
 ---
 
-<header>
-	<!-- <SkipToContent /> -->
-	<nav title="Top Navigation" class="container headerContent">
+<div class="header">
+	<div title="Top Navigation" class="container headerContent">
 		<div>
 			<a class="title" href="/">
 				<h1>
@@ -22,22 +21,9 @@
 			<a class="socialIcon socialIconNpm" class="" href="https://www.npmjs.com/package/react-chessboard-ui">
 				<img height="22px" width="22px" src="/npm.svg" alt="npm logo">
 			</a>
-		<!-- <button onclick="toggleDarkMode()">theme</button> -->
-		<!-- {
-			SITE.github &&
-			(<a title="Github" class="opacity-80 hover:opacity-100 hover:bg-slate-200 p-2 rounded-full transition-colors" href={'https://github.com/'+SITE.github}>
-				<img class="h-7" src="/github.svg" alt="github logo">
-			</a>)
-		}
-		{
-			SITE.linkedin &&
-			(<a title="linkedin" class="opacity-80 hover:opacity-100 hover:bg-blue-50 p-2 rounded-full transition-colors" href={'https://linkedin.com/in/'+SITE.linkedin}>
-				<img class="h-7" src="/linkedin.svg" alt="linkedin logo">
-			</a>)
-		} -->
 		</div>
-	</nav>
-</header>
+	</div>
+</div>
 <script>
 	const versionView = document.querySelector<HTMLSpanElement>('#versionView');
 
@@ -55,7 +41,7 @@
 	fetchPackageAction(versionView);
 </script>
 <style scoped>
-	header {
+	.header {
 		position: sticky;
 		top: 0;
 		z-index: 100;
