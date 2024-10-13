@@ -1,0 +1,62 @@
+---
+import { MENU_ROUTES } from '../constants/routes';
+---
+
+<footer>
+    <ul class="menu">
+        {MENU_ROUTES.filter((item) => !!item.link).map((item) => 
+			<li class="menuItem">
+				<a href={item.link}>
+                    {item.text}
+                </a>
+			</li>
+		)}
+    </ul>
+    <p class="developedBy">Developed by a team of <a href="https://www.chesson.ru/">chesson.ru</a> ❤️</p>
+</footer>
+<style scoped>
+footer {
+    background-color: var(--color-gray-800);
+    margin: 0;
+    padding: 40px;
+    padding-top: 60px;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: 250px 250px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    max-width: 800px;
+    column-gap: 60px;
+    row-gap: 20px;
+    margin: auto;
+}
+
+.menuItem {
+    list-style-type: none;
+}
+
+.menuItem a {
+    text-decoration: none;
+    font-size: 18px;
+    color: var(--color-gray-300);
+}
+
+.developedBy {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.developedBy a {
+    color: var(--color-gray-500);
+}
+
+@media screen and (max-width: 980px) {
+    .menu {
+        grid-template-columns: 1fr;
+        justify-content: center;
+    }
+}
+</style>

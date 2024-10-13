@@ -4,6 +4,7 @@ import 'react-chessboard-ui/dist/index.css';
 
 import LayoutApp from '../layouts/LayoutApp.astro';
 import Header from '../layouts/Header.astro';
+import Footer from '../layouts/Footer.astro';
 ---
 <LayoutApp>
     <Header />
@@ -29,6 +30,42 @@ import Header from '../layouts/Header.astro';
             <img src="./react-chessboard.svg" alt="react and chessboard">
         </div>
     </div>
+    <div class="container descriptionAbilities">
+        <div class="descriptionBlock descriptionFEN">
+            <div class="additionalContent">
+                <div>
+                    <div class="subTitle">Using <span class="titleAccentColor">FEN-notation<span></div>
+                    <p class="description">Use FEN-notation to easily set up the pieces on the chessboard.</p>
+                </div>
+                <div class="poster">
+                    <img width="100%" src="./FENnotationExample.png" alt="Code example">
+                </div>
+            </div>
+        </div>
+        <div class="descriptionBlock descriptionDesktop">
+            <div class="additionalContent">
+                <div>
+                    <div class="subTitle">Full <span class="titleAccentColor">interactive</span> chessboard</div>
+                    <p class="description">Using all the features of the chess board to create the best possible chess app 🎠</p>
+                </div>
+                <div class="poster">
+                    <img width="100%" src="./desktopApp.png" alt="Example Desktop App">
+                </div>
+            </div>
+        </div>
+        <div class="descriptionBlock descriptionMobile">
+            <div class="additionalContent">
+                <div>
+                    <div class="subTitle">Full <span class="titleAccentColor">adaptive</span> for all devices</div>
+                    <p class="description">You can create chess applications for various devices, such as mobile phones and tablets.</p>
+                </div>
+                <div class="poster">
+                    <img width="100%" src="./mobileAndHand.png" alt="Code example">
+                </div>
+            </div>
+        </div>
+    </div>
+    <Footer />
 </LayoutApp>
 
 <script>
@@ -103,7 +140,49 @@ import Header from '../layouts/Header.astro';
         justify-content: center;
         gap: 16px;
     }
-   
+
+    .descriptionAbilities {
+        margin-top: 180px;
+    }
+
+    .descriptionAbilities .description {
+        max-width: 400px;
+    }
+
+    .descriptionBlock {
+        margin-bottom: 150px;
+    }
+
+    .descriptionFEN .poster {
+        width: 100%;
+    }
+
+    .descriptionDesktop .poster {
+        width: 100%;
+    }
+
+    .descriptionMobile .poster {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .descriptionMobile img {
+        width: 60%;
+    }
+
+    .subTitle {
+        font-size: 40px;
+        font-weight: 900;
+        margin-bottom: 30px;
+    }
+
+    .additionalContent {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+
     @media screen and (max-width: 1243px) {
         .mainContent {
             padding-top: 0px;
@@ -134,10 +213,37 @@ import Header from '../layouts/Header.astro';
         .mainPoster {
             display: none;
         }
+        
+        .poster {
+            display: none;
+        }
+
+        img {
+            display: none;
+        }
 
         .mainLayout {
             grid-template-columns: 1fr;
             padding-top: 40px;
+        }
+        
+        .additionalContent {
+            grid-template-columns: 1fr;
+        }
+
+        .descriptionAbilities .description {
+            max-width: 100%;
+            margin: 0;
+        }
+
+        .subTitle {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .descriptionBlock {
+            margin-bottom: 60px;
         }
 
         .mainContent {
