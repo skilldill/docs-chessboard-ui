@@ -42,10 +42,23 @@
     --color-red-700: #d73a3a;
     --color-red-800: #c62e2e;
     --color-red-900: #ad1c1c;
-}
 
-h1 {
-    margin: 28px 0px;
+    /* Theme */
+    --color-theme-header-title: var(--color-gray-900);
+    --color-theme-titles: var(--color-gray-700);
+    --color-theme-code-bg: var(--color-gray-800);
+    --color-theme-inline-code-bg: var(--color-red-200);
+    --color-theme-inline-code: var(--color-red-700);
+    --color-theme-link: var(--color-blue-600);
+    --color-theme-link-hover: var(--color-blue-700);
+    --color-theme-text: var(--color-gray-600);
+    --color-theme-background: var(--color-gray-100);
+    --color-theme-border: var(--color-gray-200);
+    --color-theme-icon: var(--color-gray-400);
+    --color-theme-menu-item: var(--color-gray-500);
+    --color-theme-menu-item-active-bg: var(--color-gray-400);
+    --color-theme-header-background: rgb(241 245 249 / .5);
+    --color-theme-preview-block-bg: var(--color-grey-100);
 }
 
 h2,
@@ -55,7 +68,12 @@ h5,
 h6 {
     margin-top: 24px;
     margin-bottom: 10px;
-    color: var(--color-gray-700);
+    color: var(--color-theme-titles);
+}
+
+h1 {
+    margin: 28px 0px;
+    color: var(--color-theme-header-title);
 }
 
 
@@ -98,14 +116,14 @@ caption {
 code {
     font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
         Consolas, "Liberation Mono", "Courier New", monospace;
-    background-color: var(--color-gray-800);
+    background-color: var(--color-theme-code-bg);
     font-size: 16px;
 }
 
 pre {
     padding: 14px;
     border-radius: 14px;
-    background-color: var(--color-gray-800) !important;
+    background-color: var(--color-theme-code-bg) !important;
     position: relative;
     margin: 0;
     max-width: 100%;
@@ -114,18 +132,22 @@ pre {
 p > code {
     padding: 2px 6px;
     border-radius: 4px;
-    background-color: var(--color-red-200);
-    color: var(--color-red-700);
+    background-color: var(--color-theme-inline-code-bg);
+    color: var(--color-theme-inline-code);
 }
 
 a {
-    color: var(--color-blue-600);
+    color: var(--color-theme-link);
+}
+
+a:hover {
+    color: var(--color-theme-link-hover);
 }
 
 p {
     font-size: 16px;
     line-height: 24px;
-    color: var(--color-gray-600);
+    color: var(--color-theme-text);
 }
 
 .container {
@@ -142,4 +164,50 @@ p {
         padding-left: 20px !important;
         padding-right: 20px !important;
     }
+}
+
+/* Scrollbar Styles */
+/* Webkit browsers */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-theme-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-theme-border);
+    border-radius: 10px;
+    border: 3px solid var(--color-theme-background);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-theme-border) var(--color-theme-background);
+}
+
+/* Edge and IE */
+body {
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+:root[data-theme="dark"] {
+    --color-theme-titles: var(--color-gray-100);          /* светлый серый для заголовков */
+    --color-theme-code-bg: var(--color-gray-800);         /* фон блоков кода — тёмно-серый */
+    --color-theme-inline-code-bg: var(--color-green-900);   /* фон инлайн-кода — мягкий красный */
+    --color-theme-inline-code: var(--color-green-300);      /* текст инлайн-кода — светлый красный */
+    --color-theme-link: var(--color-blue-400);            /* ссылки — приглушённый голубой */
+    --color-theme-link-hover: var(--color-blue-300);      /* hover — светлее для подсветки */
+    --color-theme-text: var(--color-gray-300);
+    --color-theme-background: var(--color-gray-900);
+    --color-theme-icon: var(--color-gray-600);
+    --color-theme-menu-item: var(--color-gray-400);
+    --color-theme-menu-item-active-bg: var(--color-gray-600);
+    --color-theme-header-title: var(--color-gray-100);
+    --color-theme-border: var(--color-gray-700);
+    --color-theme-header-background: rgba(59, 61, 63, 0.5);
+    --color-theme-preview-block-bg: var(--color-gray-800);
 }

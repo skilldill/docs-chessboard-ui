@@ -52,23 +52,25 @@ const { active } = Astro.props;
 		text-decoration: none;
 		display: block;
 		width: fit-content;
-		color: var(--color-gray-500);
+		color: var(--color-theme-menu-item);
 		padding: 6px 8px;
 		border-radius: 6px;
 		transition: background-color .3s;
 	}
 
 	.menuItem a:hover {
-		background-color: var(--color-gray-200);
+		background-color: var(--color-theme-border);
+		color: var(--color-theme-titles);
 	}
 
 	.active a {
-		background-color: var(--color-gray-400) !important;
+		background-color: var(--color-theme-menu-item-active-bg) !important;
 		color: #fff !important;
 	}
 
 	.menuTitle {
 		font-size: 18px;
 		margin-top: 8px;
+		color: var(--color-theme-titles);
 	}
 </style>
