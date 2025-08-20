@@ -150,3 +150,15 @@ export const ChessBoardPawnPromotion: FC = () => {
 		/>
 	);
 }
+
+export const ChessBoardStrangeFEN: FC = () => {
+	const cellSize = useCellSize(70);
+	return (
+        <ChessBoard 
+			FEN="rnbqQBNR/2k2K2/ppppPPPP/8/8/8/8/8 w - - 0 1"
+			onChange={(data) => {}}
+			onEndGame={() => {}}
+			config={{ cellSize }}
+		/>
+    );
+}

@@ -1,106 +1,138 @@
 ---
 import '../styles/index.css';
+import { MENU_ROUTES } from '../constants/routes';
+
+const SITE = 'https://react-chessboard-ui.dev/';
+const path = Astro.url.pathname.replace(/\/+$/,'') || '/';
+
+// Карта link → text из твоих роутов
+const LABEL_BY_LINK = new Map(
+	MENU_ROUTES.filter(r => 'link' in r).map(r => [r.link, r.text])
+);
+
+// Секции (если будут отдельные страницы /docs, /properties, /examples)
+const SECTION_ROOTS = ['/docs', '/properties', '/examples'];
+
+function getSectionRoot(p) {
+	for (const root of SECTION_ROOTS) {
+		if (p === root || p.startsWith(root + '/')) return root;
+	}
+	return null;
+}
+
+function humanize(slug) {
+	return decodeURIComponent(slug)
+		.replace(/[-_]+/g, ' ')
+		.replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function buildBreadcrumbs(p) {
+	const items = [];
+	// Home
+	items.push({ name: 'Home', url: SITE });
+
+	if (p === '/' ) return items;
+
+	// Section (если есть)
+	const section = getSectionRoot(p);
+	if (section && LABEL_BY_LINK.has(section)) {
+		items.push({
+			name: LABEL_BY_LINK.get(section),
+			url: new URL(section, SITE).toString()
+		});
+	}
+
+	// Текущая страница
+	const label = LABEL_BY_LINK.get(p) || humanize(p.split('/').filter(Boolean).pop());
+	items.push({ name: label, url: new URL(p, SITE).toString() });
+
+	return items;
+}
+
+const crumbs = buildBreadcrumbs(path);
+
+const breadcrumbJson = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": crumbs.map((c, i) => ({
+		"@type": "ListItem",
+		"position": i + 1,
+		"name": c.name,
+		"item": c.url
+	}))
+};
+
+const canonicalUrl = new URL(Astro.url.pathname, SITE).toString();
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="A customizable React chessboard component library. Create interactive chessboards with ease using our flexible and feature-rich React components." />
-		<meta property="og:description" content="A customizable React chessboard component library. Create interactive chessboards with ease using our flexible and feature-rich React components." />
-		<meta name="keywords" content="react, chess, chessboard, npm-package, react-chessboard" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="og:image" content="https://chessboardui.space/og.png" />
-		<meta property="og:title" content="React ChessBoard UI">
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+		<meta charset="utf-8" />
+		<title>React Chessboard UI — Customizable React chessboard component</title>
+		<meta
+			name="description"
+			content="A customizable React chessboard component library. Create interactive chessboards with ease using flexible, feature-rich React components."
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="canonical" href={canonicalUrl} />
+
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 		<meta name="generator" content={Astro.generator} />
-		<title>React Chessboard UI</title>
+
+		<!-- Open Graph -->
+		<meta property="og:title" content="React Chessboard UI" />
+		<meta
+			property="og:description"
+			content="Customizable React chessboard component with FEN support, events, and theming."
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content="https://react-chessboard-ui.dev/og.png" />
+		<meta property="og:site_name" content="React Chessboard UI" />
+		<meta property="og:locale" content="en_US" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="React Chessboard UI" />
+		<meta
+			name="twitter:description"
+			content="Customizable React chessboard component with FEN support, events, and theming."
+		/>
+		<meta name="twitter:image" content="https://react-chessboard-ui.dev/og.png" />
+
+		<!-- JSON-LD: WebSite -->
 		<script type="application/ld+json">
-			{
-			  "@context": "https://schema.org",
-			  "@type": "ItemList",
-			  "name": "React Chessboard UI Documentation",
-			  "itemListElement": [
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "Documentation",
-				  "url": "/docs/introduction"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "Get started",
-				  "url": "/docs/quickStart"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "Properties",
-				  "url": "/properties/FEN"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "FEN",
-				  "url": "/properties/FEN"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "reversed (optional)",
-				  "url": "/properties/reversed"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "onChange",
-				  "url": "/properties/onChange"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "onEndGame",
-				  "url": "/properties/onEndGame"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "change (optional)",
-				  "url": "/properties/change"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "config (optional)",
-				  "url": "/properties/config"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "playerColor (optional)",
-				  "url": "/properties/playerColor"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "Examples",
-				  "url": "/examples/customFen"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "Custom FEN",
-				  "url": "/examples/customFen"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "Reversing board",
-				  "url": "/examples/reversingBoard"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "Pawn promotion",
-				  "url": "/examples/pawnPromotion"
-				},
-				{
-				  "@type": "SiteNavigationElement",
-				  "name": "Customization",
-				  "url": "/examples/customization"
-				}
-			  ]
-			}
-		</script>		
+			{JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "WebSite",
+				"name": "React Chessboard UI",
+				"url": SITE
+			})}
+		</script>
+
+		<!-- JSON-LD: SoftwareSourceCode -->
+		<script type="application/ld+json">
+			{JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "SoftwareSourceCode",
+				"name": "react-chessboard-ui",
+				"programmingLanguage": "JavaScript",
+				"runtimePlatform": "React",
+				"codeRepository": "https://github.com/your-org/react-chessboard-ui",
+				"license": "https://opensource.org/licenses/MIT",
+				"url": SITE,
+				"description": "Customizable React chessboard component with FEN, events, theming, and callbacks.",
+				"keywords": ["react", "chess", "chessboard", "fen", "ui"]
+			})}
+		</script>
+
+		<!-- JSON-LD: BreadcrumbList -->
+		<script type="application/ld+json" is:inline>
+			{JSON.stringify(breadcrumbJson)}
+		</script>
 	</head>
 	<body>
-        <slot />
-    </body>
+		<slot />
+	</body>
 </html>
