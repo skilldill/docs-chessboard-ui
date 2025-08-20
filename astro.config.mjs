@@ -4,9 +4,12 @@ import tailwind from "@astrojs/tailwind";
 
 import mdx from "@astrojs/mdx";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), mdx()],
+  site: 'https://react-chessboard-ui.dev',
+  integrations: [react(), mdx(), sitemap()],
   devToolbar: {
     enabled: false
   },
