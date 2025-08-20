@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://react-chessboard-ui.dev/sitemap-index.xml
