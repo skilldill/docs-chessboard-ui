@@ -1,0 +1,20 @@
+---
+---
+import LayoutDocs from '../../layouts/LayoutDocs.astro';
+import { 
+    ChessBoardPaulMorphyOperaGame
+} from '../../components/ChessBoards.tsx';
+
+<LayoutDocs active="/chessGames/morphy-opera-game">
+    # Paul Morphy Opera Game
+
+    ```The Opera Game``` is Paul Morphy’s legendary chess masterpiece played in 1858 at the Italian Opera House in Paris against Duke Karl and Count Isouard. <br/>
+
+    This short but brilliant game is famous for its elegant sacrifices and perfect demonstration of rapid development and coordination. <br/>
+    
+    It remains one of the most celebrated examples of classical attacking chess and is beautifully visualized here with ```react-chessboard-ui```. <br/>
+    
+    <div class="component-preview">
+        <ChessBoardPaulMorphyOperaGame client:only />
+    </div>
+</LayoutDocs>

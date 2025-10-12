@@ -2,6 +2,7 @@
 ---
 import LayoutDocs from "../../layouts/LayoutDocs.astro"
 import CopyBlock from '../../components/CopyBlock.tsx';
+import { ChessBoardTransformToQueen } from '../../components/ChessBoards.tsx';
 
 <LayoutDocs active="/properties/change">
     # change
@@ -12,50 +13,142 @@ import CopyBlock from '../../components/CopyBlock.tsx';
     <h2 id="Typing" data-anchor>Typing</h2>
     <CopyBlock client:load>
         ```ts
+        type Figure = {
+            color: "white" | "black";
+            type: "pawn" | "bishop" | "knight" | "rook" | "queen" | "king";
+        }
+
         type MoveData = {
             FEN: string;
             from: [number, number];
             to: [number, number];
-            figure: { 
-                color: "white" | "black";
-                type: "pawn" | "bishop" | "knight" | "rook" | "queen" | "king";
-            };
+            figure: Figure;
+            type: 'move' | 'transform'; // <~~~ NEW, may be other values, it is for example 'transform'
         }
 
         type ChangeMove = {
             move: MoveData;
             withTransition?: boolean;
+            transformTo?: Figure; // <~~~ NEW
         };
         ```
     </CopyBlock>
 
+    <h2 id="Example" data-anchor>Example</h2>
+    <div class="component-preview">
+        <ChessBoardTransformToQueen client:only />
+    </div>
+
     <h2 id="Code" data-anchor>Code</h2>
+    <h3 id="Transform to Queen" data-anchor>Moves of type MoveData</h3>
+
+    <CopyBlock client:load>
+        ```js
+        export const TRANSFORM_TO_QUEEN = [
+            {
+                figure: { type: "king", color: "white", touched: true },
+                from: [7, 7],
+                to: [7, 6],
+                FEN: "k7/p7/8/8/8/8/7K/8 b - - 0 1",
+            },
+            {
+                figure: { type: "pawn", color: "black", touched: true },
+                from: [0, 1],
+                to: [0, 3],
+                FEN: "k7/8/8/p7/8/8/7K/8 w - a6 0 1",
+            },
+            {
+                figure: { type: "king", color: "white", touched: true },
+                from: [7, 6],
+                to: [7, 5],
+                FEN: "k7/8/8/p7/8/7K/8/8 b - - 0 1",
+            },
+            {
+                figure: { type: "pawn", color: "black", touched: true },
+                from: [0, 3],
+                to: [0, 4],
+                FEN: "k7/8/8/8/p7/7K/8/8 w - - 0 1",
+            },
+            {
+                figure: { type: "king", color: "white", touched: true },
+                from: [7, 5],
+                to: [6, 4],
+                FEN: "k7/8/8/8/p5K1/8/8/8 b - - 0 1",
+            },
+            {
+                figure: { type: "pawn", color: "black", touched: true },
+                from: [0, 4],
+                to: [0, 5],
+                FEN: "k7/8/8/8/6K1/p7/8/8 w - - 0 1",
+            },
+            {
+                figure: { type: "king", color: "white", touched: true },
+                from: [6, 4],
+                to: [5, 4],
+                FEN: "k7/8/8/8/5K2/p7/8/8 b - - 0 1",
+            },
+            {
+                figure: { type: "pawn", color: "black", touched: true },
+                from: [0, 5],
+                to: [0, 6],
+                FEN: "k7/8/8/8/5K2/8/p7/8 w - - 0 1",
+            },
+            {
+                figure: { type: "king", color: "white", touched: true },
+                from: [5, 4],
+                to: [4, 5],
+                FEN: "k7/8/8/8/8/4K3/p7/8 b - - 0 1",
+            },
+            {
+                figure: { type: "queen", color: "black", touched: true },
+                from: [0, 6],
+                to: [0, 7],
+                type: "transform", // <~~~ Required for transform
+            },
+        ];
+        ```
+    </CopyBlock>
+
+    <h3 id="Component code" data-anchor>Component code</h3>
     <CopyBlock client:load>
         ```jsx
         const App = () => {
-            const [change, setChange] = useState();
+            const [moveIndex, setMoveIndex] = useState();
+            const [currentMove, setCurrentMove] = useState();
 
-            const doMove = () => {
-                setChange(
-                    {
-                        move: { // <~~~ MoveData
-                            figure: { type: "knigts", color: "white" },
-                            from: [3, 7],
-                            to: [4, 5],
-                            FEN: "q6k/8/8/8/8/4N3/8/4KR2 b - - 0 1",
-                        },
-                        withTransition: true // <~~~ For transition move
-                    }
-                );
+            const nextMove = () => {
+                if (moveIndex === undefined) {
+                    setCurrentMove({
+                        move: TRANSFORM_TO_QUEEN[0],
+                        withTransition: true
+                    });
+                    setMoveIndex(0);
+                    return;
+                }
+
+                if (moveIndex + 1 === TRANSFORM_TO_QUEEN.length) {
+                    return;
+                }
+
+                setCurrentMove({
+                    move: TRANSFORM_TO_QUEEN[moveIndex + 1],
+                    withTransition: true
+                });
+
+                setMoveIndex(moveIndex + 1);
             }
 
             return (
-                <ChessBoard 
-                    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-                    onChange={handleChange}
-                    onEndGame={handleEndGame}
-                    change={change}
-                />
+                <>
+                    <ChessBoard 
+                        FEN="k7/p7/8/8/8/8/8/7K w - - 0 1"
+                        onChange={() => {}}
+                        onEndGame={() => {}}
+                        change={currentMove}
+                    />
+
+                    <button className="button" onClick={nextMove}>Next move</button>
+                </>
             );
         }
         ```

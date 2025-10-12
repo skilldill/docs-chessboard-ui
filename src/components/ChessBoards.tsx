@@ -1,6 +1,8 @@
 import "react-chessboard-ui/dist/index.css";
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import { ChessBoard, DEFAULT_PIECES_MAP } from "react-chessboard-ui";
+import { PAUL_MORPHY_OPERA_GAME, SCHOLARS_MATE, TRANSFORM_TO_QUEEN } from "../constants/moves";
+import "./styles.css";
 
 const useCellSize = (defaultValue: number) => {
 	if (typeof window === undefined) return defaultValue;
@@ -162,4 +164,133 @@ export const ChessBoardStrangeFEN: FC = () => {
 			config={{ cellSize }}
 		/>
     );
+}
+
+export const ChessBoardPaulMorphyOperaGame: FC = () => {
+	const cellSize = useCellSize(70);
+
+	const [moveIndex, setMoveIndex] = useState<number>();
+    const [currentMove, setCurrentMove] = useState<any>();
+
+    const nextMove = () => {
+        if (moveIndex === undefined) {
+            setCurrentMove({
+                move: PAUL_MORPHY_OPERA_GAME[0],
+                withTransition: true
+            });
+            setMoveIndex(0);
+            return;
+        }
+
+        if (moveIndex + 1 === PAUL_MORPHY_OPERA_GAME.length) {
+            return;
+        }
+
+        setCurrentMove({
+            move: PAUL_MORPHY_OPERA_GAME[moveIndex + 1],
+            withTransition: true
+        });
+
+        setMoveIndex(moveIndex + 1);
+    }
+
+	return (
+		<div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20 }}>
+			<ChessBoard 
+				FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+				onChange={(data) => {}}
+				onEndGame={() => {}}
+				config={{ cellSize }}
+				change={currentMove}
+				viewOnly
+			/>
+
+			<button className="button" onClick={nextMove}>Next move</button>
+		</div>
+	);
+}
+
+export const ChessBoardScholarsMate: FC = () => {
+	const cellSize = useCellSize(70);
+
+	const [moveIndex, setMoveIndex] = useState<number>();
+    const [currentMove, setCurrentMove] = useState<any>();
+
+    const nextMove = () => {
+        if (moveIndex === undefined) {
+            setCurrentMove({
+                move: SCHOLARS_MATE[0],
+                withTransition: true
+            });
+            setMoveIndex(0);
+            return;
+        }
+
+        if (moveIndex + 1 === SCHOLARS_MATE.length) {
+            return;
+        }
+
+        setCurrentMove({
+            move: SCHOLARS_MATE[moveIndex + 1],
+            withTransition: true
+        });
+
+        setMoveIndex(moveIndex + 1);
+    }
+
+	return (
+		<div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20 }}>
+			<ChessBoard 
+				FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+				onChange={(data) => {}}
+				onEndGame={() => {}}
+				config={{ cellSize }}
+				change={currentMove}
+				viewOnly
+			/>
+
+			<button className="button" onClick={nextMove}>Next move</button>
+		</div>
+	);
+}
+
+export const ChessBoardTransformToQueen: FC = () => {
+	const cellSize = useCellSize(70);
+	const [moveIndex, setMoveIndex] = useState<number>();
+    const [currentMove, setCurrentMove] = useState<any>();
+
+    const nextMove = () => {
+        if (moveIndex === undefined) {
+            setCurrentMove({
+                move: TRANSFORM_TO_QUEEN[0],
+                withTransition: true
+            });
+            setMoveIndex(0);
+            return;
+        }
+
+        if (moveIndex + 1 === TRANSFORM_TO_QUEEN.length) {
+            return;
+        }
+
+        setCurrentMove({
+            move: TRANSFORM_TO_QUEEN[moveIndex + 1],
+            withTransition: true
+        });
+
+        setMoveIndex(moveIndex + 1);
+    }
+	return (
+		<div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20 }}>
+			<ChessBoard 
+				FEN="k7/p7/8/8/8/8/8/7K w - - 0 1"
+				onChange={() => {}}
+				onEndGame={() => {}}
+				config={{ cellSize }}
+				change={currentMove}
+			/>
+
+			<button className="button" onClick={nextMove}>Next move</button>
+		</div>
+	);
 }

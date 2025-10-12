@@ -1,0 +1,17 @@
+---
+---
+import LayoutDocs from '../../layouts/LayoutDocs.astro';
+import { 
+    ChessBoardTransformToQueen
+} from '../../components/ChessBoards.tsx';
+
+<LayoutDocs active="/chessGames/pawn-transform-to-queen">
+    # Transform to Queen
+
+    In this interactive example, you can move the black pawn all the way to the last rank <br />and choose which piece it will promote to — ```queen```, ```rook```, ```bishop```, or ```knight```.
+    
+    This demonstrates how ```react-chessboard-ui``` handles pawn promotion logic and user interaction seamlessly.
+    <div class="component-preview">
+        <ChessBoardTransformToQueen client:only />
+    </div>
+</LayoutDocs>

@@ -1,0 +1,42 @@
+---
+---
+
+import LayoutDocs from "../../layouts/LayoutDocs.astro";
+import { ChessBoardPaulMorphyOperaGame } from '../../components/ChessBoards.tsx';
+import CopyBlock from '../../components/CopyBlock.tsx';
+
+<LayoutDocs active="/properties/viewOnly">
+    # viewOnly (optional)
+
+    <CopyBlock client:load>
+        ```js
+        type viewOnly = boolean;
+        ```
+    </CopyBlock>
+    Enables demonstration mode for the chessboard — ideal for showing famous games, puzzles, or tutorials.
+
+    When ```viewOnly``` is set to true, pieces cannot be moved or dragged by the user.
+    
+    The board’s position can only be updated programmatically through the ```change``` handler. More about [change there](/properties/change).
+
+    In this mode, users can still draw arrows and highlight squares to illustrate ideas or visualize plans, but piece movement is fully disabled.
+
+    <h2 id="Code" data-anchor>Code</h2>
+    <CopyBlock client:load>
+        ```tsx
+        <ChessBoard 
+            FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+            onChange={handleChange}
+            onEndGame={handleEndGame}
+            change={change} // <~~~ change handler
+            viewOnly // <~~~ flag for view only mode
+        />
+        ```
+    </CopyBlock>
+
+    <br />
+    <h2 id="Example" data-anchor>Example</h2>
+    <div class="component-preview">
+        <ChessBoardPaulMorphyOperaGame client:only />
+    </div>
+</LayoutDocs>

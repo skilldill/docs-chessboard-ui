@@ -1,0 +1,20 @@
+---
+---
+import LayoutDocs from '../../layouts/LayoutDocs.astro';
+import { 
+    ChessBoardScholarsMate
+} from '../../components/ChessBoards.tsx';
+
+<LayoutDocs active="/chessGames/scholars-mate">
+    # Scholar's mate
+
+    ```Scholar’s Mate``` is a quick four-move checkmate that targets the weak ```f7``` (or ```f2```) square using the queen and bishop. <br/>
+    
+    It’s a classic beginner’s trap that teaches the power of early piece coordination and the risks of neglecting defense.
+
+    This elegant demonstration of tactical play is beautifully visualized here with <br/>```react-chessboard-ui```.
+    
+    <div class="component-preview">
+        <ChessBoardScholarsMate client:only />
+    </div>
+</LayoutDocs>
