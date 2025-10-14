@@ -78,7 +78,7 @@ export const ChessBoardClonsFEN: FC = () => {
 	const cellSize = useCellSize(70);
     return (
         <ChessBoard 
-			FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 b - - 0 1"
+			FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 w - - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
 			config={{ cellSize }}

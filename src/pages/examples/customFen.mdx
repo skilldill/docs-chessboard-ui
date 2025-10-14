@@ -41,7 +41,7 @@ import CopyBlock from '../../components/CopyBlock.tsx';
         ```
     </CopyBlock>
 
-    <h2 id="Quins clones (blacks start)" data-anchor>Quins clones (blacks start)</h2>
+    <h2 id="Queens clones (blacks start)" data-anchor>Queens clones</h2>
     <div class="component-preview">
         <ChessBoardClonsFEN client:only />
     </div>
@@ -49,7 +49,7 @@ import CopyBlock from '../../components/CopyBlock.tsx';
     <CopyBlock client:load>
         ```tsx
         <ChessBoard 
-            FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 b - - 0 1" // <~~~ Quins clones FEN
+            FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 w - - 0 1" // <~~~ Queens clones FEN
             onChange={handleChange}
             onEndGame={handleEndGame}
         />

@@ -5,9 +5,9 @@ export const MENU_ROUTES = [
 
     { text: "Properties", header: true },
     { text: "FEN", link: "/properties/FEN" },
-    { text: "reversed (optional)", link: "/properties/reversed" },
     { text: "onChange", link: "/properties/onChange" },
     { text: "onEndGame", link: "/properties/onEndGame" },
+    { text: "reversed (optional)", link: "/properties/reversed" },
     { text: "change (optional)", link: "/properties/change", isUpgrade: true },
     { text: "config (optional)", link: "/properties/config" },
     { text: "playerColor (optional)", link: "/properties/playerColor" },
