@@ -111,9 +111,9 @@ const CUSTOM_CONFIG = {
 	checkedCellColor: "green",
 	piecesMap: {
 		...DEFAULT_PIECES_MAP,
-		"pawn-white": () => <img width={getCustomPawnSize()} src="https://pics.clipartpng.com/midle/Pawn_White_Chess_Piece_PNG_Clip_Art-2751.png" />,
-		"pawn-black": () => <img width={getCustomPawnSize()} src="https://pics.clipartpng.com/midle/Pawn_Black_Chess_Piece_PNG_Clip_Art-2764.png" />,
-		"knight-white": () => <img height={getCustomKnightSize()} src="https://purepng.com/public/uploads/thumbnail//purepng.com-white-horse-jumpinghorsejumpingwhite-horsemountknighthackneyprad-481520976081ixkeq.png" />
+		"pawn-white": () => <img width={40} src="https://react-chessboard-ui.dev/pawn_white_custom.png" />,
+		"pawn-black": () => <img width={40} src="https://react-chessboard-ui.dev/pawn_black_custom.png" />,
+		"knight-white": () => <img height={100} src="https://react-chessboard-ui.dev/knight_white_custom.png" />
 	}
 }
 
