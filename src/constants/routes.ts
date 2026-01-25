@@ -1,4 +1,12 @@
-export const MENU_ROUTES = [
+type MenuRoute = {
+    text: string;
+    header?: boolean;
+    link?: string;
+    isUpgrade?: boolean;
+    isNew?: boolean;
+}
+
+export const MENU_ROUTES: MenuRoute[] = [
     { text: "Documentation", header: true },
     { text: 'Introduction', link: '/docs/introduction' },
     { text: "Get started", link: "/docs/quickStart" },
