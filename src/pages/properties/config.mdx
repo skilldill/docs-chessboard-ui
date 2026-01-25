@@ -23,6 +23,10 @@ import CopyBlock from '../../components/CopyBlock.tsx';
             arrowColor: string; // CSS color (but with additional opacity)
             checkedCellColor: string; // CSS color
             piecesMap: ChessPiecesMap;
+
+            // For show move's trail - highlights cells "from" and "to"
+            // default value - true
+            showMovesTrail: boolean; 
         }
 
         type config = Partial<ChessBoardConfig>;

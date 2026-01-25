@@ -8,10 +8,10 @@ export const MENU_ROUTES = [
     { text: "onChange", link: "/properties/onChange" },
     { text: "onEndGame", link: "/properties/onEndGame" },
     { text: "reversed (optional)", link: "/properties/reversed" },
-    { text: "change (optional)", link: "/properties/change", isUpgrade: true },
-    { text: "config (optional)", link: "/properties/config" },
+    { text: "change (optional)", link: "/properties/change" },
+    { text: "config (optional)", link: "/properties/config", isUpgrade: true },
     { text: "playerColor (optional)", link: "/properties/playerColor" },
-    { text: "viewOnly (optional)", link: "/properties/viewOnly", isNew: true },
+    { text: "viewOnly (optional)", link: "/properties/viewOnly" },
 
     { text: "Examples", header: true },
     { text: "Custom FEN", link: "/examples/customFen" },
@@ -20,7 +20,7 @@ export const MENU_ROUTES = [
     { text: "Customization", link: "/examples/customization" },
 
     { text: "Chess Games", header: true },
-    { text: "Scholar's mate", link: "/chessGames/scholars-mate", isNew: true },
-    { text: "Paul Morphy Opera Game", link: "/chessGames/morphy-opera-game", isNew: true },
-    { text: "Pawn transform to queen", link: "/chessGames/pawn-transform-to-queen", isNew: true },
+    { text: "Scholar's mate", link: "/chessGames/scholars-mate" },
+    { text: "Paul Morphy Opera Game", link: "/chessGames/morphy-opera-game" },
+    { text: "Pawn transform to queen", link: "/chessGames/pawn-transform-to-queen" },
 ];
