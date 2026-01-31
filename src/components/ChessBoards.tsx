@@ -27,73 +27,73 @@ const getCustomKnightSize = () => {
 }
 
 export const ChessBoardKings: FC = () => {
-    const cellSize = useCellSize(100);
+    const squareSize = useCellSize(100);
 	return (
         <ChessBoard 
 			FEN="2K2k2/8/8/8/8/8/8/8 w - - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
-			config={{ cellSize }}
+			config={{ squareSize }}
 		/>
     );
 }
 
 export const ChessBoardDefault: FC = () => {
-    const cellSize = useCellSize(70);
+    const squareSize = useCellSize(70);
 	return (
         <ChessBoard 
 			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
-			config={{ cellSize }}
+			config={{ squareSize }}
 		/>
     );
 }
 
 export const ChessBoardDefaultFEN: FC = () => {
-    const cellSize = useCellSize(70);
+    const squareSize = useCellSize(70);
 	return (
         <ChessBoard 
 			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
-			config={{ cellSize }}
+			config={{ squareSize }}
 		/>
     );
 }
 
 export const ChessBoardKingPawnFEN: FC = () => {
-	const cellSize = useCellSize(70);
+	const squareSize = useCellSize(70);
     return (
         <ChessBoard 
 			FEN="8/8/8/8/8/8/1K6/P7 w - - 0 1"
 			onChange={(data) => { console.log(data) }}
 			onEndGame={() => {}}
-			config={{ cellSize }}
+			config={{ squareSize }}
 		/>
     );
 }
 
 export const ChessBoardClonsFEN: FC = () => {
-	const cellSize = useCellSize(70);
+	const squareSize = useCellSize(70);
     return (
         <ChessBoard 
 			FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 w - - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
-			config={{ cellSize }}
+			config={{ squareSize }}
 		/>
     );
 }
 
 export const ChessBoardReversed: FC = () => {
-	const cellSize = useCellSize(70);
+	const squareSize = useCellSize(70);
     return (
         <ChessBoard 
 			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
-			config={{ cellSize }}
+			config={{ squareSize }}
 			reversed
 		/>
     );
@@ -118,56 +118,56 @@ const CUSTOM_CONFIG = {
 }
 
 export const ChessBoardCustomConfig: FC = () => {
-	const cellSize = useCellSize(70);
+	const squareSize = useCellSize(70);
 	return (
         <ChessBoard 
 			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
-			config={{ ...CUSTOM_CONFIG, cellSize }}
+			config={{ ...CUSTOM_CONFIG, squareSize }}
 		/>
     );
 }
 
 export const ChessBoardPlayerColor: FC = () => {
-	const cellSize = useCellSize(70);
+	const squareSize = useCellSize(70);
 	return (
 		<ChessBoard 
 			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
-			config={{ cellSize }}
+			config={{ squareSize }}
 			playerColor="white"
 		/>
 	);
 }
 
 export const ChessBoardPawnPromotion: FC = () => {
-	const cellSize = useCellSize(70);
+	const squareSize = useCellSize(70);
 	return (
 		<ChessBoard 
 			FEN="8/k5PK/8/8/8/8/8/8 w - - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
-			config={{ cellSize }}
+			config={{ squareSize }}
 		/>
 	);
 }
 
 export const ChessBoardStrangeFEN: FC = () => {
-	const cellSize = useCellSize(70);
+	const squareSize = useCellSize(70);
 	return (
         <ChessBoard 
 			FEN="rnbqQBNR/2k2K2/ppppPPPP/8/8/8/8/8 w - - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
-			config={{ cellSize }}
+			config={{ squareSize }}
 		/>
     );
 }
 
 export const ChessBoardPaulMorphyOperaGame: FC = () => {
-	const cellSize = useCellSize(70);
+	const squareSize = useCellSize(70);
 
 	const [moveIndex, setMoveIndex] = useState<number>();
     const [currentMove, setCurrentMove] = useState<any>();
@@ -200,7 +200,7 @@ export const ChessBoardPaulMorphyOperaGame: FC = () => {
 				FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 				onChange={(data) => {}}
 				onEndGame={() => {}}
-				config={{ cellSize }}
+				config={{ squareSize }}
 				change={currentMove}
 				viewOnly
 			/>
@@ -211,7 +211,7 @@ export const ChessBoardPaulMorphyOperaGame: FC = () => {
 }
 
 export const ChessBoardScholarsMate: FC = () => {
-	const cellSize = useCellSize(70);
+	const squareSize = useCellSize(70);
 
 	const [moveIndex, setMoveIndex] = useState<number>();
     const [currentMove, setCurrentMove] = useState<any>();
@@ -244,7 +244,7 @@ export const ChessBoardScholarsMate: FC = () => {
 				FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 				onChange={(data) => {}}
 				onEndGame={() => {}}
-				config={{ cellSize }}
+				config={{ squareSize }}
 				change={currentMove}
 				viewOnly
 			/>
@@ -255,7 +255,7 @@ export const ChessBoardScholarsMate: FC = () => {
 }
 
 export const ChessBoardTransformToQueen: FC = () => {
-	const cellSize = useCellSize(70);
+	const squareSize = useCellSize(70);
 	const [moveIndex, setMoveIndex] = useState<number>();
     const [currentMove, setCurrentMove] = useState<any>();
 
@@ -286,7 +286,7 @@ export const ChessBoardTransformToQueen: FC = () => {
 				FEN="k7/p7/8/8/8/8/8/7K w - - 0 1"
 				onChange={() => {}}
 				onEndGame={() => {}}
-				config={{ cellSize }}
+				config={{ squareSize }}
 				change={currentMove}
 			/>
 

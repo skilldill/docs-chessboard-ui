@@ -12,3 +12,31 @@
     transition: background-color .3s;
     flex: 1;
 }
+
+.squareWhite {
+    background-image: url(/magicPieces/square-light.png);
+    background-size: cover;
+    opacity: .8;
+}
+
+.squareBlack {
+    background-image: url(/magicPieces/square-dark.png);
+    background-size: cover;
+    opacity: .8;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.hidePieceEffectWithRotate {
+    animation: rotate 0.5s 0s 1 linear forwards;
+}

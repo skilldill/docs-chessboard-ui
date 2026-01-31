@@ -2,31 +2,42 @@
 ---
 
 import LayoutDocs from "../../layouts/LayoutDocs.astro"
-import { ChessBoardCustomConfig } from "../../components/ChessBoards";
+import { MagicPiecesChessBoard } from '../../components/CustomChessBoards';
 import CopyBlock from '../../components/CopyBlock.tsx';
 
 <LayoutDocs active="/properties/config">
     # config
 
     For customizing chessboard 💅
+
+    <h2 id="Example" data-anchor>Example of custom "Magic chessboard"</h2>
+    <div class="component-preview">
+        <MagicPiecesChessBoard client:only />
+    </div>
+
     <h2 id="Typing" data-anchor>Typing</h2>
     <CopyBlock client:load>
         ```ts
         type ChessBoardConfig = {
-            cellSize: number; // px
-            whiteCellColor: string; // CSS color
-            blackCellColor: string; // CSS color
-            selectedCellColor: string; // CSS color
-            selectedCellBorder: string; // CSS border prop
-            markedCellColor: string; // CSS color
-            circleMarkColor: string; // CSS color
-            arrowColor: string; // CSS color (but with additional opacity)
-            checkedCellColor: string; // CSS color
-            piecesMap: ChessPiecesMap;
+            // Right domain names
+            squareSize: number;
+            pieceSizePercent: number;
+            lightSquareClassName: string;
+            darkSquareClassName: string;
+            pickedSquareClassName: string;
+            checkedSquareClassName: string;
+            hidePieceEffectClassName: string;
+            squareHighlightClassName: string;
+            selectedSquareClassName: string;
+            holdedPieceClassName: string;
+            possibleMoveMarkClassName: string;
+            factorForSizeCircleMark: number;
 
-            // For show move's trail - highlights cells "from" and "to"
-            // default value - true
-            showMovesTrail: boolean; 
+            circleMarkColor: string;
+            arrowColor: string;
+            piecesMap: ChessPiecesMap;
+            showMovesTrail: boolean;
+            onHidePieces: (piece: Piece) => void;
         }
 
         type config = Partial<ChessBoardConfig>;
@@ -53,7 +64,7 @@ import CopyBlock from '../../components/CopyBlock.tsx';
             | "king-black";
 
         type ChessPiecesMap = {
-            [key: FigureType]: (size /* from cellSize */) => JSX.Element;
+            [key: FigureType]: (size /* from squareSize */) => JSX.Element;
         }
         ```
     </CopyBlock>
@@ -100,45 +111,4 @@ import CopyBlock from '../../components/CopyBlock.tsx';
         }
         ```
     </CopyBlock>
-
-    <h2 id="Example of full custom config" data-anchor>Example of full custom config</h2>
-    <CopyBlock client:load>
-        ```tsx
-        import { DEFAULT_PIECES_MAP /* default pieces */ } from "react-chessboard-ui";
-
-        const CUSTOM_CONFIG = { 
-            cellSize: 70,
-            selectedCellColor: "gray",
-            selectedCellBorder: "4px dashed black",
-            circleMarkColor: "red",
-            whiteCellColor: "#166",
-            blackCellColor: "#e0e0e0",
-            arrowColor: "red",
-            markedCellColor: "red",
-            checkedCellColor: "green",
-            piecesMap: {
-                ...DEFAULT_PIECES_MAP,
-                "pawn-white": () => <img width={40} src="https://pics.clipartpng.com/midle/Pawn_White_Chess_Piece_PNG_Clip_Art-2751.png" />,
-                "pawn-black": () => <img width={40} src="https://pics.clipartpng.com/midle/Pawn_Black_Chess_Piece_PNG_Clip_Art-2764.png" />,
-                "knight-white": () => <img height={100} src="https://purepng.com/public/uploads/thumbnail//purepng.com-white-horse-jumpinghorsejumpingwhite-horsemountknighthackneyprad-481520976081ixkeq.png" />
-            }
-        }
-
-        export const App = () => {
-            return (
-            <ChessBoard 
-                FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-                onChange={handleChange}
-                onEndGame={handleEndGame}
-                config={CUSTOM_CONFIG}
-            />
-            );
-        }
-        ```
-    </CopyBlock>
-
-    <h2 id="Example" data-anchor>Example</h2>
-    <div class="component-preview">
-        <ChessBoardCustomConfig client:only />
-    </div>
 </LayoutDocs>
