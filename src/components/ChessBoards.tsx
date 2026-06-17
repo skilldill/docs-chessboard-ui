@@ -120,6 +120,26 @@ export const ChessBoardArrows: FC = () => {
 	);
 }
 
+export const ChessBoardHeroBanner: FC = () => {
+	const squareSize = typeof window !== "undefined" && window.innerWidth <= 460 ? 30 : useCellSize(63);
+
+	return (
+		<div className="heroChessBoard" style={{ width: 'fit-content', height: 'fit-content', overflow: 'hidden', borderRadius: '1rem' }}>
+			<ChessBoard
+				FEN="r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 3"
+				onChange={() => {}}
+				onEndGame={() => {}}
+				config={{
+					squareSize,
+					whiteCellColor: "#f8fafc",
+					blackCellColor: "#d8deea",
+					arrowColor: "#3b82f6",
+				}}
+			/>
+		</div>
+	);
+}
+
 const CUSTOM_CONFIG = { 
 	cellSize: 70,
 	selectedCellColor: "gray",

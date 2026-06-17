@@ -13,6 +13,21 @@
     flex: 1;
 }
 
+.heroChessBoard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+}
+
+.heroChessBoard .chessBoard {
+    overflow: hidden;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
+}
+
 .squareWhite {
     background-image: url(/magicPieces/square-light.png);
     background-size: cover;
