@@ -46,19 +46,19 @@
     /* Theme */
     --color-theme-header-title: var(--color-gray-900);
     --color-theme-titles: var(--color-gray-700);
-    --color-theme-code-bg: var(--color-gray-800);
-    --color-theme-inline-code-bg: var(--color-red-200);
-    --color-theme-inline-code: var(--color-red-700);
-    --color-theme-link: var(--color-blue-600);
-    --color-theme-link-hover: var(--color-blue-700);
+    --color-theme-code-bg: #f6f8fa;
+    --color-theme-inline-code-bg: rgba(37, 99, 235, 0.1);
+    --color-theme-inline-code: var(--color-blue-700);
+    --color-theme-link: #2563eb;
+    --color-theme-link-hover: #1d4ed8;
     --color-theme-text: var(--color-gray-600);
     --color-theme-background: var(--color-gray-100);
     --color-theme-border: var(--color-gray-200);
     --color-theme-icon: var(--color-gray-400);
     --color-theme-menu-item: var(--color-gray-500);
-    --color-theme-menu-item-active-bg: var(--color-gray-400);
-    --color-theme-header-background: rgb(241 245 249 / .5);
-    --color-theme-preview-block-bg: var(--color-grey-100);
+    --color-theme-menu-item-active-bg: rgba(37, 99, 235, 0.1);
+    --color-theme-header-background: rgba(255, 255, 255, 0.78);
+    --color-theme-preview-block-bg: #f6f6f7;
 }
 
 h2,
@@ -117,16 +117,30 @@ code {
     font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
         Consolas, "Liberation Mono", "Courier New", monospace;
     background-color: var(--color-theme-code-bg);
-    font-size: 16px;
+    font-size: 14px;
 }
 
 pre {
-    padding: 14px;
-    border-radius: 14px;
+    padding: 18px;
+    border-radius: 8px;
     background-color: var(--color-theme-code-bg) !important;
     position: relative;
     margin: 0;
     max-width: 100%;
+    border: 1px solid var(--color-theme-border);
+    color: #24292f;
+}
+
+pre.astro-code,
+pre.astro-code span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg) !important;
+}
+
+:root[data-theme="dark"] pre.astro-code,
+:root[data-theme="dark"] pre.astro-code span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg) !important;
 }
 
 p > code {
@@ -146,7 +160,7 @@ a:hover {
 
 p {
     font-size: 16px;
-    line-height: 24px;
+    line-height: 28px;
     color: var(--color-theme-text);
 }
 
@@ -195,19 +209,19 @@ body {
 }
 
 :root[data-theme="dark"] {
-    --color-theme-titles: var(--color-gray-100);          /* светлый серый для заголовков */
-    --color-theme-code-bg: var(--color-gray-800);         /* фон блоков кода — тёмно-серый */
-    --color-theme-inline-code-bg: var(--color-green-900);   /* фон инлайн-кода — мягкий красный */
-    --color-theme-inline-code: var(--color-green-300);      /* текст инлайн-кода — светлый красный */
-    --color-theme-link: var(--color-blue-400);            /* ссылки — приглушённый голубой */
-    --color-theme-link-hover: var(--color-blue-300);      /* hover — светлее для подсветки */
-    --color-theme-text: var(--color-gray-300);
-    --color-theme-background: var(--color-gray-900);
-    --color-theme-icon: var(--color-gray-600);
-    --color-theme-menu-item: var(--color-gray-400);
-    --color-theme-menu-item-active-bg: var(--color-gray-600);
-    --color-theme-header-title: var(--color-gray-100);
-    --color-theme-border: var(--color-gray-700);
-    --color-theme-header-background: rgba(59, 61, 63, 0.5);
-    --color-theme-preview-block-bg: var(--color-gray-800);
+    --color-theme-titles: #f5f5f5;
+    --color-theme-code-bg: #f6f8fa;
+    --color-theme-inline-code-bg: rgba(59, 130, 246, 0.18);
+    --color-theme-inline-code: #60a5fa;
+    --color-theme-link: #3b82f6;
+    --color-theme-link-hover: #60a5fa;
+    --color-theme-text: #c9c9d1;
+    --color-theme-background: #050505;
+    --color-theme-icon: #8a8a93;
+    --color-theme-menu-item: #8f8f99;
+    --color-theme-menu-item-active-bg: rgba(59, 130, 246, 0.14);
+    --color-theme-header-title: #f5f5f5;
+    --color-theme-border: #2a2a2f;
+    --color-theme-header-background: rgba(5, 5, 5, 0.78);
+    --color-theme-preview-block-bg: #0b0b0f;
 }

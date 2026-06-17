@@ -1,10 +1,19 @@
 ---
 import '../styles/index.css';
 import 'react-chessboard-ui/dist/index.css';
+import { Code } from 'astro:components';
 
 import LayoutApp from '../layouts/LayoutApp.astro';
 import Header from '../layouts/Header.astro';
 import Footer from '../layouts/Footer.astro';
+import { ChessBoardHeroBanner } from '../components/ChessBoards';
+import CopyBlock from '../components/CopyBlock';
+
+const fenExampleCode = `<ChessBoard 
+    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+    onChange={(data) => {}}
+    onEndGame={(result) => {}}
+/>`;
 ---
 <LayoutApp>
     <Header />
@@ -20,25 +29,41 @@ import Footer from '../layouts/Footer.astro';
                         Get started
                     </a>
             
-                    <a class="button" href="/examples/customFen">
+                    <a class="button buttonOutlined" href="/examples/customFen">
                         Examples
                     </a>
+                </div>
+                <div class="installBlock">
+                    <div class="installTabs">
+                        <button class="installTab installTabActive" type="button" data-command="npm install react-chessboard-ui" aria-pressed="true">npm</button>
+                        <button class="installTab" type="button" data-command="yarn add react-chessboard-ui" aria-pressed="false">Yarn</button>
+                        <button class="installTab" type="button" data-command="pnpm add react-chessboard-ui" aria-pressed="false">pnpm</button>
+                        <button class="installTab" type="button" data-command="bun add react-chessboard-ui" aria-pressed="false">Bun</button>
+                    </div>
+                    <div class="installCommand">
+                        <code class="installCommandText">npm install react-chessboard-ui</code>
+                        <button class="installCopyButton" type="button" data-copy-command="npm install react-chessboard-ui" aria-label="Copy install command">
+                            Copy
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="mainPoster">
-            <img src="./react-chessboard.svg" alt="react and chessboard">
+            <ChessBoardHeroBanner client:only="react" />
         </div>
     </div>
     <div class="container descriptionAbilities">
         <div class="descriptionBlock descriptionFEN">
             <div class="additionalContent">
                 <div>
-                    <div class="subTitle">Using <span class="titleAccentColor">FEN-notation<span></div>
+                    <div class="subTitle">Using <span class="titleAccentColor">FEN-notation</span></div>
                     <p class="description">Use FEN-notation to easily set up the pieces on the chessboard.</p>
                 </div>
-                <div class="poster">
-                    <img width="100%" src="./FENnotationExample.png" alt="Code example">
+                <div class="poster fenCodePoster">
+                    <CopyBlock client:load value={fenExampleCode}>
+                        <Code code={fenExampleCode} lang="tsx" />
+                    </CopyBlock>
                 </div>
             </div>
         </div>
@@ -100,14 +125,72 @@ import Footer from '../layouts/Footer.astro';
 </LayoutApp>
 
 <script>
+    const installCopyButton = document.querySelector<HTMLButtonElement>('.installCopyButton');
+    const installCommandText = document.querySelector<HTMLElement>('.installCommandText');
+    const installTabs = document.querySelectorAll<HTMLButtonElement>('.installTab');
 
+    installTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            const command = tab.dataset.command;
+
+            if (!command || !installCommandText || !installCopyButton) return;
+
+            installTabs.forEach((item) => {
+                item.classList.remove('installTabActive');
+                item.setAttribute('aria-pressed', 'false');
+            });
+
+            tab.classList.add('installTabActive');
+            tab.setAttribute('aria-pressed', 'true');
+            installCommandText.innerText = command;
+            installCopyButton.dataset.copyCommand = command;
+            installCopyButton.innerText = 'Copy';
+        });
+    });
+
+    installCopyButton?.addEventListener('click', async () => {
+        const command = installCopyButton.dataset.copyCommand;
+
+        if (!command) return;
+
+        try {
+            await navigator.clipboard.writeText(command);
+        } catch {
+            const textarea = document.createElement('textarea');
+            textarea.value = command;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'fixed';
+            textarea.style.top = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            textarea.remove();
+        }
+
+        installCopyButton.innerText = 'Copied';
+
+        window.setTimeout(() => {
+            installCopyButton.innerText = 'Copy';
+        }, 1200);
+    });
 </script>
 
 <style scoped>
     .mainLayout {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        padding-top: 120px;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        min-height: clamp(520px, 72vh, 680px);
+        border-left: 1px solid var(--color-theme-border);
+        border-right: 1px solid var(--color-theme-border);
+        border-bottom: 1px solid var(--color-theme-border);
+        padding: 0;
+    }
+
+    .leftBlock {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        border-right: 1px solid var(--color-theme-border);
     }
 
     .mainContent {
@@ -115,77 +198,223 @@ import Footer from '../layouts/Footer.astro';
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        max-width: 80%;
-        padding-top: 80px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 780px;
+        padding: clamp(56px, 7vw, 96px);
     }
 
     .title {
-        font-weight: 900;
-        font-size: 50px;
+        max-width: 580px;
+        font-weight: 800;
+        font-size: clamp(52px, 5.2vw, 76px);
+        line-height: 0.96;
+        letter-spacing: 0;
         margin: 0;
-        margin-bottom: 10px;
+        margin-bottom: 28px;
+        color: var(--color-theme-header-title);
     }
 
     .description {
-        font-size: 24px;
-        line-height: 30px;
+        max-width: 620px;
+        font-size: clamp(18px, 2vw, 24px);
+        line-height: 1.55;
         font-weight: 500;
-        margin-bottom: 60px;
+        margin: 0 0 36px;
+        color: var(--color-theme-text);
     }
 
     .titleAccentColor {
-        color: var(--color-blue-500);
+        color: var(--color-theme-link);
     }
 
     .button {
         box-sizing: border-box;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
         text-decoration: none;
-        font-size: 24px;
-        border: none;
-        padding: 20px 40px;
+        font-size: 18px;
+        line-height: 1;
+        font-weight: 700;
+        border: 1px solid var(--color-theme-border);
+        padding: 0 24px;
         cursor: pointer;
-        color: #fff;
-        background-color: var(--color-gray-700);
+        color: var(--color-theme-titles);
+        background-color: transparent;
         text-align: center;
-        border-radius: 10px;
-        transition: background-color .3s;
-        flex: 1;
+        border-radius: 8px;
+        transition: all .2s ease;
+        flex: 0 0 auto;
     }
 
     .button:hover {
-        background-color: var(--color-gray-900);
+        border-color: var(--color-theme-link);
+        color: var(--color-theme-link);
+        /* transform: translateY(-1px); */
     }
 
     .buttonBlue {
-        background-color: var(--color-blue-500);
+        border-color: var(--color-theme-link);
+        background-color: var(--color-theme-link);
+        color: #fff;
+        box-shadow: 0 0 28px rgba(59, 130, 246, 0.24);
+        opacity: 1;
     }
 
     .buttonBlue:hover {
-        background-color: var(--color-blue-700);
+        /* background-color: var(--color-theme-link-hover); */
+        color: #fff;
+        opacity: 0.8;
+    }
+
+    .buttonOutlined {
+        opacity: 1;
+    }
+
+    .buttonOutlined:hover {
+        opacity: .8;
     }
 
     .buttonsBlock {
         display: flex;
-        width: 100%;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+    }
+
+    .mainPoster {
+        display: flex;
+        align-items: center;
         justify-content: center;
+        min-width: 0;
+        overflow: hidden;
+        padding: clamp(40px, 6vw, 88px);
+    }
+
+    .heroBoardSurface {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        width: min(100%, 430px);
+        padding: 0;
+        border: 0;
+        border-radius: 8px;
+        background-color: transparent;
+        box-shadow: 0 24px 70px rgba(37, 99, 235, 0.16);
+    }
+
+    .installBlock {
+        width: min(100%, 560px);
+        overflow: hidden;
+        border: 1px solid var(--color-theme-border);
+        border-radius: 8px;
+        background-color: var(--color-theme-preview-block-bg);
+    }
+
+    .installTabs {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        min-height: 48px;
+        padding: 0 18px;
+        overflow-x: auto;
+        border-bottom: 1px solid var(--color-theme-border);
+    }
+
+    .installTab {
+        display: inline-flex;
+        align-items: center;
+        flex: 0 0 auto;
+        min-height: 48px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--color-theme-menu-item);
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        transition: color .2s ease;
+    }
+
+    .installTab:hover {
+        color: var(--color-theme-link);
+    }
+
+    .installTabActive {
+        color: var(--color-theme-titles);
+        box-shadow: inset 0 -2px var(--color-theme-link);
+    }
+
+    .installCommand {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         gap: 16px;
+        min-height: 66px;
+        padding: 0 18px;
+    }
+
+    .installCommand code {
+        overflow: hidden;
+        color: var(--color-theme-inline-code);
+        background: transparent;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.4;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .installCopyButton {
+        flex: 0 0 auto;
+        min-height: 34px;
+        padding: 0 14px;
+        border: 1px solid var(--color-theme-border);
+        border-radius: 6px;
+        background: transparent;
+        color: var(--color-theme-titles);
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 700;
+        transition: border-color .2s ease, color .2s ease;
+    }
+
+    .installCopyButton:hover {
+        border-color: var(--color-theme-link);
+        color: var(--color-theme-link);
     }
 
     .descriptionAbilities {
-        margin-top: 180px;
+        margin-top: 0;
+        border-left: 1px solid var(--color-theme-border);
+        border-right: 1px solid var(--color-theme-border);
+        border-bottom: 1px solid var(--color-theme-border);
     }
 
     .descriptionAbilities .description {
-        max-width: 400px;
+        max-width: 520px;
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.65;
     }
 
     .descriptionBlock {
-        margin-bottom: 150px;
+        margin: 0;
+        border-bottom: 1px solid var(--color-theme-border);
+    }
+
+    .descriptionBlock:last-child {
+        border-bottom: 0;
     }
 
     .whoUsesContentWrapper {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
         width: 100%;
     }
@@ -194,19 +423,19 @@ import Footer from '../layouts/Footer.astro';
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 16px 12px;
-        background: var(--color-theme-background);
+        box-sizing: border-box;
+        padding: 20px;
+        background: transparent;
         border: 1px solid var(--color-theme-border);
         border-radius: 8px;
         text-decoration: none;
-        transition: all 0.3s ease;
-        min-height: 80px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: border-color .2s ease, transform .2s ease, background-color .2s ease;
+        min-height: 120px;
+        box-shadow: none;
     }
 
     .whoUsesCard:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px);
         border-color: var(--color-blue-500);
     }
 
@@ -227,32 +456,29 @@ import Footer from '../layouts/Footer.astro';
         transition: opacity 0.3s ease;
     }
 
-    /* Make logo visible in light theme */
     :root:not([data-theme="dark"]) .whoUsesLogoWrapper svg {
         filter: invert(1);
     }
 
-    /* Dark theme adjustments */
     :root[data-theme="dark"] .whoUsesCard {
-        background: var(--color-gray-800);
-        border-color: var(--color-gray-700);
+        background: transparent;
+        border-color: var(--color-theme-border);
     }
 
     :root[data-theme="dark"] .whoUsesCard:hover {
         border-color: var(--color-blue-400);
-        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
     }
 
     .whoUsesCardAdd {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
-        border-color: var(--color-gray-200);
-        border-width: 2px;
+        background: var(--color-theme-menu-item-active-bg);
+        border-color: var(--color-theme-border);
+        border-width: 1px;
         cursor: default;
     }
 
     .whoUsesCardAdd:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+        transform: translateY(-2px);
+        border-color: var(--color-theme-link);
     }
 
     .whoUsesCardAddContent {
@@ -282,14 +508,18 @@ import Footer from '../layouts/Footer.astro';
     }
 
     .whoUsesAddButton {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         text-decoration: none;
         font-size: 13px;
-        padding: 8px 16px;
+        line-height: 1;
+        min-height: 34px;
+        padding: 0 16px;
         color: #fff;
-        background-color: var(--color-blue-900);
+        background-color: var(--color-theme-link);
         border-radius: 6px;
-        transition: all 0.3s ease;
+        transition: background-color .2s ease, transform .2s ease;
         font-weight: 500;
         margin-top: 4px;
     }
@@ -298,14 +528,9 @@ import Footer from '../layouts/Footer.astro';
         transform: translateY(-1px);
     }
 
-    /* Dark theme adjustments for add card */
     :root[data-theme="dark"] .whoUsesCardAdd {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.08) 100%);
-        border-color: var(--color-blue-900);
-    }
-
-    :root[data-theme="dark"] .whoUsesCardAdd:hover {
-        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+        background: rgba(59, 130, 246, 0.12);
+        border-color: var(--color-theme-border);
     }
 
     .descriptionFEN .poster {
@@ -323,78 +548,142 @@ import Footer from '../layouts/Footer.astro';
     }
 
     .descriptionMobile img {
-        width: 60%;
+        width: min(70%, 420px);
     }
 
     .subTitle {
-        font-size: 40px;
-        font-weight: 900;
-        margin-bottom: 30px;
+        font-size: clamp(34px, 4vw, 56px);
+        line-height: 1;
+        letter-spacing: 0;
+        font-weight: 800;
+        margin: 0 0 20px;
         color: var(--color-theme-titles);
     }
 
     .additionalContent {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
         align-items: center;
+        gap: clamp(32px, 5vw, 72px);
+        box-sizing: border-box;
+        padding: clamp(48px, 6vw, 80px) clamp(40px, 6vw, 72px);
     }
 
-    @media screen and (max-width: 1243px) {
-        .mainContent {
-            padding-top: 0px;
-        }
+    .poster {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+    }
 
-        .button {
-            width: 100%;
-        }
+    .poster img {
+        display: block;
+        width: 100%;
+        max-height: 520px;
+        object-fit: contain;
+        border: 0;
+        border-radius: 8px;
+        background-color: var(--color-theme-background);
+    }
 
-        .buttonsBlock {
-            flex-direction: column;
-            align-items: center;
-        }
+    .fenCodePoster {
+        align-items: stretch;
+    }
+
+    .fenCodePoster :global(.copyBlock) {
+        width: 100%;
+    }
+
+    .fenCodePoster :global(pre.astro-code) {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 220px;
+        margin: 0;
+        padding: 28px;
+        overflow: auto;
+        border: 1px solid var(--color-theme-border);
+        border-radius: 8px;
+        background-color: var(--color-theme-preview-block-bg) !important;
+    }
+
+    .fenCodePoster :global(pre.astro-code code) {
+        background: transparent !important;
+        font-size: 15px;
+        line-height: 1.8;
+        white-space: pre;
+    }
+
+    .fenCodePoster :global(pre.astro-code span) {
+        background: transparent !important;
     }
 
     @media screen and (max-width: 1180px) {
-        .mainPoster {
-            padding-top: 40px;
+        .title {
+            font-size: clamp(48px, 6.2vw, 68px);
         }
 
-        .mainPoster img {
-            max-width: 90%;
-            margin: auto;
+        .mainContent {
+            padding: clamp(48px, 6vw, 72px);
         }
-    }   
+    }
 
     @media screen and (max-width: 980px) {
-        .whoUsesContentWrapper {
-            padding-top: 30px;
-            display: flex;
-            flex-direction: column;
+        .mainLayout {
+            grid-template-columns: 1fr;
+            min-height: auto;
+            border-left: 0;
+            border-right: 0;
         }
 
-        .whoUsesCardAdd {
-            display: none;
+        .leftBlock {
+            border-right: 0;
+        }
+
+        .mainContent {
+            max-width: 100%;
+            align-items: center;
+            padding: 40px 0 32px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: clamp(46px, 12vw, 64px);
+            text-align: center;
+        }
+
+        .description {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 24px;
+        }
+
+        .buttonsBlock {
+            width: 100%;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
         }
 
         .mainPoster {
-            display: none;
-        }
-        
-        .poster {
-            display: none;
+            padding: 0 0 32px;
         }
 
-        img {
-            display: none;
+        .heroBoardSurface {
+            width: min(100%, 286px);
+            padding: 0;
         }
 
-        .mainLayout {
-            grid-template-columns: 1fr;
-            padding-top: 40px;
+        .descriptionAbilities {
+            border-left: 0;
+            border-right: 0;
         }
-        
+
         .additionalContent {
             grid-template-columns: 1fr;
+            padding: 48px 0;
+            text-align: center;
         }
 
         .descriptionAbilities .description {
@@ -403,68 +692,53 @@ import Footer from '../layouts/Footer.astro';
         }
 
         .subTitle {
-            font-size: 36px;
             text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .descriptionBlock {
-            margin-bottom: 60px;
-        }
-
-        .mainContent {
-            max-width: 100%;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .buttonsBlock {
-            width: 100%;
         } 
 
         .button {
+            flex: 1 1 0;
+            width: auto;
+            min-width: 0;
+            padding: 0 12px;
+        }
+
+        .installBlock {
             width: 100%;
+            text-align: left;
         }
 
-        .title {
-            text-align: center;
-        }
-
-        .description {
-            text-align: center;
-        }
-
-        .whoUsesGrid {
-            grid-template-columns: repeat(2, 1fr);
+        .installCommand {
+            align-items: center;
+            flex-direction: row;
+            min-height: 58px;
+            padding: 0 14px;
             gap: 10px;
+        }
+
+        .installCommand code {
+            min-width: 0;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .installCopyButton {
+            width: auto;
+            padding: 0 12px;
+        }
+
+        .whoUsesContentWrapper {
+            display: flex;
+            flex-direction: column;
+            padding-top: 24px;
+        }
+
+        .whoUsesCardAdd {
+            display: none;
         }
 
         .whoUsesCard {
             padding: 12px 8px;
             min-height: 70px;
-        }
-
-        .whoUsesCardAdd {
-            padding: 12px 8px;
-            min-height: 100px;
-        }
-
-        .whoUsesCardAddContent {
-            gap: 6px;
-        }
-
-        .whoUsesAddText {
-            font-size: 13px;
-        }
-
-        .whoUsesAddDescription {
-            font-size: 11px;
-        }
-
-        .whoUsesAddButton {
-            font-size: 12px;
-            padding: 6px 12px;
-            width: 100%;
         }
 
         .whoUsesLogoWrapper svg {
