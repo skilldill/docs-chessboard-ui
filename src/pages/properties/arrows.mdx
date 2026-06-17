@@ -1,0 +1,59 @@
+---
+---
+import LayoutDocs from "../../layouts/LayoutDocs.astro";
+import { ChessBoardArrows } from '../../components/ChessBoards.tsx';
+import CopyBlock from '../../components/CopyBlock.tsx';
+
+<LayoutDocs active="/properties/arrows">
+    # arrows (optional)
+
+    Renders arrows on the chessboard.
+
+    If an arrow does not have a ```color```, the chessboard uses ```config.arrowColor``` or the default arrow color.
+
+    <h2 id="Example" data-anchor>Example</h2>
+    <div class="component-preview">
+        <ChessBoardArrows client:only />
+    </div>
+
+    <br/>
+    <h2 id="Typing" data-anchor>Typing</h2>
+    <CopyBlock client:load>
+        ```ts
+        type Arrow = {
+            start: number;
+            end: number;
+            color?: string;
+        }
+
+        type arrows = Arrow[];
+        ```
+    </CopyBlock>
+
+    <br />
+    <h2 id="Code" data-anchor>Code</h2>
+    <CopyBlock client:load>
+        ```tsx
+        export const App = () => {
+            const arrows = [
+                { start: [4, 6], end: [4, 4] },
+                { start: [4, 1], end: [4, 3], color: "#f97316" },
+                { start: [6, 7], end: [5, 5], color: "#5a16f9" },
+                { start: [1, 0], end: [2, 2], color: "#16f943" },
+            ];
+
+            return (
+                <ChessBoard
+                    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                    onChange={handleChange}
+                    onEndGame={handleEndGame}
+                    arrows={arrows}
+                    config={{
+                        arrowColor: "#2563eb",
+                    }}
+                />
+            );
+        }
+        ```
+    </CopyBlock>
+</LayoutDocs>

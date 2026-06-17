@@ -96,7 +96,28 @@ export const ChessBoardReversed: FC = () => {
 			config={{ squareSize }}
 			reversed
 		/>
-    );
+	);
+}
+
+export const ChessBoardArrows: FC = () => {
+	const squareSize = useCellSize(70);
+	const arrows = [
+		{ start: [4, 6], end: [4, 4] },
+		{ start: [4, 1], end: [4, 3], color: "#f97316" },
+		{ start: [6, 7], end: [5, 5], color: "#5a16f9" },
+		{ start: [1, 0], end: [2, 2], color: "#16f943" },
+	];
+
+	return (
+		<ChessBoard
+			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+			onChange={() => {}}
+			onEndGame={() => {}}
+			config={{ squareSize, arrowColor: "#2563eb" }}
+			arrows={arrows}
+			viewOnly
+		/>
+	);
 }
 
 const CUSTOM_CONFIG = { 

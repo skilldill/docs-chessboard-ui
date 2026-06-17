@@ -1,0 +1,50 @@
+---
+---
+import LayoutDocs from "../../layouts/LayoutDocs.astro";
+import CopyBlock from '../../components/CopyBlock.tsx';
+
+<LayoutDocs active="/properties/onClick">
+    # onClick (optional)
+
+    Called when the user clicks a chessboard cell.
+
+    Returns the clicked cell data and its position on the board.
+    <br/>
+    <h2 id="Typing" data-anchor>Typing</h2>
+    <CopyBlock client:load>
+        ```ts
+        type ClickData = {
+            cellData: {
+                figure: { 
+                    color: "white" | "black";
+                    type: "pawn" | "bishop" | "knigts" | "rook" | "queen" | "king";
+                } | undefined;
+            };
+            pos: [number, number];
+        }
+
+        type onClick = (data: ClickData) => void;
+        ```
+    </CopyBlock>
+
+    <br />
+    <h2 id="Code" data-anchor>Code</h2>
+    <CopyBlock client:load>
+        ```tsx
+        export const App = () => {
+            const handleClick = (data) => {
+                console.log(data.cellData, data.pos);
+            }
+
+            return (
+                <ChessBoard
+                    FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                    onChange={handleChange}
+                    onEndGame={handleEndGame}
+                    onClick={handleClick}
+                />
+            );
+        }
+        ```
+    </CopyBlock>
+</LayoutDocs>

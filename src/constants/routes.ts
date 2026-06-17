@@ -15,9 +15,11 @@ export const MENU_ROUTES: MenuRoute[] = [
     { text: "FEN", link: "/properties/FEN" },
     { text: "onChange", link: "/properties/onChange" },
     { text: "onEndGame", link: "/properties/onEndGame" },
+    { text: "onClick (optional)", link: "/properties/onClick", isNew: true },
     { text: "reversed (optional)", link: "/properties/reversed" },
     { text: "change (optional)", link: "/properties/change" },
-    { text: "config (optional)", link: "/properties/config", isUpgrade: true },
+    { text: "arrows (optional)", link: "/properties/arrows", isNew: true },
+    { text: "config (optional)", link: "/properties/config" },
     { text: "playerColor (optional)", link: "/properties/playerColor" },
     { text: "viewOnly (optional)", link: "/properties/viewOnly" },
 
