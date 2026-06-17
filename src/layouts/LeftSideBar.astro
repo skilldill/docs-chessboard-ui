@@ -31,7 +31,7 @@ const { active } = Astro.props;
 
 <style scoped>
 	.navbar {
-
+		padding-right: 24px;
 	}
 		
 	.menuItems {
@@ -41,65 +41,70 @@ const { active } = Astro.props;
 
 	.menuItems li {
 		list-style-type: none;
-		padding: 4px 0;
+		padding: 2px 0;
 	}
 
 	.menuItem {
-		font-size: 16px;
-		padding-left: 10px !important;
+		font-size: 14px;
+		padding-left: 0 !important;
 	}
 
 	.menuItem a {
 		text-decoration: none;
 		display: block;
-		width: fit-content;
+		width: 100%;
+		box-sizing: border-box;
 		color: var(--color-theme-menu-item);
-		padding: 6px 8px;
+		padding: 8px 12px;
 		border-radius: 6px;
-		transition: background-color .3s;
+		line-height: 1.35;
+		transition: background-color .2s, color .2s;
 	}
 
 	.menuItem a:hover {
-		background-color: var(--color-theme-border);
+		background-color: var(--color-theme-menu-item-active-bg);
 		color: var(--color-theme-titles);
 	}
 
 	.active a {
-		background-color: var(--color-theme-menu-item-active-bg) !important;
-		color: #fff !important;
+		background-color: transparent !important;
+		color: var(--color-theme-link) !important;
+		font-weight: 700;
 	}
 
 	.menuTitle {
-		font-size: 18px;
-		margin-top: 8px;
+		font-size: 14px;
+		margin-top: 26px;
+		margin-bottom: 8px;
+		padding: 0 12px;
 		color: var(--color-theme-titles);
+		font-weight: 700;
+		line-height: 1.4;
+	}
+
+	.menuTitle:first-child {
+		margin-top: 0;
 	}
 
 	.new {
 		font-size: 10px;
-		color: var(--color-blue-200);
-		background-color: var(--color-blue-500);
+		color: var(--color-theme-link);
+		background-color: var(--color-theme-menu-item-active-bg);
 		padding: 2px 4px;
 		border-radius: 4px;
 		margin-left: 4px;
 		font-weight: 700;
-		border-top: 1px solid var(--color-blue-400);
-		border-left: 1px solid var(--color-blue-400);
-		border-bottom: 1px solid var(--color-blue-600);
-		border-right: 1px solid var(--color-blue-600);
+		border: 1px solid var(--color-theme-border);
 	}
 
 	.upgrade {
 		font-size: 10px;
-		color: var(--color-green-200);
-		background-color: var(--color-green-600);
+		color: var(--color-green-400);
+		background-color: rgba(77, 183, 178, 0.14);
 		padding: 2px 4px;
 		border-radius: 4px;
 		margin-left: 4px;
 		font-weight: 700;
-		border-top: 1px solid var(--color-green-400);
-		border-left: 1px solid var(--color-green-400);
-		border-bottom: 1px solid var(--color-green700);
-		border-right: 1px solid var(--color-green-700);
+		border: 1px solid var(--color-theme-border);
 	}
 </style>

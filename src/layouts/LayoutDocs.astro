@@ -55,29 +55,140 @@ const { active } = Astro.props;
 		position: sticky;
 		top: 64px;
 		overflow-y: auto;
-		padding-top: 24px;
+		height: calc(100vh - 64px);
+		padding-top: 32px;
+		padding-bottom: 32px;
+		box-sizing: border-box;
 	}
 
 	.leftBlock {
 		grid-area: lb;
+		border-right: 1px solid var(--color-theme-border);
 	}
 
 	.rightBlock {
 		grid-area: rb;
+		border-left: 1px solid var(--color-theme-border);
 	}
 
 	.centerBlock {
 		overflow-y: auto;
-		padding: 40px 20px;
+		padding: 72px 48px 96px;
 		grid-area: cb;
+		max-width: 860px;
+		min-width: 0;
+		margin: 0 auto;
+		box-sizing: border-box;
+		color: var(--color-theme-text);
+	}
+
+	.centerBlock :global(h1) {
+		margin: 0 0 28px;
+		color: var(--color-theme-header-title);
+		font-size: 48px;
+		line-height: 1.05;
+		letter-spacing: 0;
+		font-weight: 800;
+	}
+
+	.centerBlock :global(h2) {
+		margin-top: 28px;
+		margin-bottom: 16px;
+		padding-top: 16px;
+		border-top: 1px solid var(--color-theme-border);
+		font-size: 28px;
+		line-height: 1.25;
+		letter-spacing: 0;
+	}
+
+	.centerBlock :global(h3) {
+		margin-top: 36px;
+		font-size: 20px;
+		line-height: 1.35;
+	}
+
+	.centerBlock :global(p),
+	.centerBlock :global(li) {
+		color: var(--color-theme-text);
+		font-size: 16px;
+		line-height: 1.75;
+		overflow-wrap: anywhere;
+	}
+
+	.centerBlock :global(br) {
+		display: none;
+	}
+
+	.centerBlock :global(a) {
+		text-decoration: none;
+		text-underline-offset: 3px;
+	}
+
+	.centerBlock :global(a:hover) {
+		text-decoration: underline;
+	}
+
+	.centerBlock :global(pre) {
+		margin: 12px 0 18px;
+		box-shadow: none;
+		overflow-x: auto;
+	}
+
+	.centerBlock :global(pre code) {
+		color: #24292f;
+	}
+
+	.centerBlock :global(.copyBlock) {
+		margin: 12px 0 18px;
+		max-width: 100%;
+		min-width: 0;
+	}
+
+	.centerBlock :global(.copyBlock pre) {
+		margin: 0;
+	}
+
+	.centerBlock :global(.component-preview) {
+		margin: 16px 0 24px;
+		max-width: 100%;
+		box-sizing: border-box;
+		overflow: auto;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 	}
 
 	.layout {
 		height: calc(100vh - 64px);
 		display: grid;
-		grid-template-columns: 300px 1fr 300px;
+		grid-template-columns: 260px minmax(0, 1fr) 260px;
 		grid-template-areas:
 			"lb cb rb";
+	}
+
+	@media screen and (max-width: 1280px) {
+		.layout {
+			grid-template-columns: 260px minmax(0, 1fr) 0px;
+		}
+
+		.rightBlock {
+			display: none;
+		}
+
+		.centerBlock {
+			max-width: 900px;
+			padding-left: 48px;
+			padding-right: 48px;
+		}
+	}
+
+	@media screen and (max-width: 1140px) {
+		.layout {
+			grid-template-columns: 240px minmax(0, 1fr) 0px;
+		}
+
+		.centerBlock {
+			padding-left: 32px;
+			padding-right: 32px;
+		}
 	}
 
 	.mobileMenu {
@@ -86,7 +197,7 @@ const { active } = Astro.props;
 		bottom: 0;
 		left: 0;
 		width: 60%;
-		padding: 40px;
+		padding: 40px 28px;
 		z-index: 100;
 		background-color: var(--color-theme-background);
 		transform: translateX(-100%);
@@ -102,15 +213,16 @@ const { active } = Astro.props;
 		display: flex;
 		justify-content: flex-end;
 		font-size: 16px;
-		color: var(--color-gray-500);
+		color: var(--color-theme-menu-item);
 	}
 
 	.openArea {
 		display: none;
-		padding: 30px 0;
+		padding: 18px 0;
 		text-align: center;
 		font-size: 16px;
-		color: var(--color-gray-500);
+		color: var(--color-theme-menu-item);
+		border-bottom: 1px solid var(--color-theme-border);
 	}
 
 	@media screen and (max-width: 1024px) {
@@ -122,8 +234,23 @@ const { active } = Astro.props;
 				"lb cb rb";
 		}
 
+		.leftBlock,
+		.rightBlock {
+			display: none;
+			border: 0;
+		}
+
 		.centerBlock {
-			padding: 0px 0px 100px 0px;
+			padding: 48px 0 84px;
+			max-width: 100%;
+		}
+
+		.centerBlock :global(h1) {
+			font-size: 40px;
+		}
+
+		.centerBlock :global(h2) {
+			font-size: 26px;
 		}
 
 		.openArea {

@@ -11,25 +11,30 @@
 </script>
 <style is:global>
     .rightSideBar {
-
+        padding-left: 24px;
     }
 
     .anchors {
+        padding: 0;
+        margin: 0;
     }
     
     .anchorItem {
         list-style-type: none;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
     }
 
     .anchorItem a {
-        font-size: 16px;
+        display: block;
+        font-size: 14px;
+        line-height: 1.45;
         text-decoration: none;
-        color: var(--color-gray-400);
+        color: var(--color-theme-menu-item);
+        transition: color .2s;
     }
 
     .anchorItem a:hover {
-        text-decoration: underline;
-        color: var(--color-gray-500);
+        text-decoration: none;
+        color: var(--color-theme-titles);
     }
 </style>
