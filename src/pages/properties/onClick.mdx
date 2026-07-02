@@ -21,6 +21,7 @@ import CopyBlock from '../../components/CopyBlock.tsx';
                 } | undefined;
             };
             pos: [number, number];
+            currentColor: "white" | "black";
         }
 
         type onClick = (data: ClickData) => void;
@@ -33,7 +34,7 @@ import CopyBlock from '../../components/CopyBlock.tsx';
         ```tsx
         export const App = () => {
             const handleClick = (data) => {
-                console.log(data.cellData, data.pos);
+                console.log(data.cellData, data.pos, data.currentColor);
             }
 
             return (

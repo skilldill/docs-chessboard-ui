@@ -1,8 +1,85 @@
 import "react-chessboard-ui/dist/index.css";
-import { useState, type FC } from "react";
+import { useEffect, useRef, useState, type ComponentProps, type FC } from "react";
 import { ChessBoard, DEFAULT_PIECES_MAP } from "react-chessboard-ui";
 import { PAUL_MORPHY_OPERA_GAME, SCHOLARS_MATE, TRANSFORM_TO_QUEEN } from "../constants/moves";
 import "./styles.css";
+
+type ChessBoardProps = ComponentProps<typeof ChessBoard>;
+type ClickData = Parameters<NonNullable<ChessBoardProps["onClick"]>>[0];
+type FigureColor = ClickData["currentColor"];
+
+const WRONG_COLOR_CLICK_LIMIT = 2;
+const NOTIFICATION_SHOW_TIME = 2200;
+
+const BoardNotification: FC<{ message: string }> = ({ message }) => {
+	return (
+		<div className="boardNotification" role="status" aria-live="polite">
+			{message}
+		</div>
+	);
+}
+
+const InteractiveChessBoard: FC<ChessBoardProps> = ({ onChange, onClick, ...props }) => {
+	const [notification, setNotification] = useState("");
+	const hasMovedRef = useRef(false);
+	const wrongColorClickCountRef = useRef(0);
+	const lastMovedColorRef = useRef<FigureColor>();
+	const nextMoveColorRef = useRef<FigureColor>();
+
+	useEffect(() => {
+		if (!notification) {
+			return;
+		}
+
+		const timeoutId = window.setTimeout(() => setNotification(""), NOTIFICATION_SHOW_TIME);
+
+		return () => window.clearTimeout(timeoutId);
+	}, [notification]);
+
+	const handleChange: ChessBoardProps["onChange"] = (moveData) => {
+		hasMovedRef.current = true;
+		wrongColorClickCountRef.current = 0;
+		setNotification("");
+		lastMovedColorRef.current = moveData.figure.color;
+		nextMoveColorRef.current = moveData.figure.color === "white" ? "black" : "white";
+		onChange(moveData);
+	}
+
+	const handleClick = (data: ClickData) => {
+		onClick?.(data);
+
+		const clickedFigure = data.cellData.figure;
+
+		if (!hasMovedRef.current) {
+			return;
+		}
+
+		if (!clickedFigure) {
+			wrongColorClickCountRef.current = 0;
+			return;
+		}
+
+		if (clickedFigure.color === lastMovedColorRef.current) {
+			wrongColorClickCountRef.current += 1;
+
+			if (wrongColorClickCountRef.current === WRONG_COLOR_CLICK_LIMIT && nextMoveColorRef.current) {
+				setNotification(`Now move ${nextMoveColorRef.current}`);
+				wrongColorClickCountRef.current = 0;
+			}
+
+			return;
+		}
+
+		wrongColorClickCountRef.current = 0;
+	}
+
+	return (
+		<div className="interactiveChessBoard">
+			{notification && <BoardNotification message={notification} />}
+			<ChessBoard {...props} onChange={handleChange} onClick={handleClick} />
+		</div>
+	);
+}
 
 const useCellSize = (defaultValue: number) => {
 	if (typeof window === undefined) return defaultValue;
@@ -29,7 +106,7 @@ const getCustomKnightSize = () => {
 export const ChessBoardKings: FC = () => {
     const squareSize = useCellSize(100);
 	return (
-        <ChessBoard 
+        <InteractiveChessBoard 
 			FEN="2K2k2/8/8/8/8/8/8/8 w - - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
@@ -41,7 +118,7 @@ export const ChessBoardKings: FC = () => {
 export const ChessBoardDefault: FC = () => {
     const squareSize = useCellSize(70);
 	return (
-        <ChessBoard 
+        <InteractiveChessBoard 
 			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
@@ -53,7 +130,7 @@ export const ChessBoardDefault: FC = () => {
 export const ChessBoardDefaultFEN: FC = () => {
     const squareSize = useCellSize(70);
 	return (
-        <ChessBoard 
+        <InteractiveChessBoard 
 			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
@@ -65,7 +142,7 @@ export const ChessBoardDefaultFEN: FC = () => {
 export const ChessBoardKingPawnFEN: FC = () => {
 	const squareSize = useCellSize(70);
     return (
-        <ChessBoard 
+        <InteractiveChessBoard 
 			FEN="8/8/8/8/8/8/1K6/P7 w - - 0 1"
 			onChange={(data) => { console.log(data) }}
 			onEndGame={() => {}}
@@ -77,7 +154,7 @@ export const ChessBoardKingPawnFEN: FC = () => {
 export const ChessBoardClonsFEN: FC = () => {
 	const squareSize = useCellSize(70);
     return (
-        <ChessBoard 
+        <InteractiveChessBoard 
 			FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 w - - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
@@ -89,7 +166,7 @@ export const ChessBoardClonsFEN: FC = () => {
 export const ChessBoardReversed: FC = () => {
 	const squareSize = useCellSize(70);
     return (
-        <ChessBoard 
+        <InteractiveChessBoard 
 			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
@@ -125,7 +202,7 @@ export const ChessBoardHeroBanner: FC = () => {
 
 	return (
 		<div className="heroChessBoard" style={{ width: 'fit-content', height: 'fit-content', overflow: 'hidden', borderRadius: '1rem' }}>
-			<ChessBoard
+			<InteractiveChessBoard
 				FEN="r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 3"
 				onChange={() => {}}
 				onEndGame={() => {}}
@@ -161,7 +238,7 @@ const CUSTOM_CONFIG = {
 export const ChessBoardCustomConfig: FC = () => {
 	const squareSize = useCellSize(70);
 	return (
-        <ChessBoard 
+        <InteractiveChessBoard 
 			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
@@ -173,7 +250,7 @@ export const ChessBoardCustomConfig: FC = () => {
 export const ChessBoardPlayerColor: FC = () => {
 	const squareSize = useCellSize(70);
 	return (
-		<ChessBoard 
+		<InteractiveChessBoard 
 			FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
@@ -186,7 +263,7 @@ export const ChessBoardPlayerColor: FC = () => {
 export const ChessBoardPawnPromotion: FC = () => {
 	const squareSize = useCellSize(70);
 	return (
-		<ChessBoard 
+		<InteractiveChessBoard 
 			FEN="8/k5PK/8/8/8/8/8/8 w - - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
@@ -198,7 +275,7 @@ export const ChessBoardPawnPromotion: FC = () => {
 export const ChessBoardStrangeFEN: FC = () => {
 	const squareSize = useCellSize(70);
 	return (
-        <ChessBoard 
+        <InteractiveChessBoard 
 			FEN="rnbqQBNR/2k2K2/ppppPPPP/8/8/8/8/8 w - - 0 1"
 			onChange={(data) => {}}
 			onEndGame={() => {}}
@@ -323,7 +400,7 @@ export const ChessBoardTransformToQueen: FC = () => {
     }
 	return (
 		<div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20 }}>
-			<ChessBoard 
+			<InteractiveChessBoard 
 				FEN="k7/p7/8/8/8/8/8/7K w - - 0 1"
 				onChange={() => {}}
 				onEndGame={() => {}}

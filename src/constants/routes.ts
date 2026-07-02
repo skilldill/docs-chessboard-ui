@@ -4,6 +4,7 @@ type MenuRoute = {
     link?: string;
     isUpgrade?: boolean;
     isNew?: boolean;
+    isOptional?: boolean;
 }
 
 export const MENU_ROUTES: MenuRoute[] = [
@@ -15,13 +16,13 @@ export const MENU_ROUTES: MenuRoute[] = [
     { text: "FEN", link: "/properties/FEN" },
     { text: "onChange", link: "/properties/onChange" },
     { text: "onEndGame", link: "/properties/onEndGame" },
-    { text: "onClick (optional)", link: "/properties/onClick", isNew: true },
-    { text: "reversed (optional)", link: "/properties/reversed" },
-    { text: "change (optional)", link: "/properties/change" },
-    { text: "arrows (optional)", link: "/properties/arrows", isNew: true },
-    { text: "config (optional)", link: "/properties/config" },
-    { text: "playerColor (optional)", link: "/properties/playerColor" },
-    { text: "viewOnly (optional)", link: "/properties/viewOnly" },
+    { text: "onClick", link: "/properties/onClick", isOptional: true, isUpgrade: true },
+    { text: "reversed", link: "/properties/reversed", isOptional: true },
+    { text: "change", link: "/properties/change", isOptional: true },
+    { text: "arrows", link: "/properties/arrows", isOptional: true },
+    { text: "config", link: "/properties/config", isOptional: true },
+    { text: "playerColor", link: "/properties/playerColor", isOptional: true },
+    { text: "viewOnly", link: "/properties/viewOnly", isOptional: true },
 
     { text: "Examples", header: true },
     { text: "Custom FEN", link: "/examples/customFen" },

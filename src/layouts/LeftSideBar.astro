@@ -16,7 +16,8 @@ const { active } = Astro.props;
 			}>
 				{item.link ? (
 					<a href={item.link ? item.link : ''}>
-						{item.text} {item.isNew && <span class="new">NEW</span>}
+						{item.text} {item.isOptional && <span class="optional">OPTIONAL</span>}
+						{item.isNew && <span class="new">NEW</span>}
 						{item.isUpgrade && <span class="upgrade">UPGRADE</span>}
 					</a>
 				) : <span>{item.text}</span>}
@@ -101,6 +102,16 @@ const { active } = Astro.props;
 		font-size: 10px;
 		color: var(--color-green-400);
 		background-color: rgba(77, 183, 178, 0.14);
+		padding: 2px 4px;
+		border-radius: 4px;
+		margin-left: 4px;
+		font-weight: 700;
+		border: 1px solid var(--color-theme-border);
+	}
+
+	.optional {
+		font-size: 8px;
+		background-color: rgba(135, 140, 193, 0.14);
 		padding: 2px 4px;
 		border-radius: 4px;
 		margin-left: 4px;
