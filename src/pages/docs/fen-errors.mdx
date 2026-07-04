@@ -1,0 +1,93 @@
+---
+---
+
+import LayoutDocs from "../../layouts/LayoutDocs.astro";
+import CopyBlock from "../../components/CopyBlock.tsx";
+
+<LayoutDocs active="/docs/fen-errors">
+    # FEN errors
+
+    If the `FEN` value is invalid, the chessboard uses the default starting position and shows a FEN notation error. Check the FEN string for the common problems below.
+
+    <h2 id="Piece placement length" data-anchor>Piece placement length</h2>
+
+    The first FEN field describes the pieces on all 8 board ranks. Each rank must contain exactly 8 squares after digits are expanded.
+
+    Common problems:
+
+    - a rank contains fewer than 8 squares;
+    - a rank contains more than 8 squares;
+    - there are fewer or more than 8 ranks;
+    - `0` is used instead of a digit from `1` to `8`.
+
+    <CopyBlock client:load>
+        ```ts
+        // Invalid: the first rank expands to 9 squares.
+        "rnbqkbnr1/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
+        // Valid.
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        ```
+    </CopyBlock>
+
+    <h2 id="Incorrect pieces" data-anchor>Incorrect pieces</h2>
+
+    Piece placement can contain only valid chess piece letters and empty-square digits.
+
+    Valid piece letters:
+
+    - white pieces: `PNBRQK`;
+    - black pieces: `pnbrqk`;
+    - empty squares: digits from `1` to `8`.
+
+    <CopyBlock client:load>
+        ```ts
+        // Invalid: "x" is not a FEN piece.
+        "rnbqkbnx/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
+        // Valid.
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        ```
+    </CopyBlock>
+
+    <h2 id="Incorrect en passant square" data-anchor>Incorrect en passant square</h2>
+
+    The en passant target square is the fourth FEN field. It must be `-` when there is no en passant target, or a valid board square on rank `3` or `6`.
+
+    Common problems:
+
+    - the square is outside the board, for example `i3`;
+    - the rank is not `3` or `6`, for example `e4`;
+    - the value is not `-` and not a square coordinate.
+
+    <CopyBlock client:load>
+        ```ts
+        // Invalid: e4 cannot be an en passant target square.
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq e4 0 1"
+
+        // Valid: no en passant target.
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        ```
+    </CopyBlock>
+
+    <h2 id="Incorrect castling" data-anchor>Incorrect castling</h2>
+
+    Castling availability is the third FEN field. It must be `-` or a combination of `K`, `Q`, `k`, and `q`.
+
+    Common problems:
+
+    - unsupported letters are used;
+    - the same castling marker is repeated;
+    - `-` is combined with castling markers;
+    - the order is ambiguous. Prefer the standard order: `KQkq`.
+
+    <CopyBlock client:load>
+        ```ts
+        // Invalid: "A" is not a castling marker.
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQAq - 0 1"
+
+        // Valid.
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        ```
+    </CopyBlock>
+</LayoutDocs>
