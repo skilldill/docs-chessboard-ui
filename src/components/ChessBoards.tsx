@@ -142,10 +142,12 @@ export const ChessBoardDefaultFEN: FC = () => {
 export const ChessBoardKingPawnFEN: FC = () => {
 	const squareSize = useCellSize(70);
     return (
-        <InteractiveChessBoard 
-			FEN="8/8/8/8/8/8/1K6/P7 w - - 0 1"
+        <ChessBoard 
+			FEN="8/8/8/8/8/8/PK6/8 w - - 0 1"
 			onChange={(data) => { console.log(data) }}
 			onEndGame={() => {}}
+			playerColor="white"
+			toggleTurn={false}
 			config={{ squareSize }}
 		/>
     );
@@ -256,6 +258,21 @@ export const ChessBoardPlayerColor: FC = () => {
 			onEndGame={() => {}}
 			config={{ squareSize }}
 			playerColor="white"
+		/>
+	);
+}
+
+export const ChessBoardToggleTurn: FC = () => {
+	const squareSize = useCellSize(70);
+
+	return (
+		<ChessBoard
+			FEN="8/8/8/P7/3N4/8/8/4K3 w - - 0 1"
+			onChange={() => {}}
+			onEndGame={() => {}}
+			config={{ squareSize }}
+			playerColor="white"
+			toggleTurn={false}
 		/>
 	);
 }
