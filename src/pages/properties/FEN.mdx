@@ -2,7 +2,7 @@
 ---
 
 import LayoutConfig from "../../layouts/LayoutDocs.astro";
-import { ChessBoardClonsFEN } from '../../components/ChessBoards.tsx';
+import { ChessBoardClonsFEN, ChessBoardCustomSizeFEN } from '../../components/ChessBoards.tsx';
 import CopyBlock from '../../components/CopyBlock.tsx';
 
 <LayoutConfig active="/properties/FEN">
@@ -21,6 +21,8 @@ import CopyBlock from '../../components/CopyBlock.tsx';
 
     If a FEN value is invalid, the chessboard falls back to the default position. See [common FEN errors](/docs/fen-errors) for troubleshooting.
 
+    The board size is detected from the FEN piece placement. A number in FEN means the number of empty squares in a row, so ```12``` means twelve empty squares. The component renders the required number of cells from the passed FEN string.
+
     <h2 id="Example" data-anchor>Example</h2>
     <div class="component-preview">
         <ChessBoardClonsFEN client:only />
@@ -32,6 +34,24 @@ import CopyBlock from '../../components/CopyBlock.tsx';
             FEN="3k4/qqqqqqqq/8/8/8/8/QQQQQQQQ/3K4 w - - 0 1" // <~~~ Custom FEN
             onChange={handleChange}
             onEndGame={handleEndGame}
+        />
+        ```
+    </CopyBlock>
+
+    <br/>
+    <h2 id="Custom board size" data-anchor>Custom board size</h2>
+    The example below creates a 12x12 board. Each rank expands to 12 cells, and the FEN contains 12 ranks.
+
+    <div class="component-preview">
+        <ChessBoardCustomSizeFEN client:only />
+    </div>
+    <br/>
+    <CopyBlock client:load>
+        ```tsx
+        <ChessBoard
+            FEN="qqrnbqkbnrqq/pppppppppppp/12/12/12/12/12/12/12/12/PPPPPPPPPPPP/QQRNBQKBNRQQ w - - 0 1"
+            onChange={console.log}
+            onEndGame={console.log}
         />
         ```
     </CopyBlock>

@@ -1,0 +1,55 @@
+---
+---
+
+import LayoutDocs from "../../layouts/LayoutDocs.astro";
+import CopyBlock from "../../components/CopyBlock.tsx";
+
+<LayoutDocs active="/docs/migration-notes">
+    # Migration notes
+
+    The package build has moved from ```create-react-library``` / ```microbundle-crl``` to Vite library mode.
+
+    <h2 id="Package artifacts" data-anchor>Package artifacts</h2>
+
+    Published package artifacts:
+
+    - ```dist/index.js``` for ESM imports;
+    - ```dist/index.cjs``` for CommonJS require;
+    - ```dist/index.d.ts``` for TypeScript types;
+    - ```dist/index.css``` for backward-compatible explicit CSS imports.
+
+    The package uses ```exports``` for the public entry points:
+
+    - ```"."``` for import, require, and types;
+    - ```"./style.css"``` for explicit CSS import;
+    - ```"./dist/index.css"``` for legacy CSS import compatibility.
+
+    <h2 id="CSS" data-anchor>CSS</h2>
+
+    CSS is injected automatically by default. Importing the package once adds a browser style tag with the id ```react-chessboard-ui-styles```.
+
+    Recommended usage:
+
+    <CopyBlock client:load>
+        ```tsx
+        import { ChessBoard } from "react-chessboard-ui";
+        ```
+    </CopyBlock>
+
+    Manual CSS import is optional. Existing code continues to work:
+
+    <CopyBlock client:load>
+        ```tsx
+        import "react-chessboard-ui/style.css";
+
+        // Legacy path, still supported:
+        import "react-chessboard-ui/dist/index.css";
+        ```
+    </CopyBlock>
+
+    <h2 id="Compatibility" data-anchor>Compatibility</h2>
+
+    The public component API did not change. This is not a breaking change for users who already imported CSS manually, because the old CSS path remains supported.
+
+    If styles are missing while using an older package version, import ```react-chessboard-ui/dist/index.css``` manually or upgrade to a version with automatic style injection.
+</LayoutDocs>

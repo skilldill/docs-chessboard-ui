@@ -1,4 +1,3 @@
-import "react-chessboard-ui/dist/index.css";
 import { ChessBoard } from "react-chessboard-ui";
 import "./styles.css";
 

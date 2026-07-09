@@ -1,4 +1,3 @@
-import "react-chessboard-ui/dist/index.css";
 import { useEffect, useRef, useState, type ComponentProps, type FC } from "react";
 import { ChessBoard, DEFAULT_PIECES_MAP } from "react-chessboard-ui";
 import { PAUL_MORPHY_OPERA_GAME, SCHOLARS_MATE, TRANSFORM_TO_QUEEN } from "../constants/moves";
@@ -165,6 +164,19 @@ export const ChessBoardClonsFEN: FC = () => {
     );
 }
 
+export const ChessBoardCustomSizeFEN: FC = () => {
+	const squareSize = useCellSize(46);
+
+	return (
+		<ChessBoard
+			FEN="qqrnbqkbnrqq/pppppppppppp/12/12/12/12/12/12/12/12/PPPPPPPPPPPP/QQRNBQKBNRQQ w - - 0 1"
+			onChange={() => {}}
+			onEndGame={() => {}}
+			config={{ squareSize }}
+		/>
+	);
+}
+
 export const ChessBoardReversed: FC = () => {
 	const squareSize = useCellSize(70);
     return (
@@ -210,8 +222,6 @@ export const ChessBoardHeroBanner: FC = () => {
 				onEndGame={() => {}}
 				config={{
 					squareSize,
-					whiteCellColor: "#f8fafc",
-					blackCellColor: "#d8deea",
 					arrowColor: "#3b82f6",
 				}}
 			/>

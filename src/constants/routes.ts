@@ -11,9 +11,10 @@ export const MENU_ROUTES: MenuRoute[] = [
     { text: "Documentation", header: true },
     { text: 'Introduction', link: '/docs/introduction' },
     { text: "Get started", link: "/docs/quickStart" },
+    { text: "Migration notes", link: "/docs/migration-notes", isNew: true },
 
     { text: "Properties", header: true },
-    { text: "FEN", link: "/properties/FEN" },
+    { text: "FEN", link: "/properties/FEN", isUpgrade: true },
     { text: "onChange", link: "/properties/onChange" },
     { text: "onEndGame", link: "/properties/onEndGame" },
     { text: "onClick", link: "/properties/onClick", isOptional: true },
@@ -22,7 +23,7 @@ export const MENU_ROUTES: MenuRoute[] = [
     { text: "arrows", link: "/properties/arrows", isOptional: true },
     { text: "config", link: "/properties/config", isOptional: true },
     { text: "playerColor", link: "/properties/playerColor", isOptional: true },
-    { text: "toggleTurn", link: "/properties/toggleTurn", isOptional: true, isNew: true },
+    { text: "toggleTurn", link: "/properties/toggleTurn", isOptional: true },
     { text: "viewOnly", link: "/properties/viewOnly", isOptional: true },
 
     { text: "Examples", header: true },

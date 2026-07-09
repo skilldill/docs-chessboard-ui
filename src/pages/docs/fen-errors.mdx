@@ -11,34 +11,37 @@ import CopyBlock from "../../components/CopyBlock.tsx";
 
     <h2 id="Piece placement length" data-anchor>Piece placement length</h2>
 
-    The first FEN field describes the pieces on all 8 board ranks. Each rank must contain exactly 8 squares after digits are expanded.
+    The first FEN field describes the pieces on the board ranks. The board size is detected from this field, so every rank must expand to the same number of squares. The number of ranks defines the board height.
 
     Common problems:
 
-    - a rank contains fewer than 8 squares;
-    - a rank contains more than 8 squares;
-    - there are fewer or more than 8 ranks;
-    - `0` is used instead of a digit from `1` to `8`.
+    - one rank expands to a different number of squares than the others;
+    - there are too few or too many ranks for the intended board size;
+    - `0` is used instead of a positive empty-square number;
+    - multi-digit empty-square numbers are split incorrectly.
 
     <CopyBlock client:load>
         ```ts
-        // Invalid: the first rank expands to 9 squares.
+        // Invalid: the first rank expands to 9 squares, while the other ranks expand to 8.
         "rnbqkbnr1/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
-        // Valid.
+        // Valid 8x8 board.
         "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
+        // Valid 12x12 board.
+        "qqrnbqkbnrqq/pppppppppppp/12/12/12/12/12/12/12/12/PPPPPPPPPPPP/QQRNBQKBNRQQ w - - 0 1"
         ```
     </CopyBlock>
 
     <h2 id="Incorrect pieces" data-anchor>Incorrect pieces</h2>
 
-    Piece placement can contain only valid chess piece letters and empty-square digits.
+    Piece placement can contain only valid chess piece letters and empty-square numbers.
 
     Valid piece letters:
 
     - white pieces: `PNBRQK`;
     - black pieces: `pnbrqk`;
-    - empty squares: digits from `1` to `8`.
+    - empty squares: positive numbers such as `1`, `8`, or `12`.
 
     <CopyBlock client:load>
         ```ts
